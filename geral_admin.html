@@ -8,8 +8,7 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/jquery.pagedown-bootstrap.css" rel="stylesheet">
+    <link href="jquery.pagedown-bootstrap.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -17,10 +16,6 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/jquery.pagedown-bootstrap.combined.min.js"></script>
   </head>
   <body>
     <div class="navbar navbar-static-top navbar-inverse">
@@ -51,54 +46,24 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">User Name | 710</a></li>
+            <li><a href="#">Flags</a></li>
             <li><a href="#">Log out</a></li>
           </ul>
             
         </div>
-      </div>
     </div>
 
     <div class="container" style="width:70%; margin-left:auto; margin-right:auto; padding-left:0px">
+        <ul class="nav navbar-nav navbar-left">
+          <li> <a href="#" ><b>Ask a Question</b></a></li>
+        </ul>
         <ul class="nav navbar-nav navbar-right">
           <li> <a href="#">Users</a></li>
           <li> <a href="#">Tags</a></li>
         </ul>
     </div>
 
-    <br><br>
-
-    <div class="container" style="margin-left:15% ;margin-right:31.4%; width:60%">
-      <b>Title</b>
-      <input type="text" class="form-control">
-    </div>
-
-    <br><br>
-
-    <div class="container" style="margin-left:15% ;margin-right:31.4%; width:60%">
-        <textarea class="form-control" id="pagedownMe" rows="10">
-        </textarea>
-    </div>
-
-    <br><br>
-
-    <div class="container" style="margin-left:15% ;margin-right:31.4%; width:60%">
-      <b>Tags</b> <small class="pull-right">Check the existent tags in the <a href="#"> Tags</a> section.</small>
-      <input type="text" class="form-control" style="width:30%; height:30px; margin-bottom:4px">
-      <input type="text" class="form-control" style="width:30%; height:30px; margin-bottom:4px">
-      <input type="text" class="form-control" style="width:30%; height:30px; margin-bottom:4px">
-      <input type="text" class="form-control" style="width:30%; height:30px; margin-bottom:4px">
-      <input type="text" class="form-control" style="width:30%; height:30px; margin-bottom:4px">
-      <small>Minimum tags:1 | Maximum tags:5</small>
-    </div>
-
-    <div class="container" style="margin-left:15% ;margin-right:31.4%; width:60%">
-      <button type="button" class="btn btn-default btn-info pull-right" style="margin-top:10px">Post Question</button>
-    </div>
-
-    <br><br>
-
-
-    <div class="navbar navbar-default navbar-static-bottom" style="margin-bottom:0">
+    <div class="navbar navbar-default navbar-fixed-bottom" style="margin-bottom:0">
 
       <div class="container">
           <ul class="nav navbar-nav">
@@ -111,22 +76,6 @@
             
         </div>
     </div>
-
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    
-
-    <script type="text/javascript">
-    (function () {
-
-      $("textarea#pagedownMe").pagedownBootstrap();
-
-      $('.wmd-preview').addClass('well');
-
-    })();
-    </script>  
 
   </body>
 </html>
