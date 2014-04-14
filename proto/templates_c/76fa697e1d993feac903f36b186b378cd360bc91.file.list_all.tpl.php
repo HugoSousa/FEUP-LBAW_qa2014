@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.15, created on 2014-04-11 22:19:51
+<?php /* Smarty version Smarty-3.1.15, created on 2014-04-14 15:56:11
          compiled from "\wamp\www\proto\templates\questions\list_all.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:409753483355473198-10728032%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '76fa697e1d993feac903f36b186b378cd360bc91' => 
     array (
       0 => '\\wamp\\www\\proto\\templates\\questions\\list_all.tpl',
-      1 => 1397251188,
+      1 => 1397487368,
       2 => 'file',
     ),
   ),
@@ -19,11 +19,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'unifunc' => 'content_534833555746b9_87606414',
   'variables' => 
   array (
+    'BASE_URL' => 0,
+    'order' => 0,
     'page' => 0,
+    'filter_ans' => 0,
+    'filter_acc' => 0,
     'pages' => 0,
     'questions' => 0,
     'question' => 0,
-    'BASE_URL' => 0,
     'page_' => 0,
   ),
   'has_nocache_code' => false,
@@ -32,11 +35,156 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 ?><?php echo $_smarty_tpl->getSubTemplate ('common/header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
 
-<?php echo $_smarty_tpl->getSubTemplate ('common/topbar.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+<script src="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
+javascript/list_all.js"></script>
 
+<div class="container" style="width:70%; margin-left:auto; margin-right:auto; padding-left:0px; margin-bottom:20px">
+  <ul class="nav navbar-nav navbar-left">
+    <li> <a href="#" ><b>Ask a Question</b></a></li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li> <a href="#">Users</a></li>
+    <li> <a href="#">Tags</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Order<b class="caret"></b></a>
+      <ul class="dropdown-menu" style="padding:0px" id="order_dropdown">
+        <?php if ($_smarty_tpl->tpl_vars['order']->value=='new') {?>
+          <li><button class="btn btn-default btn-block active" style="border-radius: 0;" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
+, 'new', '<?php echo $_smarty_tpl->tpl_vars['filter_ans']->value;?>
+', '<?php echo $_smarty_tpl->tpl_vars['filter_acc']->value;?>
+')">Newest First</button></li>
+          <li><button class="btn btn-default btn-block " style="border-radius: 0;" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
+, 'old', '<?php echo $_smarty_tpl->tpl_vars['filter_ans']->value;?>
+', '<?php echo $_smarty_tpl->tpl_vars['filter_acc']->value;?>
+')">Oldest First</button></li>
+        <?php } else { ?>
+          <li><button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
+, 'new', '<?php echo $_smarty_tpl->tpl_vars['filter_ans']->value;?>
+', '<?php echo $_smarty_tpl->tpl_vars['filter_acc']->value;?>
+')">Newest First</button></li>
+          <li><button class="btn btn-default btn-block active" style="border-radius: 0;" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
+, 'old', '<?php echo $_smarty_tpl->tpl_vars['filter_ans']->value;?>
+', '<?php echo $_smarty_tpl->tpl_vars['filter_acc']->value;?>
+')">Oldest First</button></li>
+        <?php }?>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search Options<b class="caret"></b></a>
+      <ul class="dropdown-menu" style="padding:0px" id="filter_dropdown">
+        <li>
+          <div class="row" style="width: 400px;">
+            <ul class="list-unstyled col-md-6">
+              <li>
+                <?php if ($_smarty_tpl->tpl_vars['filter_ans']->value=='n') {?>
+                  <button class="btn btn-default btn-block active" style="border-radius: 0;" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
+, '<?php echo $_smarty_tpl->tpl_vars['order']->value;?>
+', 'n', '<?php echo $_smarty_tpl->tpl_vars['filter_acc']->value;?>
+')">
+                <?php } else { ?>
+                  <button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
+, '<?php echo $_smarty_tpl->tpl_vars['order']->value;?>
+', 'n', '<?php echo $_smarty_tpl->tpl_vars['filter_acc']->value;?>
+')">
+                <?php }?>
+                Non-Answered</button>
+              </li>
+              <li>
+                <?php if ($_smarty_tpl->tpl_vars['filter_ans']->value=='y') {?>
+                  <button class="btn btn-default btn-block active" style="border-radius: 0;" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
+, '<?php echo $_smarty_tpl->tpl_vars['order']->value;?>
+', 'y', '<?php echo $_smarty_tpl->tpl_vars['filter_acc']->value;?>
+')">
+                <?php } else { ?>
+                  <button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
+, '<?php echo $_smarty_tpl->tpl_vars['order']->value;?>
+', 'y', '<?php echo $_smarty_tpl->tpl_vars['filter_acc']->value;?>
+')">
+                <?php }?>
+              Answered</button>
+              </li>
+              <li>
+                <?php if ($_smarty_tpl->tpl_vars['filter_ans']->value=='all') {?>
+                  <button class="btn btn-default btn-block active" style="border-radius: 0;" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
+, '<?php echo $_smarty_tpl->tpl_vars['order']->value;?>
+', 'all', '<?php echo $_smarty_tpl->tpl_vars['filter_acc']->value;?>
+')">
+                <?php } else { ?>
+                  <button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
+, '<?php echo $_smarty_tpl->tpl_vars['order']->value;?>
+', 'all', '<?php echo $_smarty_tpl->tpl_vars['filter_acc']->value;?>
+')">
+                <?php }?>
+                All</button>
+              </li>
+            </ul>
+            <ul class="list-unstyled col-md-6">
+                <li>
+                  <?php if ($_smarty_tpl->tpl_vars['filter_ans']->value=='n') {?>
+                      <button class="btn btn-default btn-block disabled" style="border-radius: 0;" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
+, '<?php echo $_smarty_tpl->tpl_vars['order']->value;?>
+', '<?php echo $_smarty_tpl->tpl_vars['filter_ans']->value;?>
+', 'n')">
+                  <?php } else { ?>
+                    <?php if ($_smarty_tpl->tpl_vars['filter_acc']->value=='n') {?>
+                      <button class="btn btn-default btn-block active" style="border-radius: 0;" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
+, '<?php echo $_smarty_tpl->tpl_vars['order']->value;?>
+', '<?php echo $_smarty_tpl->tpl_vars['filter_ans']->value;?>
+', 'n')">
+                    <?php } else { ?>
+                    <button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
+, '<?php echo $_smarty_tpl->tpl_vars['order']->value;?>
+', '<?php echo $_smarty_tpl->tpl_vars['filter_ans']->value;?>
+', 'n')">
+                    <?php }?>
+                  <?php }?>
+                  Non-Accepted</button>
+                </li>
+                <li>
+                  <?php if ($_smarty_tpl->tpl_vars['filter_ans']->value=='n') {?>
+                      <button class="btn btn-default btn-block disabled" style="border-radius: 0;" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
+, '<?php echo $_smarty_tpl->tpl_vars['order']->value;?>
+', '<?php echo $_smarty_tpl->tpl_vars['filter_ans']->value;?>
+', 'y')">
+                  <?php } else { ?>
+                    <?php if ($_smarty_tpl->tpl_vars['filter_acc']->value=='y') {?>
+                      <button class="btn btn-default btn-block active" style="border-radius: 0;" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
+, '<?php echo $_smarty_tpl->tpl_vars['order']->value;?>
+', '<?php echo $_smarty_tpl->tpl_vars['filter_ans']->value;?>
+', 'y')">
+                    <?php } else { ?>
+                    <button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
+, '<?php echo $_smarty_tpl->tpl_vars['order']->value;?>
+', '<?php echo $_smarty_tpl->tpl_vars['filter_ans']->value;?>
+', 'y')">
+                    <?php }?>
+                  <?php }?>
+                  Accepted</button>
+                </li>
+                <li>
+                  <?php if ($_smarty_tpl->tpl_vars['filter_acc']->value=='all') {?>
+                    <button class="btn btn-default btn-block active" style="border-radius: 0;" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
+, '<?php echo $_smarty_tpl->tpl_vars['order']->value;?>
+', '<?php echo $_smarty_tpl->tpl_vars['filter_ans']->value;?>
+', 'all')">
+                  <?php } else { ?>
+                    <button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
+, '<?php echo $_smarty_tpl->tpl_vars['order']->value;?>
+', '<?php echo $_smarty_tpl->tpl_vars['filter_ans']->value;?>
+', 'all')">
+                  <?php }?>
+                  All</button>
+                </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
 
 <?php if ($_smarty_tpl->tpl_vars['page']->value>$_smarty_tpl->tpl_vars['pages']->value) {?>
-  <h1 style="text-align:center; margin-top:15%"> Unknown page! </h1> <!-- melhorar isto -->
+  <h1 style="text-align:center; margin-top:15%"> Unknown page! </h1> 
 
 <?php } else { ?>
 

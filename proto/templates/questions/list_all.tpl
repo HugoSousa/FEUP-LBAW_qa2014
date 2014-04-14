@@ -1,6 +1,97 @@
 {include file='common/header.tpl'}
 
-{include file='common/topbar.tpl'}
+<script src="{$BASE_URL}javascript/list_all.js"></script>
+
+<div class="container" style="width:70%; margin-left:auto; margin-right:auto; padding-left:0px; margin-bottom:20px">
+  <ul class="nav navbar-nav navbar-left">
+    <li> <a href="#" ><b>Ask a Question</b></a></li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li> <a href="#">Users</a></li>
+    <li> <a href="#">Tags</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Order<b class="caret"></b></a>
+      <ul class="dropdown-menu" style="padding:0px" id="order_dropdown">
+        {if $order == 'new'}
+          <li><button class="btn btn-default btn-block active" style="border-radius: 0;" onclick="dropdownClick({$page}, 'new', '{$filter_ans}', '{$filter_acc}')">Newest First</button></li>
+          <li><button class="btn btn-default btn-block " style="border-radius: 0;" onclick="dropdownClick({$page}, 'old', '{$filter_ans}', '{$filter_acc}')">Oldest First</button></li>
+        {else}
+          <li><button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick({$page}, 'new', '{$filter_ans}', '{$filter_acc}')">Newest First</button></li>
+          <li><button class="btn btn-default btn-block active" style="border-radius: 0;" onclick="dropdownClick({$page}, 'old', '{$filter_ans}', '{$filter_acc}')">Oldest First</button></li>
+        {/if}
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search Options<b class="caret"></b></a>
+      <ul class="dropdown-menu" style="padding:0px" id="filter_dropdown">
+        <li>
+          <div class="row" style="width: 400px;">
+            <ul class="list-unstyled col-md-6">
+              <li>
+                {if $filter_ans == 'n'}
+                  <button class="btn btn-default btn-block active" style="border-radius: 0;" onclick="dropdownClick({$page}, '{$order}', 'n', '{$filter_acc}')">
+                {else}
+                  <button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick({$page}, '{$order}', 'n', '{$filter_acc}')">
+                {/if}
+                Non-Answered</button>
+              </li>
+              <li>
+                {if $filter_ans == 'y'}
+                  <button class="btn btn-default btn-block active" style="border-radius: 0;" onclick="dropdownClick({$page}, '{$order}', 'y', '{$filter_acc}')">
+                {else}
+                  <button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick({$page}, '{$order}', 'y', '{$filter_acc}')">
+                {/if}
+              Answered</button>
+              </li>
+              <li>
+                {if $filter_ans == 'all'}
+                  <button class="btn btn-default btn-block active" style="border-radius: 0;" onclick="dropdownClick({$page}, '{$order}', 'all', '{$filter_acc}')">
+                {else}
+                  <button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick({$page}, '{$order}', 'all', '{$filter_acc}')">
+                {/if}
+                All</button>
+              </li>
+            </ul>
+            <ul class="list-unstyled col-md-6">
+                <li>
+                  {if $filter_ans == 'n'}
+                      <button class="btn btn-default btn-block disabled" style="border-radius: 0;" onclick="dropdownClick({$page}, '{$order}', '{$filter_ans}', 'n')">
+                  {else}
+                    {if $filter_acc == 'n'}
+                      <button class="btn btn-default btn-block active" style="border-radius: 0;" onclick="dropdownClick({$page}, '{$order}', '{$filter_ans}', 'n')">
+                    {else}
+                    <button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick({$page}, '{$order}', '{$filter_ans}', 'n')">
+                    {/if}
+                  {/if}
+                  Non-Accepted</button>
+                </li>
+                <li>
+                  {if $filter_ans == 'n'}
+                      <button class="btn btn-default btn-block disabled" style="border-radius: 0;" onclick="dropdownClick({$page}, '{$order}', '{$filter_ans}', 'y')">
+                  {else}
+                    {if $filter_acc == 'y'}
+                      <button class="btn btn-default btn-block active" style="border-radius: 0;" onclick="dropdownClick({$page}, '{$order}', '{$filter_ans}', 'y')">
+                    {else}
+                    <button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick({$page}, '{$order}', '{$filter_ans}', 'y')">
+                    {/if}
+                  {/if}
+                  Accepted</button>
+                </li>
+                <li>
+                  {if $filter_acc == 'all'}
+                    <button class="btn btn-default btn-block active" style="border-radius: 0;" onclick="dropdownClick({$page}, '{$order}', '{$filter_ans}', 'all')">
+                  {else}
+                    <button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick({$page}, '{$order}', '{$filter_ans}', 'all')">
+                  {/if}
+                  All</button>
+                </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
 
 {if $page >  $pages}
   <h1 style="text-align:center; margin-top:15%"> Unknown page! </h1> 
