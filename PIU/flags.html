@@ -56,7 +56,7 @@
             <li><a href="#">Log out</a></li>
           </ul>
             
-        </div>
+        </div> 
       </div>
 
 
@@ -67,231 +67,188 @@
         <ul class="nav navbar-nav navbar-right">
           <li> <a href="#">Users</a></li>
           <li> <a href="#">Tags</a></li>
+          <li class="dropdown">
+
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Order by <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><button class="btn btn-default btn-block">Newest</button></li>
+          <li><button class="btn btn-default btn-block">Oldest</button></li>
+                  <li><button class="btn btn-default btn-block active">More # of Flags</button></li>
+          <li><button class="btn btn-default btn-block">Less # of Flags</button></li>
+                </ul>
+            </li>
         </ul>
       </div>
 
       <br><br>
 
-      <div class="panel panel-default" style="width:80%; margin-left:auto; margin-right:auto">
+      <div class="panel panel-default" style="width:50%; margin-left:auto; margin-right:auto">
         <table class="table table-vcenter">
           <thead>
             <tr>
-              <th style="width:8%">Flag #</th>
-              <th style="width:10%">Flagged by</th>
-              <th style="width:32%">Question</th>
-              <th style="width:45%">Description</th>
-              <th style="width:5%"></th>
+              <th style="width:20%"># of Flags</th>
+
+              <th style="width:50%">Question</th>
+
+			  <th style="width:30%"></th>
+
             </tr>
           </thead>
           <tr>
-            <td>1</td>
-            <td><a href="#">Joao</a></td>
+            <td>34</td>
+
             <td><a href="#">Pergunta 1</a></td>
-            <td>Racist comments</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td><a href="#">Carlos</a></td>
-            <td><a href="#">Pergunta 1</a></td>
-            <td>Off-topic</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td><a href="#">Rita</a></td>
-            <td><a href="#">Pergunta 25</a></td>
-            <td>Insulted another member</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td><a href="#">AntonioX</a></td>
-            <td><a href="#">Pergunta 23892</a></td>
-            <td>Abusive image</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td><a href="#">Pires92</a></td>
-            <td><a href="#">Pergunta 1</a></td>
-            <td>Racist comments</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td><a href="#">99Pedrito</a></td>
-            <td><a href="#">Pergunta 4</a></td>
-            <td>Question too vague</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td><a href="#">Carla Gomes</a></td>
-            <td><a href="#">Pergunta 4</a></td>
-            <td>Duplicate Question</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>8</td>
-            <td><a href="#">Daniel R.</a></td>
-            <td><a href="#">Pergunta 9389</a></td>
-            <td>It's spam</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>9</td>
-            <td><a href="#">MyCoolNick</a></td>
-            <td><a href="#">Pergunta 1</a></td>
-            <td>Offensive</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td><a href="#">Joao</a></td>
-            <td><a href="#">Pergunta 4421</a></td>
-            <td>Abusive answer, insulting question owner</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>11</td>
-            <td><a href="#">Rui Gonç.</a></td>
-            <td><a href="#">Pergunta 43</a></td>
-            <td>Try of advertisment</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>12</td>
-            <td><a href="#">Joao</a></td>
-            <td><a href="#">Pergunta 7</a></td>
-            <td>Offensive</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>13</td>
-            <td><a href="#">Snickers</a></td>
-            <td><a href="#">Pergunta 43</a></td>
-            <td>Offensive</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>14</td>
-            <td><a href="#">Cris86</a></td>
-            <td><a href="#">Pergunta 19</a></td>
-            <td>Abusive</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>15</td>
-            <td><a href="#">Jojo Broas</a></td>
-            <td><a href="#">Pergunta 12421</a></td>
-            <td>Off-topic comments</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>16</td>
-            <td><a href="#">MyCoolNick</a></td>
-            <td><a href="#">Pergunta 1214</a></td>
-            <td>Multiple wrong answers from the same user to the same question</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>17</td>
-            <td><a href="#">Pedro Gomes</a></td>
-            <td><a href="#">Pergunta 9038</a></td>
-            <td>Off-topic</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>18</td>
-            <td><a href="#">Joao</a></td>
-            <td><a href="#">Pergunta 1</a></td>
-            <td>Off-topic</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>19</td>
-            <td><a href="#">Patrícia C.</a></td>
-            <td><a href="#">Pergunta 9038</a></td>
-            <td>Advertisment</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>20</td>
-            <td><a href="#">Kaboom007</a></td>
-            <td><a href="#">Pergunta 829</a></td>
-            <td>Trying to sell a product</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>21</td>
-            <td><a href="#">Jonas L.</a></td>
-            <td><a href="#">Pergunta 829</a></td>
-            <td>Spam</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>22</td>
-            <td><a href="#">Snickers</a></td>
-            <td><a href="#">Pergunta 84922</a></td>
-            <td>Question is unclear</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>23</td>
-            <td><a href="#">Quinas</a></td>
-            <td><a href="#">Pergunta 792</a></td>
-            <td>Duplicate Question</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
-          </tr>
-          <tr>
-            <td>24</td>
-            <td><a href="#">Patrícia C.</a></td>
-            <td><a href="#">Pergunta 80384</a></td>
-            <td>Question is too broad</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+			
           </tr>
           <tr>
             <td>25</td>
-            <td><a href="#">Artur Araújo</a></td>
+        
+            <td><a href="#">Pergunta 10</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+			
+          </tr>
+          <tr>
+            <td>24</td>
+ 
+            <td><a href="#">Pergunta 25</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>20</td>
+
+            <td><a href="#">Pergunta 23892</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>18</td>
+            <td><a href="#">Pergunta 11</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>18</td>
+            <td><a href="#">Pergunta 4</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>17</td>
+            <td><a href="#">Pergunta 44</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>16</td>
+            <td><a href="#">Pergunta 9389</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>15</td>
+            <td><a href="#">Pergunta 17</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td><a href="#">Pergunta 4421</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td><a href="#">Pergunta 43</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td><a href="#">Pergunta 7</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td><a href="#">Pergunta 53</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td><a href="#">Pergunta 19</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><a href="#">Pergunta 12421</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><a href="#">Pergunta 1214</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><a href="#">Pergunta 9038</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><a href="#">Pergunta 1112</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><a href="#">Pergunta 9438</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>10</td>
             <td><a href="#">Pergunta 829</a></td>
-            <td>Hate speech</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
           </tr>
           <tr>
-            <td>26</td>
-            <td><a href="#">Jonas L.</a></td>
-            <td><a href="#">Pergunta 1</a></td>
-            <td>Spam</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
+            <td>10</td>
+            <td><a href="#">Pergunta 879</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
           </tr>
           <tr>
-            <td>27</td>
-            <td><a href="#">Joao</a></td>
+            <td>8</td>
+            <td><a href="#">Pergunta 84922</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><a href="#">Pergunta 792</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><a href="#">Pergunta 80384</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><a href="#">Pergunta 929</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><a href="#">Pergunta 111</a></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
+          </tr>
+          <tr>
+            <td>5</td>
             <td><a href="#">Pergunta 738</a></td>
-            <td>Question is unclear</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
           </tr>
           <tr>
-            <td>28</td>
-            <td><a href="#">Pedro Gomes</a></td>
+            <td>5</td>
             <td><a href="#">Pergunta 22267</a></td>
-            <td>Duplicate Question</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
           </tr>
           <tr>
-            <td>29</td>
-            <td><a href="#">Eduardo JJ</a></td>
+            <td>5</td>
             <td><a href="#">Pergunta 9372</a></td>
-            <td>The answer doesn't try to solve the problem. Should be deleted</td>
-            <td><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
+			<td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
           </tr>
-          <tr style="vertical-align:middle">
-            <td>30</td>
-            <td><a href="#">youcantseeme</a></td>
+          <tr>
+            <td>2</td>
             <td><a href="#">Pergunta 1114</a></td>
-            <td>Question is unclear. Question is unclear. Question is unclear.Question is unclear.Question is unclear.Question is unclear.Question is unclear.Question is unclear.Question is unclear.Question is unclear.</td>
-            <td style="vertical-align:middle"><button type="button" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Solved</button></td>
+            <td align="right"><button type="button" class="btn btn-default btn-s ">Solve</button></td>
           </tr>
         </table>
       </div>
