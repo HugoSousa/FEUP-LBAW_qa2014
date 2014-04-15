@@ -122,4 +122,160 @@
 
   }
 
+
+  function getQuestion($userid, $questionid){
+
+    global $conn;
+
+     $stmt = $conn->prepare("
+        SELECT q.\"idQuestion\", c.\"contentText\", c.\"contentDate\", q.\"title\",
+        ( 
+          SELECT \"username\"
+          FROM \"User\"
+          WHERE c.\"userID\" = \"User\".\"id\"
+        ) AS username,
+        SUM(
+         CASE
+         WHEN v.\"isUp\" 
+         THEN 1
+         ELSE CASE
+              WHEN v.\"isUp\" IS NULL
+              THEN 0
+              ELSE -1
+              END
+         END
+        ) AS votes,
+        ( 
+          SELECT
+          CASE 
+            WHEN COUNT(\"idUser\") = 0
+            THEN FALSE
+            ELSE TRUE
+          END 
+          FROM \"VoteQuestion\"
+          WHERE \"VoteQuestion\".\"idQuestion\" = q.\"idQuestion\"
+          AND \"VoteQuestion\".\"isUp\" IS TRUE
+          AND \"idUser\" = ?
+        ) AS myvoteup,
+        ( 
+          SELECT
+          CASE 
+            WHEN COUNT(\"idUser\") = 0
+            THEN FALSE
+            ELSE TRUE
+          END 
+          FROM \"VoteQuestion\"
+          WHERE \"VoteQuestion\".\"idQuestion\" = q.\"idQuestion\"
+          AND \"VoteQuestion\".\"isUp\" IS FALSE
+          AND \"idUser\" = ?
+        ) AS myvotedown
+        FROM \"VoteQuestion\" v JOIN \"Question\" q ON v.\"idQuestion\" = q.\"idQuestion\" JOIN \"Content\" c ON q.\"idQuestion\" = c.\"id\"
+        WHERE q.\"idQuestion\" = ?
+        GROUP BY q.\"idQuestion\", c.\"contentText\", c.\"contentDate\", username
+      ");
+
+    $stmt->execute(array($userid, $userid, $questionid));
+
+    return $stmt->fetch();
+  }
+
+
+  function getQuestionComments($questionid){
+    global $conn;
+
+     $stmt = $conn->prepare("
+        SELECT \"idComment\", \"contentText\", \"contentDate\", \"userID\",
+        (
+          SELECT \"username\"
+          FROM \"User\"
+          WHERE \"User\".\"id\" = \"userID\"
+        ) AS username
+        FROM \"CommentQuestion\", \"Content\"
+        WHERE \"idQuestion\" = ?
+        AND \"CommentQuestion\".\"idComment\" = \"Content\".\"id\"
+      ");
+
+    $stmt->execute(array($questionid));
+
+    return $stmt->fetchAll();
+  }
+
+
+  function getAnswers($userid, $questionid){
+    global $conn;
+
+     $stmt = $conn->prepare("
+        SELECT a.\"idAnswer\", c.\"contentText\", c.\"contentDate\", a.\"isAccepted\",
+        ( 
+          SELECT \"username\"
+          FROM \"User\"
+          WHERE c.\"userID\" = \"User\".\"id\"
+        ) AS username,
+        SUM(
+         CASE
+         WHEN v.\"isUp\" 
+         THEN 1
+         ELSE CASE
+              WHEN v.\"isUp\" IS NULL
+              THEN 0
+              ELSE -1
+              END
+         END
+        ) AS votes,
+        ( 
+          SELECT
+          CASE 
+            WHEN COUNT(\"idUser\") = 0
+            THEN FALSE
+            ELSE TRUE
+          END 
+          FROM \"VoteAnswer\"
+          WHERE \"VoteAnswer\".\"idAnswer\" = a.\"idAnswer\"
+          AND \"VoteAnswer\".\"isUp\" IS TRUE
+          AND \"idUser\" = ?
+        ) AS myvoteup,
+        ( 
+          SELECT
+          CASE 
+            WHEN COUNT(\"idUser\") = 0
+            THEN FALSE
+            ELSE TRUE
+          END 
+          FROM \"VoteAnswer\"
+          WHERE \"VoteAnswer\".\"idAnswer\" = a.\"idAnswer\"
+          AND \"VoteAnswer\".\"isUp\" IS FALSE
+          AND \"idUser\" = ?
+        ) AS myvotedown
+        FROM \"Answer\" a JOIN \"Content\" c ON a.\"idAnswer\" = c.\"id\"  LEFT JOIN \"VoteAnswer\" v ON v.\"idAnswer\" = a.\"idAnswer\"
+        WHERE a.\"idQuestion\" = ?
+        GROUP BY a.\"idAnswer\", c.\"contentText\", c.\"contentDate\", username
+        ORDER BY votes DESC
+      ");
+
+    $stmt->execute(array($userid, $userid, $questionid));
+
+    return $stmt->fetchAll();
+  }
+
+
+  function getCommentsAnswer($answerid){
+        global $conn;
+
+     $stmt = $conn->prepare("
+        SELECT \"idComment\", \"idAnswer\", \"contentText\" AS text, \"contentDate\" AS DATE,
+        (
+          SELECT \"username\" 
+          FROM \"User\"
+          WHERE \"Content\".\"userID\" = \"User\".\"id\"
+        ) AS USER
+        FROM \"CommentAnswer\", \"Content\"
+        WHERE \"idAnswer\" = ?
+        AND \"CommentAnswer\".\"idComment\" = \"Content\".\"id\"
+      ");
+
+    $stmt->execute(array($answerid));
+
+    return $stmt->fetchAll();
+  }
+
 ?>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.15, created on 2014-04-14 15:56:11
+<?php /* Smarty version Smarty-3.1.15, created on 2014-04-15 13:25:33
          compiled from "\wamp\www\proto\templates\questions\list_all.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:409753483355473198-10728032%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '76fa697e1d993feac903f36b186b378cd360bc91' => 
     array (
       0 => '\\wamp\\www\\proto\\templates\\questions\\list_all.tpl',
-      1 => 1397487368,
+      1 => 1397563660,
       2 => 'file',
     ),
   ),
@@ -198,7 +198,7 @@ $_smarty_tpl->tpl_vars['question']->_loop = true;
       <div class="panel-heading">
 
         <span class="pull-right"> Asked <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['question']->value['contentDate'],"M d 'Y");?>
- at <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['question']->value['contentDate'],"g:i");?>
+ at <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['question']->value['contentDate'],"H:i");?>
   by 
           <a href="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
 pages/users/user.php?username=<?php echo $_smarty_tpl->tpl_vars['question']->value['user'];?>
@@ -225,7 +225,7 @@ pages/users/user.php?username=<?php echo $_smarty_tpl->tpl_vars['question']->val
  Answers</span>
         <h3 class="panel-title" id=<?php echo $_smarty_tpl->tpl_vars['question']->value['id'];?>
 ><a href="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
-pages/questions/question.php?id=<?php echo $_smarty_tpl->tpl_vars['question']->value['id'];?>
+pages/questions/show_question.php?id=<?php echo $_smarty_tpl->tpl_vars['question']->value['id'];?>
 "><b><?php echo $_smarty_tpl->tpl_vars['question']->value['title'];?>
 </b></a></h3>
       </div>

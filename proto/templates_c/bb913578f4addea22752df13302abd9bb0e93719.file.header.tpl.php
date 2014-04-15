@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.15, created on 2014-04-11 18:46:48
+<?php /* Smarty version Smarty-3.1.15, created on 2014-04-15 18:21:59
          compiled from "\wamp\www\proto\templates\common\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:243305347dc3f2a0482-45454657%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'bb913578f4addea22752df13302abd9bb0e93719' => 
     array (
       0 => '\\wamp\\www\\proto\\templates\\common\\header.tpl',
-      1 => 1397238406,
+      1 => 1397582504,
       2 => 'file',
     ),
   ),
@@ -37,7 +37,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <!-- Bootstrap -->
     <link href="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
 css/bootstrap.min.css" rel="stylesheet">
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>

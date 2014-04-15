@@ -103,7 +103,7 @@
     <div class="panel panel-default" style="width:70%; margin-left:auto; margin-right:auto">
       <div class="panel-heading">
 
-        <span class="pull-right"> Asked {$question.contentDate|date_format:"M d 'Y"} at {$question.contentDate|date_format:"g:i"}  by 
+        <span class="pull-right"> Asked {$question.contentDate|date_format:"M d 'Y"} at {$question.contentDate|date_format:"H:i"}  by 
           <a href="{$BASE_URL}pages/users/user.php?username={$question.user}">{$question.user}</a></span> <!--link para o user -->
         <!-- so se for aceite -->
         <h3 class="panel-title">
@@ -122,7 +122,7 @@
           {/if}
         </h3>
         <span class="pull-right" >{$question.answers} Answers</span>
-        <h3 class="panel-title" id={$question.id}><a href="{$BASE_URL}pages/questions/question.php?id={$question.id}"><b>{$question.title}</b></a></h3>
+        <h3 class="panel-title" id={$question.id}><a href="{$BASE_URL}pages/questions/show_question.php?id={$question.id}"><b>{$question.title}</b></a></h3>
       </div>
       <div class="panel-body">
         {substr($question.contentText, 0, 400)}

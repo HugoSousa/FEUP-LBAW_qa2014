@@ -27,5 +27,19 @@
     return $reputation['reputation'];
 
   } 
+
+
+  function getUserID($username){
+    global $conn;
+    $stmt = $conn->prepare("SELECT id 
+                            FROM \"User\"
+                            WHERE username = ?");
+
+    $stmt->execute(array($username));
+    
+    $result = $stmt->fetch();
+
+    return $result['id'];
+  }
   
 ?>
