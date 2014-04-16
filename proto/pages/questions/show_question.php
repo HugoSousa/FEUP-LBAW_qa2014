@@ -7,8 +7,7 @@
     $question = getQuestion($viewer, $questionid);
     $questionComments = getQuestionComments($questionid);
     $answers = getAnswers($viewer, $questionid);
-
-    //var_dump($answers);
+    $tags = getTagsQuestion($questionid);
 
     for($i=0; $i < sizeof($answers); $i++){
 		$answer = $answers[$i];
@@ -24,10 +23,10 @@
     	}
     }
 
-    //print_r($answers);
 
     $smarty->assign('own', $_SESSION['username']);
 	$smarty->assign('question', $question);
+    $smarty->assign('tags', $tags);
 	$smarty->assign('questionComments', $questionComments);
 	$smarty->assign('answersAndComments', $answers);
 	$smarty->display('questions/show_question.tpl');

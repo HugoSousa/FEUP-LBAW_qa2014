@@ -259,7 +259,7 @@
 
 
   function getCommentsAnswer($answerid){
-        global $conn;
+    global $conn;
 
      $stmt = $conn->prepare("
         SELECT \"idComment\", \"idAnswer\", \"contentText\" AS text, \"contentDate\" AS DATE,
@@ -276,6 +276,25 @@
     $stmt->execute(array($answerid));
 
     return $stmt->fetchAll();
+  }
+
+
+  function getTagsQuestion($questionid){
+    global $conn;
+
+
+    $stmt = $conn->prepare("
+      SELECT \"TagQuestion\".\"idTag\", \"Tag\".\"name\"
+      FROM \"TagQuestion\", \"Question\", \"Tag\"
+      WHERE \"TagQuestion\".\"idQuestion\" = \"Question\".\"idQuestion\"
+      AND \"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\"
+      AND \"Question\".\"idQuestion\" = ?
+    ");
+
+    $stmt->execute(array($questionid));
+
+    return $stmt->fetchAll();
+
   }
 
 ?>

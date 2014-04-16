@@ -1,6 +1,6 @@
 {include file='common/header.tpl'}
 
-<script src="{$BASE_URL}javascript/list_all.js"></script>
+<script src="{$BASE_URL}javascript/users/list_all.js"></script>
 
 <div class="container" style="width:70%; margin-left:auto; margin-right:auto; padding-left:0px; margin-bottom:20px">
   <ul class="nav navbar-nav navbar-left">
@@ -140,21 +140,35 @@
         <a href="#">&laquo;</a></li>
 
         {if $page >= 3}
+          {if $page-2 > 1}
+            <li><a href="#">1</a></li>
+            <li class="disabled">...</li>
+          {/if}
           {for $page_=$page-2 to $page+2}
             {if $page_ <= $pages }
             <li><a href="#">{$page_}</a></li>
             {/if}
            {/for}
+           {if $page+2 < $pages}
+            <li class="disabled">...</li>
+            <li><a href="#">$pages</a></li>
+           {/if}
+        
         {else}
           {for $page_=$page to $page+4}
             {if $page_ <= $pages  }
             <li><a href="#">{$page_}</a></li>
             {/if}
           {/for}
+
+          {if $page+4 < $pages}
+            <li class="disabled">...</li>
+            <li><a href="#">$pages</a></li>
+           {/if}
         {/if}
 
 
-        {if ({sizeof($questions)} < 30)}
+        {if $page == $pages}
         <li class="disabled">
         {else}
         <li>
@@ -163,5 +177,9 @@
       </ul>
     </div>
 
+
+    <br><br>
 {/if}
+
+
 {include file='common/footer.tpl'}

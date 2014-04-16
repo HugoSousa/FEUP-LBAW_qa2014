@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.15, created on 2014-04-15 19:25:58
+<?php /* Smarty version Smarty-3.1.15, created on 2014-04-16 12:08:00
          compiled from "\wamp\www\proto\templates\questions\show_question.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:6020534d1c195a8ea9-56046212%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '4f52d4065a74167933ff0862cd71dc2563b8a5ce' => 
     array (
       0 => '\\wamp\\www\\proto\\templates\\questions\\show_question.tpl',
-      1 => 1397586356,
+      1 => 1397646453,
       2 => 'file',
     ),
   ),
@@ -22,6 +22,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'BASE_URL' => 0,
     'question' => 0,
     'own' => 0,
+    'tags' => 0,
+    'tag' => 0,
     'questionComments' => 0,
     'comment' => 0,
     'answersAndComments' => 0,
@@ -92,9 +94,16 @@ javascript/jquery.pagedown-bootstrap.combined.min.js"></script>
           <br>
           <!-- FALTA QUERY DE PROCURAR TAGS DE UMA QUESTÃO -->
           <span> Tags:</span>
-          <span class="label label-default" style="font-size:100%"><a href="#" style="color:white">lorem</a></span>
-          <span class="label label-default" style="font-size:100%"><a href="#" style="color:white">ipsum</a></span>
-          <span class="label label-default" style="font-size:100%"><a href="#" style="color:white">sed</a></span>
+
+          <?php  $_smarty_tpl->tpl_vars['tag'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['tag']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['tags']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['tag']->key => $_smarty_tpl->tpl_vars['tag']->value) {
+$_smarty_tpl->tpl_vars['tag']->_loop = true;
+?>
+            <span class="label label-default" style="font-size:100%"><a href="#" style="color:white"><?php echo $_smarty_tpl->tpl_vars['tag']->value['name'];?>
+</a></span>
+          <?php } ?>
+
           <?php if ($_smarty_tpl->tpl_vars['question']->value['username']==$_smarty_tpl->tpl_vars['own']->value) {?>
           	<button type="button" class="btn btn-default pull-right">Flag</button>
           	<button type="button" class="btn btn-default pull-right">Edit</button>
@@ -150,13 +159,15 @@ $_smarty_tpl->tpl_vars['answer']->_loop = true;
     <div class="container" style="width:70%; margin-left:auto; margin-right:auto">
       <div class="row">
         <div class="col-md-1">
-          <?php if ($_smarty_tpl->tpl_vars['answer']->value['myvoteup']) {?>
-              <button type="button" class="btn btn-default btn-lg btn-warning">
-          <?php } else { ?>
-              <button type="button" class="btn btn-default btn-lg">
-          <?php }?>
+          <?php if (isset($_smarty_tpl->tpl_vars['own']->value)) {?>
+            <?php if ($_smarty_tpl->tpl_vars['answer']->value['myvoteup']) {?>
+                <button type="button" class="btn btn-default btn-lg btn-warning">
+            <?php } else { ?>
+                <button type="button" class="btn btn-default btn-lg">
+            <?php }?>
             <span class="glyphicon glyphicon-chevron-up"></span>
           </button>
+          <?php }?>
           <br><br>
           <?php if ($_smarty_tpl->tpl_vars['answer']->value['votes']>0) {?>
             <span class="label label-success" style="font-size:170%; display: inline-block; width: 50px;">
@@ -168,16 +179,18 @@ $_smarty_tpl->tpl_vars['answer']->_loop = true;
           <?php echo $_smarty_tpl->tpl_vars['answer']->value['votes'];?>
 </span>
           <br><br>
-          <?php if ($_smarty_tpl->tpl_vars['answer']->value['myvotedown']) {?>
-              <button type="button" class="btn btn-default btn-lg btn-warning">
-          <?php } else { ?>
-              <button type="button" class="btn btn-default btn-lg">
-          <?php }?>
+          <?php if (isset($_smarty_tpl->tpl_vars['own']->value)) {?>
+            <?php if ($_smarty_tpl->tpl_vars['answer']->value['myvotedown']) {?>
+                <button type="button" class="btn btn-default btn-lg btn-warning">
+            <?php } else { ?>
+                <button type="button" class="btn btn-default btn-lg">
+            <?php }?>
             <span class="glyphicon glyphicon-chevron-down"></span>
           </button>
+          <?php }?>
           <br><br>
           <?php if ($_smarty_tpl->tpl_vars['answer']->value['isAccepted']) {?>
-            <button type="button" class="btn btn-default btn-lg" style="border:0">
+            <button type="button" class="btn btn-default btn-lg disabled" style="border:0; opacity:100">
               <span class="glyphicon glyphicon-ok" style="color:green; font-size:150%"></span>
             </button>
           <?php }?>
@@ -216,7 +229,7 @@ $_smarty_tpl->tpl_vars['comment']->_loop = true;
         <div class="well well-sm" style=" margin-left:25%; margin-right:32.5%; text-align:justify">
           <?php echo $_smarty_tpl->tpl_vars['comment']->value['text'];?>
 
-          <?php if ($_smarty_tpl->tpl_vars['own']->value==$_smarty_tpl->tpl_vars['comment']->value['username']) {?>
+          <?php if ($_smarty_tpl->tpl_vars['own']->value==$_smarty_tpl->tpl_vars['comment']->value['user']) {?>
             <a class="close pull-right" style="color:red">&times;</a>
             <a class="pull-right" href="#">edit&nbsp;</a>
           <?php }?>

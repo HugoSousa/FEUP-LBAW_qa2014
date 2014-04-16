@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.15, created on 2014-04-15 18:21:59
+<?php /* Smarty version Smarty-3.1.15, created on 2014-04-16 15:42:36
          compiled from "\wamp\www\proto\templates\common\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:243305347dc3f2a0482-45454657%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'bb913578f4addea22752df13302abd9bb0e93719' => 
     array (
       0 => '\\wamp\\www\\proto\\templates\\common\\header.tpl',
-      1 => 1397582504,
+      1 => 1397659354,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'BASE_URL' => 0,
     'USERNAME' => 0,
     'REPUTATION' => 0,
-    'USERTYPE' => 0,
+    'PERMISSION' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -48,7 +48,8 @@ javascript/bootstrap.min.js"></script>
     <div class="navbar navbar-static-top navbar-inverse">
 
       <div class="container">
-        <a href="#" class="navbar-brand">Q&A2014</a>
+        <a href="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
+" class="navbar-brand">Q&A2014</a>
         <form class="navbar-form navbar-right" role="search">
           <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
@@ -78,19 +79,20 @@ javascript/bootstrap.min.js"></script>
             <li><a href="#"><?php echo $_smarty_tpl->tpl_vars['USERNAME']->value;?>
  | <?php echo $_smarty_tpl->tpl_vars['REPUTATION']->value;?>
 </a></li>
-            <?php if ($_smarty_tpl->tpl_vars['USERTYPE']->value=='A') {?>
+            <?php if ($_smarty_tpl->tpl_vars['PERMISSION']->value=='A') {?>
             <li><a href="#">Flags</a></li>
             <?php }?>
             <li><a href="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
 actions/users/logout.php">Log out</a></li>
             <?php } else { ?>
-            <li><a href="#">Register</a></li>
+            <li><a href="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
+pages/users/register.php">Register</a></li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">Log in <b class="caret"></b></a>  
               <div class="dropdown-menu" style="padding: 15px; width:200px">
                 <form class="form" action="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
 actions/users/login.php" method="post">
-                  <input name="username" id="username" type="text" placeholder="Username" size="30" style="margin-bottom: 15px;" class="form-control"> 
+                  <input name="login" id="login" type="text" placeholder="Username" size="30" style="margin-bottom: 15px;" class="form-control"> 
                   <input name="password" id="password" type="password" placeholder="Password" size="30" style="margin-bottom: 15px;" class="form-control"><br>
                   <input class="btn btn-primary" style="clear: left; width: 100%; height: 32px; font-size: 13px" type="submit" name="commit" value="Sign In" />
                 </form>

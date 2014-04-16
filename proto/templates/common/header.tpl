@@ -18,7 +18,7 @@
     <div class="navbar navbar-static-top navbar-inverse">
 
       <div class="container">
-        <a href="#" class="navbar-brand">Q&A2014</a>
+        <a href="{$BASE_URL}" class="navbar-brand">Q&A2014</a>
         <form class="navbar-form navbar-right" role="search">
           <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
@@ -46,17 +46,17 @@
           <ul class="nav navbar-nav navbar-right">
             {if $USERNAME}
             <li><a href="#">{$USERNAME} | {$REPUTATION}</a></li>
-            {if $USERTYPE == 'A'}
+            {if $PERMISSION == 'A'}
             <li><a href="#">Flags</a></li>
             {/if}
             <li><a href="{$BASE_URL}actions/users/logout.php">Log out</a></li>
             {else}
-            <li><a href="#">Register</a></li>
+            <li><a href="{$BASE_URL}pages/users/register.php">Register</a></li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">Log in <b class="caret"></b></a>  
               <div class="dropdown-menu" style="padding: 15px; width:200px">
                 <form class="form" action="{$BASE_URL}actions/users/login.php" method="post">
-                  <input name="username" id="username" type="text" placeholder="Username" size="30" style="margin-bottom: 15px;" class="form-control"> 
+                  <input name="login" id="login" type="text" placeholder="Username" size="30" style="margin-bottom: 15px;" class="form-control"> 
                   <input name="password" id="password" type="password" placeholder="Password" size="30" style="margin-bottom: 15px;" class="form-control"><br>
                   <input class="btn btn-primary" style="clear: left; width: 100%; height: 32px; font-size: 13px" type="submit" name="commit" value="Sign In" />
                 </form>

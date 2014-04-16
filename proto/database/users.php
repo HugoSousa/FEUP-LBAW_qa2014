@@ -7,31 +7,34 @@
   }
 
 
-  function isLoginCorrect($username, $password) {
+  function isLoginCorrect($login, $password) {
     global $conn;
     $stmt = $conn->prepare("SELECT * 
                             FROM \"User\"
                             WHERE login = ? AND password = ?");
-    $stmt->execute(array($username, hash("sha256", $password)));
+
+    $stmt->execute(array($login, hash("sha256", $password)));
+    
     return $stmt->fetch() == true;
   }
 
-  function getReputation($username, $password){
+  function getUserInfoByLogin($login){
     global $conn;
-    $stmt = $conn->prepare("SELECT reputation 
+    $stmt = $conn->prepare("SELECT id, username, reputation, permission
                             FROM \"User\"
-                            WHERE login = ? AND password = ?");
-    $stmt->execute(array($username, hash("sha256", $password)));
+                            WHERE login = ?");
+
+    $stmt->execute(array($login));
     
-    $reputation = $stmt->fetch();
-    return $reputation['reputation'];
+    $result = $stmt->fetch();
 
-  } 
+    return $result;
+  }
 
 
-  function getUserID($username){
+  function getUserInfoByUsername($username){
     global $conn;
-    $stmt = $conn->prepare("SELECT id 
+    $stmt = $conn->prepare("SELECT *
                             FROM \"User\"
                             WHERE username = ?");
 
@@ -39,7 +42,89 @@
     
     $result = $stmt->fetch();
 
-    return $result['id'];
+    return $result;
+  }
+
+
+  function getTopQuestionsUser($userid){
+    global $conn;
+    $stmt = $conn->prepare("
+      WITH myQ AS
+      (
+        SELECT q.\"idQuestion\", q.\"title\"
+        FROM \"User\" u, \"Content\" c, \"Question\" q
+        WHERE c.\"id\" = q.\"idQuestion\" AND u.\"id\" = ? AND c.\"userID\"= ?
+      )
+      SELECT myQ.\"idQuestion\", myQ.\"title\",
+      SUM(
+        CASE
+              WHEN v.\"isUp\" IS NULL
+              THEN 0
+        WHEN v.\"isUp\"
+        THEN 1
+        ELSE -1
+        END
+      ) AS total
+      FROM \"VoteQuestion\" v RIGHT OUTER JOIN myQ ON v.\"idQuestion\" = myQ.\"idQuestion\"
+      GROUP BY myQ.\"title\", myQ.\"idQuestion\"
+      ORDER BY total DESC
+      LIMIT 5
+    ");
+
+    $stmt->execute(array($userid, $userid));
+    
+    return $stmt->fetchAll();
+
+  }
+
+
+  function getTopAnswersUser($userid){
+    global $conn;
+    $stmt = $conn->prepare("
+      WITH myA AS
+      (
+        SELECT a.\"idAnswer\", q.\"idQuestion\", q.\"title\", c.\"contentText\"
+        FROM \"User\" u, \"Content\" c, \"Question\" q, \"Answer\" a
+        WHERE c.\"id\" = a.\"idAnswer\" AND a.\"idQuestion\" = q.\"idQuestion\" AND u.\"id\" = ? AND c.\"userID\"= ? 
+      )
+      SELECT myA.\"idAnswer\", myA.\"idQuestion\", myA.\"title\", myA.\"contentText\", SUM
+      (
+        CASE
+        WHEN v.\"isUp\" IS NULL
+        THEN 0
+        WHEN v.\"isUp\"
+        THEN 1
+        ELSE -1
+        END
+      )AS total
+      FROM \"VoteAnswer\" v RIGHT OUTER JOIN myA ON v.\"idAnswer\" = myA.\"idAnswer\"
+      GROUP BY myA.\"idAnswer\", myA.\"title\", myA.\"idQuestion\", myA.\"contentText\"
+      ORDER BY total DESC
+      LIMIT 5
+    ");
+
+    $stmt->execute(array($userid, $userid));
+    
+    return $stmt->fetchAll();
+
+  }
+
+
+  function editUser($username, $field, $value){
+        global $conn;
+
+    if($field == 'realname')
+      $query = "UPDATE \"User\" SET \"realName\" = ? WHERE \"username\" = ?";
+    else if($field == 'location')
+      $query = "UPDATE \"User\" SET \"realName\" = ? WHERE \"username\" = ?";
+    else if($field == 'biography')
+      $query = "UPDATE \"User\" SET \"biography\" = ? WHERE \"username\" = ?";
+
+
+    $stmt = $conn->prepare($query);
+
+    return $stmt->execute(array($value, $username));
+    
   }
   
 ?>

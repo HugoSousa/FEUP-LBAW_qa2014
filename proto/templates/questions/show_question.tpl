@@ -50,9 +50,11 @@
           <br>
           <!-- FALTA QUERY DE PROCURAR TAGS DE UMA QUESTÃO -->
           <span> Tags:</span>
-          <span class="label label-default" style="font-size:100%"><a href="#" style="color:white">lorem</a></span>
-          <span class="label label-default" style="font-size:100%"><a href="#" style="color:white">ipsum</a></span>
-          <span class="label label-default" style="font-size:100%"><a href="#" style="color:white">sed</a></span>
+
+          {foreach $tags as $tag}
+            <span class="label label-default" style="font-size:100%"><a href="#" style="color:white">{$tag.name}</a></span>
+          {/foreach}
+
           {if $question.username == $own}
           	<button type="button" class="btn btn-default pull-right">Flag</button>
           	<button type="button" class="btn btn-default pull-right">Edit</button>
@@ -96,13 +98,15 @@
     <div class="container" style="width:70%; margin-left:auto; margin-right:auto">
       <div class="row">
         <div class="col-md-1">
-          {if $answer.myvoteup}
-              <button type="button" class="btn btn-default btn-lg btn-warning">
-          {else}
-              <button type="button" class="btn btn-default btn-lg">
-          {/if}
+          {if isset($own)}
+            {if $answer.myvoteup}
+                <button type="button" class="btn btn-default btn-lg btn-warning">
+            {else}
+                <button type="button" class="btn btn-default btn-lg">
+            {/if}
             <span class="glyphicon glyphicon-chevron-up"></span>
           </button>
+          {/if}
           <br><br>
           {if $answer.votes > 0}
             <span class="label label-success" style="font-size:170%; display: inline-block; width: 50px;">
@@ -113,16 +117,18 @@
           {/if}
           {$answer.votes}</span>
           <br><br>
-          {if $answer.myvotedown}
-              <button type="button" class="btn btn-default btn-lg btn-warning">
-          {else}
-              <button type="button" class="btn btn-default btn-lg">
-          {/if}
+          {if isset($own)}
+            {if $answer.myvotedown}
+                <button type="button" class="btn btn-default btn-lg btn-warning">
+            {else}
+                <button type="button" class="btn btn-default btn-lg">
+            {/if}
             <span class="glyphicon glyphicon-chevron-down"></span>
           </button>
+          {/if}
           <br><br>
           {if $answer.isAccepted}
-            <button type="button" class="btn btn-default btn-lg" style="border:0">
+            <button type="button" class="btn btn-default btn-lg disabled" style="border:0; opacity:100">
               <span class="glyphicon glyphicon-ok" style="color:green; font-size:150%"></span>
             </button>
           {/if}
@@ -152,7 +158,7 @@
 
         <div class="well well-sm" style=" margin-left:25%; margin-right:32.5%; text-align:justify">
           {$comment.text}
-          {if $own == $comment.username}
+          {if $own == $comment.user}
             <a class="close pull-right" style="color:red">&times;</a>
             <a class="pull-right" href="#">edit&nbsp;</a>
           {/if}
@@ -176,14 +182,14 @@
     <br>
 
     {if isset($own)}
-    <!--CREDITS:https://github.com/kevinoconnor7/pagedown-bootstrap/-->
-    <div class="container" style="margin-left:15%;margin-right:31.4%; width:60%">
-      <textarea class="form-control" id="pagedownMe" rows="10"></textarea>
-    </div>
+      <!--CREDITS:https://github.com/kevinoconnor7/pagedown-bootstrap/-->
+      <div class="container" style="margin-left:15%;margin-right:31.4%; width:60%">
+        <textarea class="form-control" id="pagedownMe" rows="10"></textarea>
+      </div>
 
-    <div class="container" style="margin-left:15% ;margin-right:31.4%; width:60%">
-      <button type="button" class="btn btn-default btn-info pull-right" style="margin-top:10px">Post Answer</button>
-    </div>
+      <div class="container" style="margin-left:15% ;margin-right:31.4%; width:60%">
+        <button type="button" class="btn btn-default btn-info pull-right" style="margin-top:10px">Post Answer</button>
+      </div>
     {/if}
 
 
