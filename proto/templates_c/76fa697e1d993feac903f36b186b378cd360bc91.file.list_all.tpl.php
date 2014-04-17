@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.15, created on 2014-04-17 14:05:19
+<?php /* Smarty version Smarty-3.1.15, created on 2014-04-16 15:46:57
          compiled from "\wamp\www\proto\templates\questions\list_all.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:409753483355473198-10728032%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '76fa697e1d993feac903f36b186b378cd360bc91' => 
     array (
       0 => '\\wamp\\www\\proto\\templates\\questions\\list_all.tpl',
-      1 => 1397739913,
+      1 => 1397588304,
       2 => 'file',
     ),
   ),
@@ -27,6 +27,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'pages' => 0,
     'questions' => 0,
     'question' => 0,
+    'page_' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -35,7 +36,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
 
 <script src="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
-javascript/users/list_all.js"></script>
+javascript/list_all.js"></script>
 
 <div class="container" style="width:70%; margin-left:auto; margin-right:auto; padding-left:0px; margin-bottom:20px">
   <ul class="nav navbar-nav navbar-left">
@@ -235,13 +236,48 @@ pages/questions/show_question.php?id=<?php echo $_smarty_tpl->tpl_vars['question
     </div>
 <?php } ?>
 
- 
-<?php echo $_smarty_tpl->getSubTemplate ('common/pagination.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+    <div style="text-align:center">
+      <ul class="pagination">
+        <?php if ($_smarty_tpl->tpl_vars['page']->value==1) {?>
+        <li class="disabled">
+        <?php } else { ?>
+        <li>
+        <?php }?>
+        <a href="#">&laquo;</a></li>
+
+        <?php if ($_smarty_tpl->tpl_vars['page']->value>=3) {?>
+          <?php $_smarty_tpl->tpl_vars['page_'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['page_']->step = 1;$_smarty_tpl->tpl_vars['page_']->total = (int) ceil(($_smarty_tpl->tpl_vars['page_']->step > 0 ? $_smarty_tpl->tpl_vars['page']->value+2+1 - ($_smarty_tpl->tpl_vars['page']->value-2) : $_smarty_tpl->tpl_vars['page']->value-2-($_smarty_tpl->tpl_vars['page']->value+2)+1)/abs($_smarty_tpl->tpl_vars['page_']->step));
+if ($_smarty_tpl->tpl_vars['page_']->total > 0) {
+for ($_smarty_tpl->tpl_vars['page_']->value = $_smarty_tpl->tpl_vars['page']->value-2, $_smarty_tpl->tpl_vars['page_']->iteration = 1;$_smarty_tpl->tpl_vars['page_']->iteration <= $_smarty_tpl->tpl_vars['page_']->total;$_smarty_tpl->tpl_vars['page_']->value += $_smarty_tpl->tpl_vars['page_']->step, $_smarty_tpl->tpl_vars['page_']->iteration++) {
+$_smarty_tpl->tpl_vars['page_']->first = $_smarty_tpl->tpl_vars['page_']->iteration == 1;$_smarty_tpl->tpl_vars['page_']->last = $_smarty_tpl->tpl_vars['page_']->iteration == $_smarty_tpl->tpl_vars['page_']->total;?>
+            <?php if ($_smarty_tpl->tpl_vars['page_']->value<=$_smarty_tpl->tpl_vars['pages']->value) {?>
+            <li><a href="#"><?php echo $_smarty_tpl->tpl_vars['page_']->value;?>
+</a></li>
+            <?php }?>
+           <?php }} ?>
+        <?php } else { ?>
+          <?php $_smarty_tpl->tpl_vars['page_'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['page_']->step = 1;$_smarty_tpl->tpl_vars['page_']->total = (int) ceil(($_smarty_tpl->tpl_vars['page_']->step > 0 ? $_smarty_tpl->tpl_vars['page']->value+4+1 - ($_smarty_tpl->tpl_vars['page']->value) : $_smarty_tpl->tpl_vars['page']->value-($_smarty_tpl->tpl_vars['page']->value+4)+1)/abs($_smarty_tpl->tpl_vars['page_']->step));
+if ($_smarty_tpl->tpl_vars['page_']->total > 0) {
+for ($_smarty_tpl->tpl_vars['page_']->value = $_smarty_tpl->tpl_vars['page']->value, $_smarty_tpl->tpl_vars['page_']->iteration = 1;$_smarty_tpl->tpl_vars['page_']->iteration <= $_smarty_tpl->tpl_vars['page_']->total;$_smarty_tpl->tpl_vars['page_']->value += $_smarty_tpl->tpl_vars['page_']->step, $_smarty_tpl->tpl_vars['page_']->iteration++) {
+$_smarty_tpl->tpl_vars['page_']->first = $_smarty_tpl->tpl_vars['page_']->iteration == 1;$_smarty_tpl->tpl_vars['page_']->last = $_smarty_tpl->tpl_vars['page_']->iteration == $_smarty_tpl->tpl_vars['page_']->total;?>
+            <?php if ($_smarty_tpl->tpl_vars['page_']->value<=$_smarty_tpl->tpl_vars['pages']->value) {?>
+            <li><a href="#"><?php echo $_smarty_tpl->tpl_vars['page_']->value;?>
+</a></li>
+            <?php }?>
+          <?php }} ?>
+        <?php }?>
 
 
-    <br><br>
+        <?php ob_start();?><?php echo sizeof($_smarty_tpl->tpl_vars['questions']->value);?>
+<?php $_tmp1=ob_get_clean();?><?php if (($_tmp1<30)) {?>
+        <li class="disabled">
+        <?php } else { ?>
+        <li>
+        <?php }?>
+        <a href="#">&raquo;</a></li>
+      </ul>
+    </div>
+
 <?php }?>
-
-
 <?php echo $_smarty_tpl->getSubTemplate ('common/footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 <?php }} ?>
