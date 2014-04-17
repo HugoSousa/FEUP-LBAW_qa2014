@@ -4,15 +4,20 @@
 
     $page = $_GET['page'];
 
+    if(! isset($_GET['page']))
+    	$page = 1;
 
     switch($_GET['order']){
 	    case 'old':
 	        $order = 'old';
 	        break;
-	    default :
+	    case 'new' :
 	        $order = 'new';
 	        break;
 	}
+
+	if(! isset($_GET['order']))
+		$order = 'new';
 
 	switch($_GET['filter_ans']){
 	    case 'y':
@@ -21,10 +26,13 @@
 	    case 'n' :
 	        $filter_ans = 'n';
 	        break;
-	    default:
+	    case 'all':
 	    	$filter_ans = 'all';
 	    	break;
 	}
+
+	if(! isset($_GET['filter_ans']))
+		$filter_ans = 'all';
 
 	switch($_GET['filter_acc']){
 	    case 'y':
@@ -33,10 +41,13 @@
 	    case 'n' :
 	        $filter_acc = 'n';
 	        break;
-	    default:
+	    case 'all':
 	    	$filter_acc = 'all';
 	    	break;
 	}
+
+	if(! isset($_GET['filter_acc']))
+		$filter_acc = 'all';
 
     $questions = getQuestions($page, $order, $filter_ans, $filter_acc);  
     $pages = ceil(intval(getTotalResults($filter_ans, $filter_acc))/30);

@@ -1,16 +1,13 @@
-function dropdownClick(page, order, filter_ans, filter_acc){
+function dropdownClick(page, order){
 
 		var redirect = 'list_all.php?page=' + page;
 
-		if(order == 'old')
-			redirect += '&order=old';
-
-		if(filter_ans != 'all')
-			redirect += '&filter_ans=' + filter_ans;
-
-		if(filter_acc != 'all')
-			redirect += '&filter_acc=' + filter_acc;
-
+		if(order == 'username')
+			redirect += '&order=username';
+		else if(order == 'registry')
+			redirect += '&order=registry';
+		else if(order == 'reputation')
+			redirect += '&order=reputation';
 
 		window.location.href = redirect;
 }

@@ -111,7 +111,7 @@
 
 
   function editUser($username, $field, $value){
-        global $conn;
+    global $conn;
 
     if($field == 'realname')
       $query = "UPDATE \"User\" SET \"realName\" = ? WHERE \"username\" = ?";
@@ -127,4 +127,35 @@
     
   }
   
+
+
+  function getUsers($order, $page){
+    global $conn;
+
+    $offset = ($page-1) * 30;
+
+    if($order == 'username')
+      $query = "SELECT \"username\", \"registry\", \"reputation\" FROM \"User\" ORDER BY \"username\" LIMIT 30 OFFSET ?";
+    else if($order == 'reputation')
+      $query = "SELECT \"username\", \"registry\", \"reputation\" FROM \"User\" ORDER BY \"reputation\" DESC LIMIT 30 OFFSET ?";
+    if($order == 'registry')
+      $query = "SELECT \"username\", \"registry\", \"reputation\" FROM \"User\" ORDER BY \"registry\" LIMIT 30 OFFSET ?";
+
+    $stmt = $conn->prepare($query);
+
+    $stmt->execute(array($offset));
+
+    return $stmt->fetchAll();
+  }
+
+
+  function getTotalUsers(){
+    global $conn;
+
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM \"User\"");
+
+    $stmt->execute(array());
+
+    return $stmt->fetch();
+  }
 ?>
