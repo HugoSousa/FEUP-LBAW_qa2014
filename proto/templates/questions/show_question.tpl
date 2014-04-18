@@ -4,6 +4,8 @@
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
     <link href="{$BASE_URL}css/jquery.pagedown-bootstrap.css" rel="stylesheet">
     <script type="text/javascript" src="{$BASE_URL}javascript/jquery.pagedown-bootstrap.combined.min.js"></script>
+    <script type="text/javascript" src="{$BASE_URL}javascript/comment.js"></script>
+    <script type="text/javascript" src="{$BASE_URL}javascript/answer.js"></script>
 
     <div class="page-header" style="width:70%; margin-left:auto; margin-right:auto">
       <h3>{$question.title}</h3>
@@ -46,15 +48,13 @@
         <div class="well well-lg col-md-8">
 		      {$question.contentText}
           <br><br><br>
-          <span> Asked by <a href="#">{$question.username}</a> at {$question.contentDate|date_format:"M d 'Y"}, {$question.contentDate|date_format:"H:i"} </span>
+          <span> Asked by <a href="{$BASE_URL}pages/users/user.php?username={$question.username}">{$question.username}</a> at {$question.contentDate|date_format:"M d 'Y"}, {$question.contentDate|date_format:"H:i"} </span>
           <br>
           <!-- FALTA QUERY DE PROCURAR TAGS DE UMA QUESTÃO -->
           <span> Tags:</span>
-
-          {foreach $tags as $tag}
-            <span class="label label-default" style="font-size:100%"><a href="#" style="color:white">{$tag.name}</a></span>
-          {/foreach}
-
+          <span class="label label-default" style="font-size:100%"><a href="#" style="color:white">lorem</a></span>
+          <span class="label label-default" style="font-size:100%"><a href="#" style="color:white">ipsum</a></span>
+          <span class="label label-default" style="font-size:100%"><a href="#" style="color:white">sed</a></span>
           {if $question.username == $own}
           	<button type="button" class="btn btn-default pull-right">Flag</button>
           	<button type="button" class="btn btn-default pull-right">Edit</button>
@@ -65,7 +65,7 @@
 
     </div>
 
-
+    <div id="QuestionDiv{$question.idQuestion}" >
     {foreach $questionComments as $comment}
       <div class="well well-sm" style="margin-bottom:2px; margin-left:25%; margin-right:32.5%; text-align:justify">
         {$comment.contentText}
@@ -76,11 +76,11 @@
         {/if}
 
         <span class="pull-right">
-          <a href="#">{$comment.username}</a> <small>{$comment.contentDate|date_format:"M d 'Y"}, {$comment.contentDate|date_format:"H:i"}&nbsp;&nbsp;&nbsp;</small>
+          <a href="{$BASE_URL}pages/users/user.php?username={$comment.username}">{$comment.username}</a> <small>{$comment.contentDate|date_format:"M d 'Y"}, {$comment.contentDate|date_format:"H:i"}&nbsp;&nbsp;&nbsp;</small>
         </span>
       </div>
     {/foreach}
-
+  </div>
     {if isset($own)}
       <br>
       <div class="container" style="margin-right:31.4%">
@@ -88,7 +88,34 @@
       </div>
     {/if}
 
+    {if isset($own)}
+    <div class="container" style="margin-right:31.4%">
+      <button id="comment" class="btn btn-default btn-xs btn-info pull-right" data-toggle="modal" data-target="#modalQuestion">
+        Add Comment
+      </button>
+    </div>
+    {/if}
+      <!-- Modal -->
+      <div class="modal fade" id="modalQuestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">Comment Question of {$question.username}</h4>
+            </div>
+            <div class="modal-body">
+              <textarea class="form-control" rows="10" style="resize:none"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button id ="commentQuestion" type="button" value="{$question.idQuestion}"  class="btn btn-primary">Comment</button>
+            </div>
+          </div>
+        </div>
+      </div>  
 
+
+     <div id="AllAnswers"> 
     {foreach $answersAndComments as $answer}
 
     <!--Divisoria Horizontal-->
@@ -98,15 +125,13 @@
     <div class="container" style="width:70%; margin-left:auto; margin-right:auto">
       <div class="row">
         <div class="col-md-1">
-          {if isset($own)}
-            {if $answer.myvoteup}
-                <button type="button" class="btn btn-default btn-lg btn-warning">
-            {else}
-                <button type="button" class="btn btn-default btn-lg">
-            {/if}
+          {if $answer.myvoteup}
+              <button type="button" class="btn btn-default btn-lg btn-warning">
+          {else}
+              <button type="button" class="btn btn-default btn-lg">
+          {/if}
             <span class="glyphicon glyphicon-chevron-up"></span>
           </button>
-          {/if}
           <br><br>
           {if $answer.votes > 0}
             <span class="label label-success" style="font-size:170%; display: inline-block; width: 50px;">
@@ -117,18 +142,16 @@
           {/if}
           {$answer.votes}</span>
           <br><br>
-          {if isset($own)}
-            {if $answer.myvotedown}
-                <button type="button" class="btn btn-default btn-lg btn-warning">
-            {else}
-                <button type="button" class="btn btn-default btn-lg">
-            {/if}
+          {if $answer.myvotedown}
+              <button type="button" class="btn btn-default btn-lg btn-warning">
+          {else}
+              <button type="button" class="btn btn-default btn-lg">
+          {/if}
             <span class="glyphicon glyphicon-chevron-down"></span>
           </button>
-          {/if}
           <br><br>
           {if $answer.isAccepted}
-            <button type="button" class="btn btn-default btn-lg disabled" style="border:0; opacity:100">
+            <button type="button" class="btn btn-default btn-lg" style="border:0">
               <span class="glyphicon glyphicon-ok" style="color:green; font-size:150%"></span>
             </button>
           {/if}
@@ -138,7 +161,7 @@
 
           {$answer.contentText}
           <br><br><br>
-          <span> Answered by <a href="#">{$answer.username}</a> at {$answer.contentDate|date_format:"M d 'Y"}, {$answer.contentDate|date_format:"H:i"} </span>
+          <span> Answered by <a href="{$BASE_URL}pages/users/user.php?username={$answer.username}">{$answer.username}</a> at {$answer.contentDate|date_format:"M d 'Y"}, {$answer.contentDate|date_format:"H:i"} </span>
           {if $answer.username == $own}
           <button type="button" class="btn btn-danger pull-right">Delete</button>
           {/if}
@@ -152,44 +175,79 @@
         </div>
       </div>
 
-    </div>
 
+    </div>
+    <div id="CommentDiv{$answer.idAnswer}">
       {foreach $answer.comments as $comment}
 
         <div class="well well-sm" style=" margin-left:25%; margin-right:32.5%; text-align:justify">
           {$comment.text}
-          {if $own == $comment.user}
+          {if $own == $comment.username}
             <a class="close pull-right" style="color:red">&times;</a>
             <a class="pull-right" href="#">edit&nbsp;</a>
           {/if}
           <span class="pull-right">
-            <a href="#">{$comment.user}</a> <small>at {$comment.date|date_format:"M d 'Y"}, {$comment.date|date_format:"H:i"} &nbsp;&nbsp;&nbsp;</small>
+            <a href="{$BASE_URL}pages/users/user.php?username={$comment.user}">{$comment.user}</a> <small>at {$comment.date|date_format:"M d 'Y"}, {$comment.date|date_format:"H:i"} &nbsp;&nbsp;&nbsp;</small>
           </span>
         </div>
 
 
       {/foreach}
+    </div>
 
-    {if isset($own)}
-    <div class="container" style="margin-right:31.4%">
-      <button type="button" class="btn btn-default btn-xs btn-info pull-right">Add Comment</button>
+    <!-- {if isset($own)} 
+     <div class="container" style="margin-right:31.4%">
+      <button id="comment" class="btn btn-default btn-xs btn-info pull-right" data-toggle="modal" data-target="#modal{$answer.idAnswer}">
+        Add Comment
+      </button>
+    </div>
+     {/if} -->
+
+     {if isset($own)}
+    <!-- Button trigger modal -->
+     <div class="container" style="margin-right:31.4%">
+      <button id="comment" class="btn btn-default btn-xs btn-info pull-right" data-toggle="modal" data-target="#modal{$answer.idAnswer}">
+        Add Comment
+      </button>
     </div>
     {/if}
+      <!-- Modal -->
+      <div class="modal fade" id="modal{$answer.idAnswer}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">Comment Answer of {$answer.username}</h4>
+            </div>
+            <div class="modal-body">
+              <textarea class="form-control" rows="10" style="resize:none"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button id ="commentAnswer" type="button" value="{$answer.idAnswer}"  class="btn btn-primary">Comment</button>
+            </div>
+          </div>
+        </div>
+      </div>  
 
     {/foreach}
+
+  </div>
 
     <hr>
     <br>
 
     {if isset($own)}
-      <!--CREDITS:https://github.com/kevinoconnor7/pagedown-bootstrap/-->
+    <!--CREDITS:https://github.com/kevinoconnor7/pagedown-bootstrap/-->
+    <div>
       <div class="container" style="margin-left:15%;margin-right:31.4%; width:60%">
         <textarea class="form-control" id="pagedownMe" rows="10"></textarea>
       </div>
 
       <div class="container" style="margin-left:15% ;margin-right:31.4%; width:60%">
-        <button type="button" class="btn btn-default btn-info pull-right" style="margin-top:10px">Post Answer</button>
+        <button id="postAnswer" type="button" class="btn btn-default btn-info pull-right" style="margin-top:10px" value="{$question.idQuestion}" >Post Answer</button>
       </div>
+    </div>
     {/if}
 
 
