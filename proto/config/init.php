@@ -1,11 +1,12 @@
 <?php
-  session_set_cookie_params(3600); //FIXME
+  session_set_cookie_params(3600, '/~lbaw1346'); //FIXME
   session_start();
 
-  $BASE_DIR = '/wamp/www/proto/'; //FIXME
-  $BASE_URL = '/proto/'; //FIXME
+  $BASE_DIR = '/opt/lbaw/lbaw1346/public_html/proto/'; //FIXME
+  $BASE_URL = '/~lbaw1346/proto/'; //FIXME
 
-  $conn = new PDO('pgsql:host=localhost;dbname=lbaw1346', 'postgres', 'root'); //FIXME
+  $conn = new PDO('pgsql:host=vdbm;dbname=lbaw1346', 'lbaw1346', 
+'yP455af6'); //FIXME
   $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
