@@ -6,6 +6,8 @@
     <script type="text/javascript" src="{$BASE_URL}javascript/jquery.pagedown-bootstrap.combined.min.js"></script>
     <script type="text/javascript" src="{$BASE_URL}javascript/comment.js"></script>
     <script type="text/javascript" src="{$BASE_URL}javascript/answer.js"></script>
+    <script type="text/javascript" src="{$BASE_URL}javascript/vote.js"></script>
+    <script type="text/javascript" src="{$BASE_URL}javascript/flag.js"></script>
 
     <div class="page-header" style="width:70%; margin-left:auto; margin-right:auto">
       <h3>{$question.title}</h3>
@@ -20,7 +22,7 @@
             {else}
               <button type="button" class="btn btn-default btn-lg">
             {/if}
-            <span class="glyphicon glyphicon-chevron-up"></span>
+            <span class="glyphicon glyphicon-chevron-up voteUp"></span>
           </button>
           {/if}
           <br><br>
@@ -41,7 +43,7 @@
             {else}
               <button type="button" class="btn btn-default btn-lg">
             {/if}
-            <span class="glyphicon glyphicon-chevron-down"></span>
+            <span class="glyphicon glyphicon-chevron-down voteDown"></span>
           </button>
           {/if}
         </div>
@@ -64,8 +66,11 @@
       </div>
 
     </div>
+  
+    <div id="questionID" style="display:none">"{$question.idQuestion}"</div>
+    <div id="userID" style="display:none">{$userid}</div>
 
-    <div id="QuestionDiv{$question.idQuestion}" >
+    <div id="QuestionDiv{$question.idQuestion}">
     {foreach $questionComments as $comment}
       <div class="well well-sm" style="margin-bottom:2px; margin-left:25%; margin-right:32.5%; text-align:justify">
         {$comment.contentText}
@@ -130,7 +135,7 @@
           {else}
               <button type="button" class="btn btn-default btn-lg">
           {/if}
-            <span class="glyphicon glyphicon-chevron-up"></span>
+            <span class="glyphicon glyphicon-chevron-up voteUp"></span>
           </button>
           <br><br>
           {if $answer.votes > 0}
@@ -147,7 +152,7 @@
           {else}
               <button type="button" class="btn btn-default btn-lg">
           {/if}
-            <span class="glyphicon glyphicon-chevron-down"></span>
+            <span class="glyphicon glyphicon-chevron-down voteDown" ></span>
           </button>
           <br><br>
           {if $answer.isAccepted}
@@ -166,7 +171,7 @@
           <button type="button" class="btn btn-danger pull-right">Delete</button>
           {/if}
           {if isset($own)}
-          <button type="button" class="btn btn-default pull-right">Flag</button>
+          <button type="button" id="flagContent" class="btn btn-default pull-right">Flag</button>
           {/if}
           {if $answer.username == $own}
           <button type="button" class="btn btn-default pull-right">Edit</button>

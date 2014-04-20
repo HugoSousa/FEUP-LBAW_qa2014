@@ -20,7 +20,8 @@
     $_SESSION['reputation'] = $user['reputation'];
     $_SESSION['permission'] = $user['permission'];
     $_SESSION['userid'] = $user['id'];
-    $_SESSION['success_messages'][] = 'Login successful';  
+    $_SESSION['success_messages'][] = 'Login successful';
+    setcookie('userid', $user['id']);  
   } else {
     $_SESSION['error_messages'][] = 'Login failed';  
   }

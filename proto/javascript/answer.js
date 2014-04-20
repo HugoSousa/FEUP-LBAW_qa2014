@@ -4,9 +4,7 @@ $(function() {
       .button()
       .click(function() {
 
-
         var text = $(this).parent().parent().find(".container > .wmd-panel > textarea");
-
 
         
         var questionID = $(this).val();
