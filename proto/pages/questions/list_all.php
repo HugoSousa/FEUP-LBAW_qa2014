@@ -50,7 +50,9 @@
 		$filter_acc = 'all';
 
     $questions = getQuestions($page, $order, $filter_ans, $filter_acc);  
-    $pages = ceil(intval(getTotalResults($filter_ans, $filter_acc))/30);
+
+    $totalQuestions = getTotalQuestions();
+    $pages = ceil($totalQuestions['total']/30);
 
 	$smarty->assign('filter_acc', $filter_acc);
 	$smarty->assign('filter_ans', $filter_ans);

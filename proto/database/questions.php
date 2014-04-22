@@ -297,5 +297,20 @@
 
   }
 
+   function getTotalQuestions(){
+    global $conn;
+
+
+    $stmt = $conn->prepare("
+      SELECT count(*) AS total
+      FROM \"Question\" 
+      ");
+
+    $stmt->execute();
+
+    return $stmt->fetch();
+
+  }
+
 
 ?>
