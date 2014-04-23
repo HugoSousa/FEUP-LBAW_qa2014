@@ -6,15 +6,8 @@
 
 	$questionID = $_GET['questionID'];
 	$text = $_GET['text'];
-	$userID = $USERID; //FIX ME
-	$username = $USERNAME; //FIX ME
-
-	if (empty($userID)) {
-    $userID = 2;
-
-	if (empty($username)) {
-    $username = EU;
-	}
+	$userID = $_SESSION['userid']; //FIX ME
+	$username = $_SESSION['username']; //FIX ME
 
 	$contentID = insertContent($text, $userID, ANSWER);
 

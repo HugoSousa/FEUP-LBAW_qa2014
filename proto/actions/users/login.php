@@ -12,6 +12,8 @@
   $login = $_POST['login'];
   $password = $_POST['password'];
 
+  echo $password;
+
   if (isLoginCorrect($login, $password)) {
 
     $user = getUserInfoByLogin($login);

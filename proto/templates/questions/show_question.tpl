@@ -52,11 +52,12 @@
           <br><br><br>
           <span> Asked by <a href="{$BASE_URL}pages/users/user.php?username={$question.username}">{$question.username}</a> at {$question.contentDate|date_format:"M d 'Y"}, {$question.contentDate|date_format:"H:i"} </span>
           <br>
-          <!-- FALTA QUERY DE PROCURAR TAGS DE UMA QUESTÃO -->
+          <!-- TAGS -->
           <span> Tags:</span>
-          <span class="label label-default" style="font-size:100%"><a href="#" style="color:white">lorem</a></span>
-          <span class="label label-default" style="font-size:100%"><a href="#" style="color:white">ipsum</a></span>
-          <span class="label label-default" style="font-size:100%"><a href="#" style="color:white">sed</a></span>
+          {foreach $tags as $tag}
+            <span class="label label-default" style="font-size:100%"><a href="#" style="color:white">{$tag.name}</a></span>
+          {/foreach}
+
           {if $question.username == $own}
           	<button type="button" class="btn btn-default pull-right">Flag</button>
           	<button type="button" class="btn btn-default pull-right">Edit</button>
@@ -86,12 +87,6 @@
       </div>
     {/foreach}
   </div>
-    {if isset($own)}
-      <br>
-      <div class="container" style="margin-right:31.4%">
-        <button type="button" class="btn btn-default btn-xs btn-info pull-right">Add Comment</button>
-      </div>
-    {/if}
 
     {if isset($own)}
     <div class="container" style="margin-right:31.4%">
@@ -130,14 +125,17 @@
     <div class="container" style="width:70%; margin-left:auto; margin-right:auto">
       <div class="row">
         <div class="col-md-1">
-          {if $answer.myvoteup}
-              <button type="button" class="btn btn-default btn-lg btn-warning">
-          {else}
-              <button type="button" class="btn btn-default btn-lg">
+          {if isset($own)}
+            {if $answer.myvoteup}
+                <button type="button" class="btn btn-default btn-lg btn-warning">
+            {else}
+                <button type="button" class="btn btn-default btn-lg">
+            {/if}
+              <span class="glyphicon glyphicon-chevron-up voteUp"></span>
+            </button>
           {/if}
-            <span class="glyphicon glyphicon-chevron-up voteUp"></span>
-          </button>
           <br><br>
+
           {if $answer.votes > 0}
             <span class="label label-success" style="font-size:170%; display: inline-block; width: 50px;">
           {else if $answer.votes == 0}
@@ -147,13 +145,16 @@
           {/if}
           {$answer.votes}</span>
           <br><br>
-          {if $answer.myvotedown}
-              <button type="button" class="btn btn-default btn-lg btn-warning">
-          {else}
-              <button type="button" class="btn btn-default btn-lg">
+
+          {if isset($own)}
+            {if $answer.myvotedown}
+                <button type="button" class="btn btn-default btn-lg btn-warning">
+            {else}
+                <button type="button" class="btn btn-default btn-lg">
+            {/if}
+              <span class="glyphicon glyphicon-chevron-down voteDown" ></span>
+            </button>
           {/if}
-            <span class="glyphicon glyphicon-chevron-down voteDown" ></span>
-          </button>
           <br><br>
           {if $answer.isAccepted}
             <button type="button" class="btn btn-default btn-lg" style="border:0">
@@ -165,6 +166,7 @@
         <div class="well well-lg col-md-8">
 
           {$answer.contentText}
+
           <br><br><br>
           <span> Answered by <a href="{$BASE_URL}pages/users/user.php?username={$answer.username}">{$answer.username}</a> at {$answer.contentDate|date_format:"M d 'Y"}, {$answer.contentDate|date_format:"H:i"} </span>
           {if $answer.username == $own}
