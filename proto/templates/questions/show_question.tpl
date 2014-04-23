@@ -10,7 +10,7 @@
     <script type="text/javascript" src="{$BASE_URL}javascript/flag.js"></script>
 
     <div class="page-header" style="width:70%; margin-left:auto; margin-right:auto">
-      <h3>{$question.title}</h3>
+      <h3 style="word-wrap: break-word;">{$question.title}</h3>
     </div>
 
     <div class="container" style="width:70%; margin-left:auto; margin-right:auto">
@@ -47,7 +47,7 @@
           </button>
           {/if}
         </div>
-        <div class="well well-lg col-md-8">
+        <div class="well well-lg col-md-8" style="word-wrap: break-word;">
 		      {$question.contentText}
           <br><br><br>
           <span> Asked by <a href="{$BASE_URL}pages/users/user.php?username={$question.username}">{$question.username}</a> at {$question.contentDate|date_format:"M d 'Y"}, {$question.contentDate|date_format:"H:i"} </span>
@@ -73,7 +73,7 @@
 
     <div id="QuestionDiv{$question.idQuestion}">
     {foreach $questionComments as $comment}
-      <div class="well well-sm" style="margin-bottom:2px; margin-left:25%; margin-right:32.5%; text-align:justify">
+      <div class="well well-sm" style="margin-bottom:2px; margin-left:25%; margin-right:32.5%; text-align:justify; word-wrap: break-word;">
         {$comment.contentText}
 
         {if $own == $comment.username}
@@ -163,7 +163,7 @@
           {/if}
 
         </div>
-        <div class="well well-lg col-md-8">
+        <div class="well well-lg col-md-8" style="word-wrap: break-word;">
 
           {$answer.contentText}
 
@@ -187,7 +187,7 @@
     <div id="CommentDiv{$answer.idAnswer}">
       {foreach $answer.comments as $comment}
 
-        <div class="well well-sm" style=" margin-left:25%; margin-right:32.5%; text-align:justify">
+        <div class="well well-sm" style=" margin-left:25%; margin-right:32.5%; text-align:justif; word-wrap: break-word;">
           {$comment.text}
           {if $own == $comment.username}
             <a class="close pull-right" style="color:red">&times;</a>
