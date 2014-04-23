@@ -12,8 +12,6 @@
   $login = $_POST['login'];
   $password = $_POST['password'];
 
-  echo $password;
-
   if (isLoginCorrect($login, $password)) {
 
     $user = getUserInfoByLogin($login);
@@ -23,7 +21,6 @@
     $_SESSION['permission'] = $user['permission'];
     $_SESSION['userid'] = $user['id'];
     $_SESSION['success_messages'][] = 'Login successful';
-    setcookie('userid', $user['id']);  
   } else {
     $_SESSION['error_messages'][] = 'Login failed';  
   }

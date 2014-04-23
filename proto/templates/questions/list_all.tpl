@@ -122,9 +122,9 @@
           {/if}
         </h3>
         <span class="pull-right" >{$question.answers} Answers</span>
-        <h3 class="panel-title" id={$question.id}><a href="{$BASE_URL}pages/questions/show_question.php?id={$question.id}"><b>{$question.title}</b></a></h3>
+        <h3 class="panel-title" id={$question.id} style="word-wrap: break-word;"><a href="{$BASE_URL}pages/questions/show_question.php?id={$question.id}"><b>{$question.title}</b></a></h3>
       </div>
-      <div class="panel-body">
+      <div class="panel-body" style="word-wrap: break-word;">
         {substr($question.contentText, 0, 400)}
       </div>
     </div>
