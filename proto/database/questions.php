@@ -313,4 +313,83 @@
   }
 
 
+  function searchQuestions($page, $order, $filter_ans, $filter_acc, $search){
+    global $conn;
+
+    $query =
+      "SELECT * FROM
+      (SELECT \"Content\".\"id\" AS \"id\", \"Content\".\"contentText\" AS \"contentText\", \"Content\".\"contentDate\" AS \"contentDate\", \"title\" AS \"title\",
+      (
+          SELECT \"User\".\"username\"
+          FROM \"User\"
+          WHERE \"User\".\"id\" = \"Content\".\"userID\"
+      )AS \"user\",  
+      (
+          SELECT COUNT(*) 
+          FROM \"VoteQuestion\"
+          WHERE \"idQuestion\" = \"Content\".\"id\" AND \"VoteQuestion\".\"isUp\" IS TRUE
+      ) AS \"upvotes\",
+      (
+          SELECT COUNT(*) 
+          FROM \"VoteQuestion\"
+          WHERE \"idQuestion\" = \"Content\".\"id\" AND \"VoteQuestion\".\"isUp\" IS FALSE
+      ) AS \"downvotes\",
+      (
+          SELECT COUNT(*)
+          FROM \"Answer\"
+          WHERE \"Answer\".\"idQuestion\" = \"Content\".\"id\"
+      ) AS \"answers\",
+      (
+          SELECT COALESCE(SUM(CASE WHEN \"isAccepted\" THEN 1 ELSE 0 END),0) 
+          AS accepted 
+          FROM \"Answer\" 
+          WHERE \"Answer\".\"idQuestion\" = \"Content\".\"id\"
+      ) AS \"accepted\"
+      FROM \"Question\", \"Content\",
+      (      
+        SELECT c.\"id\"
+        FROM  \"Content\" c, \"Question\" q
+        WHERE q.\"idQuestion\" = c.\"id\" 
+        AND (q.\"title\" LIKE ?
+        OR c.\"contentText\" LIKE ?)
+      ) AS questions
+      WHERE\"Content\".\"id\" = \"Question\".\"idQuestion\" AND questions.\"id\" = \"Content\".\"id\"
+      ORDER BY \"contentDate\"";
+
+    if($order == 'new')
+      $query .= " DESC ";
+
+    $query .=  "LIMIT 30 OFFSET ?) AS result";
+
+    if($filter_ans == 'y'){
+      $query .= " GROUP BY result.\"id\", result.\"contentText\", result.\"contentDate\", result.\"title\", result.\"user\", result.\"upvotes\", result.\"downvotes\", result.\"answers\", result.\"accepted\"
+                HAVING answers > 0";
+      
+      if($filter_acc == 'y')
+        $query .= " AND accepted = 1";
+      else if($filter_acc == 'n')
+        $query .= " AND accepted = 0";
+    }
+    else if($filter_ans == 'n'){
+      $query .= " GROUP BY result.\"id\", result.\"contentText\", result.\"contentDate\", result.\"title\", result.\"user\", result.\"upvotes\", result.\"downvotes\", result.\"answers\", result.\"accepted\"
+                HAVING answers = 0";
+    }
+    else{
+      if($filter_acc == 'y')
+        $query .= " GROUP BY result.\"id\", result.\"contentText\", result.\"contentDate\", result.\"title\", result.\"user\", result.\"upvotes\", result.\"downvotes\", result.\"answers\", result.\"accepted\"
+                HAVING accepted = 1";
+      else if($filter_acc == 'n')
+        $query .= " GROUP BY result.\"id\", result.\"contentText\", result.\"contentDate\", result.\"title\", result.\"user\", result.\"upvotes\", result.\"downvotes\", result.\"answers\", result.\"accepted\"
+                HAVING accepted = 0";
+    }
+    
+     $stmt = $conn->prepare($query);
+
+    $stmt->execute(array('%'.$search.'%', '%'.$search.'%', 30*($page-1)));
+
+    return $stmt->fetchAll();
+
+  }
+
+
 ?>

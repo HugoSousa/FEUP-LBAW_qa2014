@@ -158,4 +158,35 @@
 
     return $stmt->fetch();
   }
+
+
+  function getUsersBySearch($order, $page, $search){
+    global $conn;
+
+    $offset = ($page-1) * 30;
+
+    if($order == 'username')
+      $query = "SELECT \"username\", \"registry\", \"reputation\" FROM \"User\" WHERE \"username\" LIKE ? ORDER BY \"username\" LIMIT 30 OFFSET ?";
+    else if($order == 'reputation')
+      $query = "SELECT \"username\", \"registry\", \"reputation\" FROM \"User\" WHERE \"username\" LIKE ? ORDER BY \"reputation\" DESC LIMIT 30 OFFSET ?";
+    if($order == 'registry')
+      $query = "SELECT \"username\", \"registry\", \"reputation\" FROM \"User\" WHERE \"username\" LIKE ? ORDER BY \"registry\" LIMIT 30 OFFSET ?";
+
+    $stmt = $conn->prepare($query);
+
+    $stmt->execute(array('%'.$search.'%', $offset));
+
+    return $stmt->fetchAll();
+  }
+
+  function getTotalUsersBySearch($search){
+
+    global $conn;
+
+      $query = "SELECT COUNT(*) FROM \"User\" WHERE \"username\" LIKE ?";
+
+    $stmt = $conn->prepare($query);
+
+    $stmt->execute(array('%'.$search.'%'));
+  }
 ?>

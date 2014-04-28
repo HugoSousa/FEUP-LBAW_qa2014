@@ -22,9 +22,17 @@
 	if(! isset($_GET['order']))
 		$order = 'reputation';
 
-	$users = getUsers($order, $page);
-	$pages = ceil(intval(getTotalUsers())/30);
+	if(isset($_GET['search'])){
+		$search = $_GET['search'];
+		$users = getUsersBySearch($order, $page, $search);
+		$pages = ceil(intval(getTotalUsersBySearch($search))/30);
+	}
+	else{
+		$users = getUsers($order, $page);
+		$pages = ceil(intval(getTotalUsers())/30);
+	}
 
+	$smarty->assign('search', $search);
 	$smarty->assign('users', $users);
 	$smarty->assign('page', $page);
 	$smarty->assign('pages', $pages);

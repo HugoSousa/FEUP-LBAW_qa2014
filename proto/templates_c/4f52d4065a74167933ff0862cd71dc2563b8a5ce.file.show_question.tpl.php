@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.15, created on 2014-04-27 21:09:30
+<?php /* Smarty version Smarty-3.1.15, created on 2014-04-28 21:16:43
          compiled from "\wamp\www\proto\templates\questions\show_question.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:6020534d1c195a8ea9-56046212%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '4f52d4065a74167933ff0862cd71dc2563b8a5ce' => 
     array (
       0 => '\\wamp\\www\\proto\\templates\\questions\\show_question.tpl',
-      1 => 1398629367,
+      1 => 1398716199,
       2 => 'file',
     ),
   ),
@@ -21,10 +21,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   array (
     'BASE_URL' => 0,
     'question' => 0,
+    'userid' => 0,
     'own' => 0,
     'tags' => 0,
     'tag' => 0,
-    'userid' => 0,
     'questionComments' => 0,
     'comment' => 0,
     'answersAndComments' => 0,
@@ -48,25 +48,33 @@ javascript/comment.js"></script>
     <script type="text/javascript" src="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
 javascript/answer.js"></script>
     <script type="text/javascript" src="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
-javascript/vote.js"></script>
+javascript/questions/vote.js"></script>
     <script type="text/javascript" src="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
-javascript/flag.js"></script>
+javascript/questions/delete.js"></script>
+
+
+    <div id="questionID" style="display:none"><?php echo $_smarty_tpl->tpl_vars['question']->value['idQuestion'];?>
+</div>
+    <div id="userID" style="display:none"><?php echo $_smarty_tpl->tpl_vars['userid']->value;?>
+</div>
+
 
     <div class="page-header" style="width:70%; margin-left:auto; margin-right:auto">
       <h3 style="word-wrap: break-word;"><?php echo $_smarty_tpl->tpl_vars['question']->value['title'];?>
 </h3>
     </div>
 
-    <div class="container" style="width:70%; margin-left:auto; margin-right:auto">
+    <div class="container question" style="width:70%; margin-left:auto; margin-right:auto" id="<?php echo $_smarty_tpl->tpl_vars['question']->value['idQuestion'];?>
+">
       <div class="row">
         <div class="col-md-1">
-          <?php if (isset($_smarty_tpl->tpl_vars['own']->value)) {?>
+          <?php if (isset($_smarty_tpl->tpl_vars['own']->value)&&$_smarty_tpl->tpl_vars['own']->value!=$_smarty_tpl->tpl_vars['question']->value['username']) {?>
             <?php if ($_smarty_tpl->tpl_vars['question']->value['myvoteup']) {?>
-              <button type="button" class="btn btn-default btn-lg btn-warning">
+              <button type="button" class="btn btn-default btn-lg btn-warning questionVote voteUp">
             <?php } else { ?>
-              <button type="button" class="btn btn-default btn-lg">
+              <button type="button" class="btn btn-default btn-lg questionVote voteUp">
             <?php }?>
-            <span class="glyphicon glyphicon-chevron-up voteUp"></span>
+            <span class="glyphicon glyphicon-chevron-up"></span>
           </button>
           <?php }?>
           <br><br>
@@ -82,13 +90,13 @@ javascript/flag.js"></script>
       		</span>
 
           <br><br>
-          <?php if (isset($_smarty_tpl->tpl_vars['own']->value)) {?>
+          <?php if (isset($_smarty_tpl->tpl_vars['own']->value)&&$_smarty_tpl->tpl_vars['own']->value!=$_smarty_tpl->tpl_vars['question']->value['username']) {?>
             <?php if ($_smarty_tpl->tpl_vars['question']->value['myvotedown']) {?>
-              <button type="button" class="btn btn-default btn-lg btn-warning">
+              <button type="button" class="btn btn-default btn-lg btn-warning questionVote voteDown">
             <?php } else { ?>
-              <button type="button" class="btn btn-default btn-lg">
+              <button type="button" class="btn btn-default btn-lg questionVote voteDown">
             <?php }?>
-            <span class="glyphicon glyphicon-chevron-down voteDown"></span>
+            <span class="glyphicon glyphicon-chevron-down"></span>
           </button>
           <?php }?>
         </div>
@@ -115,7 +123,13 @@ $_smarty_tpl->tpl_vars['tag']->_loop = true;
           <?php } ?>
 
           <?php if ($_smarty_tpl->tpl_vars['question']->value['username']==$_smarty_tpl->tpl_vars['own']->value) {?>
+            <button type="button" class="btn btn-danger pull-right delete" id="<?php echo $_smarty_tpl->tpl_vars['question']->value['idQuestion'];?>
+">Delete</button>
+          <?php }?>
+          <?php if (isset($_smarty_tpl->tpl_vars['own']->value)) {?>
           	<button type="button" class="btn btn-default pull-right">Flag</button>
+          <?php }?>
+          <?php if ($_smarty_tpl->tpl_vars['question']->value['username']==$_smarty_tpl->tpl_vars['own']->value) {?>
           	<button type="button" class="btn btn-default pull-right">Edit</button>
           <?php }?>
 
@@ -123,11 +137,6 @@ $_smarty_tpl->tpl_vars['tag']->_loop = true;
       </div>
 
     </div>
-  
-    <div id="questionID" style="display:none">"<?php echo $_smarty_tpl->tpl_vars['question']->value['idQuestion'];?>
-"</div>
-    <div id="userID" style="display:none"><?php echo $_smarty_tpl->tpl_vars['userid']->value;?>
-</div>
 
     <div id="QuestionDiv<?php echo $_smarty_tpl->tpl_vars['question']->value['idQuestion'];?>
 ">
@@ -141,7 +150,8 @@ $_smarty_tpl->tpl_vars['comment']->_loop = true;
 
 
         <?php if ($_smarty_tpl->tpl_vars['own']->value==$_smarty_tpl->tpl_vars['comment']->value['username']) {?>
-          <a class="close pull-right" style="color:red">&times;</a>
+          <a class="close pull-right delete" id="<?php echo $_smarty_tpl->tpl_vars['comment']->value['idComment'];?>
+" style="color:red">&times;</a>
           <a class="pull-right" href="#">edit&nbsp;</a>
         <?php }?>
 
@@ -185,6 +195,8 @@ pages/users/show_user.php?username=<?php echo $_smarty_tpl->tpl_vars['comment']-
         </div>
       </div>  
 
+    <hr>
+
 
      <div id="AllAnswers"> 
     <?php  $_smarty_tpl->tpl_vars['answer'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['answer']->_loop = false;
@@ -194,19 +206,20 @@ $_smarty_tpl->tpl_vars['answer']->_loop = true;
 ?>
 
     <!--Divisoria Horizontal-->
-    <hr>
+    
 
     <!--Resposta-->
-    <div class="container" style="width:70%; margin-left:auto; margin-right:auto">
+    <div class="container" style="width:70%; margin-left:auto; margin-right:auto" id="<?php echo $_smarty_tpl->tpl_vars['answer']->value['idAnswer'];?>
+">
       <div class="row">
         <div class="col-md-1">
-          <?php if (isset($_smarty_tpl->tpl_vars['own']->value)) {?>
+          <?php if (isset($_smarty_tpl->tpl_vars['own']->value)&&$_smarty_tpl->tpl_vars['own']->value!=$_smarty_tpl->tpl_vars['answer']->value['username']) {?>
             <?php if ($_smarty_tpl->tpl_vars['answer']->value['myvoteup']) {?>
-                <button type="button" class="btn btn-default btn-lg btn-warning">
+                <button type="button" class="btn btn-default btn-lg btn-warning answerVote voteUp">
             <?php } else { ?>
-                <button type="button" class="btn btn-default btn-lg">
+                <button type="button" class="btn btn-default btn-lg answerVote voteUp">
             <?php }?>
-              <span class="glyphicon glyphicon-chevron-up voteUp"></span>
+              <span class="glyphicon glyphicon-chevron-up"></span>
             </button>
           <?php }?>
           <br><br>
@@ -222,13 +235,13 @@ $_smarty_tpl->tpl_vars['answer']->_loop = true;
 </span>
           <br><br>
 
-          <?php if (isset($_smarty_tpl->tpl_vars['own']->value)) {?>
+          <?php if (isset($_smarty_tpl->tpl_vars['own']->value)&&$_smarty_tpl->tpl_vars['own']->value!=$_smarty_tpl->tpl_vars['answer']->value['username']) {?>
             <?php if ($_smarty_tpl->tpl_vars['answer']->value['myvotedown']) {?>
-                <button type="button" class="btn btn-default btn-lg btn-warning">
+                <button type="button" class="btn btn-default btn-lg btn-warning answerVote voteDown">
             <?php } else { ?>
-                <button type="button" class="btn btn-default btn-lg">
+                <button type="button" class="btn btn-default btn-lg answerVote voteDown">
             <?php }?>
-              <span class="glyphicon glyphicon-chevron-down voteDown" ></span>
+              <span class="glyphicon glyphicon-chevron-down" ></span>
             </button>
           <?php }?>
           <br><br>
@@ -252,10 +265,11 @@ pages/users/show_user.php?username=<?php echo $_smarty_tpl->tpl_vars['answer']->
 , <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['answer']->value['contentDate'],"H:i");?>
  </span>
           <?php if ($_smarty_tpl->tpl_vars['answer']->value['username']==$_smarty_tpl->tpl_vars['own']->value) {?>
-          <button type="button" class="btn btn-danger pull-right">Delete</button>
+            <button type="button" class="btn btn-danger pull-right delete" id="<?php echo $_smarty_tpl->tpl_vars['answer']->value['idAnswer'];?>
+">Delete</button>
           <?php }?>
           <?php if (isset($_smarty_tpl->tpl_vars['own']->value)) {?>
-          <button type="button" id="flagContent" class="btn btn-default pull-right">Flag</button>
+            <button type="button" id="flagContent" class="btn btn-default pull-right">Flag</button>
           <?php }?>
           <?php if ($_smarty_tpl->tpl_vars['answer']->value['username']==$_smarty_tpl->tpl_vars['own']->value) {?>
           <button type="button" class="btn btn-default pull-right">Edit</button>
@@ -274,11 +288,12 @@ foreach ($_from as $_smarty_tpl->tpl_vars['comment']->key => $_smarty_tpl->tpl_v
 $_smarty_tpl->tpl_vars['comment']->_loop = true;
 ?>
 
-        <div class="well well-sm" style=" margin-left:25%; margin-right:32.5%; text-align:justif; word-wrap: break-word;">
+        <div class="well well-sm" style="margin-bottom:2px; margin-left:25%; margin-right:32.5%; text-align:justif; word-wrap: break-word;">
           <?php echo $_smarty_tpl->tpl_vars['comment']->value['text'];?>
 
-          <?php if ($_smarty_tpl->tpl_vars['own']->value==$_smarty_tpl->tpl_vars['comment']->value['username']) {?>
-            <a class="close pull-right" style="color:red">&times;</a>
+          <?php if ($_smarty_tpl->tpl_vars['own']->value==$_smarty_tpl->tpl_vars['comment']->value['user']) {?>
+            <a class="close pull-right delete" id="<?php echo $_smarty_tpl->tpl_vars['comment']->value['idComment'];?>
+" style="color:red">&times;</a>
             <a class="pull-right" href="#">edit&nbsp;</a>
           <?php }?>
           <span class="pull-right">
@@ -335,11 +350,13 @@ pages/users/show_user.php?username=<?php echo $_smarty_tpl->tpl_vars['comment']-
         </div>
       </div>  
 
+      <hr>
+
     <?php } ?>
 
   </div>
 
-    <hr>
+    
     <br>
 
     <?php if (isset($_smarty_tpl->tpl_vars['own']->value)) {?>

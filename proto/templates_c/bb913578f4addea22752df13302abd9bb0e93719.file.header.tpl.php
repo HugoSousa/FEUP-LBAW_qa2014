@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.15, created on 2014-04-27 21:06:57
+<?php /* Smarty version Smarty-3.1.15, created on 2014-04-28 10:20:52
          compiled from "\wamp\www\proto\templates\common\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:243305347dc3f2a0482-45454657%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'bb913578f4addea22752df13302abd9bb0e93719' => 
     array (
       0 => '\\wamp\\www\\proto\\templates\\common\\header.tpl',
-      1 => 1398629215,
+      1 => 1398676849,
       2 => 'file',
     ),
   ),
@@ -51,10 +51,10 @@ javascript/bootstrap.min.js"></script>
         <a href="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
 " class="navbar-brand">Q&A2014</a>
         <form class="navbar-form navbar-right" role="search">
-          <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-          </div>
-          <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+          <input name="search"type="text" class="form-control" placeholder="Search">
+          <button id="search_questions" type="submit" class="btn btn-default">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
         </form>
           <?php if ($_smarty_tpl->tpl_vars['USERNAME']->value) {?>
           <ul class="nav navbar-nav navbar-left">

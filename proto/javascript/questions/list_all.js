@@ -1,4 +1,4 @@
-function dropdownClick(page, order, filter_ans, filter_acc){
+function dropdownClick(page, order, filter_ans, filter_acc, search){
 
 		var redirect = 'list_all.php?page=' + page;
 
@@ -10,6 +10,9 @@ function dropdownClick(page, order, filter_ans, filter_acc){
 
 		if(filter_acc != 'all')
 			redirect += '&filter_acc=' + filter_acc;
+
+		if(search)
+			redirect += '&search=' + search;
 
 
 		window.location.href = redirect;

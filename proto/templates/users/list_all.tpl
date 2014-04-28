@@ -7,7 +7,7 @@
 <div class="container" style="width:70%; margin-left:auto; margin-right:auto; padding-left:0px">
 	<form class="navbar-form navbar-left" role="search" style="padding-left:0">
 		<div class="form-group">
-        	<input type="text" class="form-control" placeholder="Search User">
+        	<input name="search" type="text" class="form-control" placeholder="Search User">
         </div>
         <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
     </form>
@@ -17,25 +17,25 @@
             <ul class="dropdown-menu">
                 <li>
                 	{if $order == 'username'}
-                		<button class="btn btn-default btn-block active" onclick="dropdownClick({$page}, 'username')">
+                		<button class="btn btn-default btn-block active" onclick="dropdownClick({$page}, 'username', '{$search}')">
                 	{else}
-                		<button class="btn btn-default btn-block" onclick="dropdownClick({$page}, 'username')">
+                		<button class="btn btn-default btn-block" onclick="dropdownClick({$page}, 'username', '{$search}')">
                 	{/if}
                 		Username</button>
                 </li>
                 <li>
                 	{if $order == 'registry'}
-                		<button class="btn btn-default btn-block active" onclick="dropdownClick({$page}, 'registry')">
+                		<button class="btn btn-default btn-block active" onclick="dropdownClick({$page}, 'registry', '{$search}')">
                 	{else}
-                		<button class="btn btn-default btn-block" onclick="dropdownClick({$page}, 'registry')">
+                		<button class="btn btn-default btn-block" onclick="dropdownClick({$page}, 'registry', '{$search}')">
                 	{/if}
                 		Registry Date</button>
                 </li>
                 <li>
                 	{if $order == 'reputation'}
-                		<button class="btn btn-default btn-block active" onclick="dropdownClick({$page}, 'reputation')">
+                		<button class="btn btn-default btn-block active" onclick="dropdownClick({$page}, 'reputation', '{$search}')">
                 	{else}
-                		<button class="btn btn-default btn-block" onclick="dropdownClick({$page}, 'reputation')">
+                		<button class="btn btn-default btn-block" onclick="dropdownClick({$page}, 'reputation', '{$search}')">
                 	{/if}
                 		Reputation</button>
                 </li>

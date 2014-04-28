@@ -1,4 +1,4 @@
-function dropdownClick(page, order){
+function dropdownClick(page, order, search){
 
 		var redirect = 'list_all.php?page=' + page;
 
@@ -8,6 +8,10 @@ function dropdownClick(page, order){
 			redirect += '&order=registry';
 		else if(order == 'reputation')
 			redirect += '&order=reputation';
+
+		if(search)
+			redirect += '&search=' + search;
+
 
 		window.location.href = redirect;
 }
