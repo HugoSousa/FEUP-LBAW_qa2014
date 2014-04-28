@@ -7,7 +7,7 @@
     <li> <a href="#" ><b>Ask a Question</b></a></li>
   </ul>
   <ul class="nav navbar-nav navbar-right">
-    <li> <a href="#">Users</a></li>
+    <li> <a href="{$BASE_URL}pages/users/list_all.php">Users</a></li>
     <li> <a href="#">Tags</a></li>
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Order<b class="caret"></b></a>
@@ -104,7 +104,7 @@
       <div class="panel-heading">
 
         <span class="pull-right"> Asked {$question.contentDate|date_format:"M d 'Y"} at {$question.contentDate|date_format:"H:i"}  by 
-          <a href="{$BASE_URL}pages/users/user.php?username={$question.user}">{$question.user}</a></span> <!--link para o user -->
+          <a href="{$BASE_URL}pages/users/show_user.php?username={$question.user}">{$question.user}</a></span> <!--link para o user -->
         <!-- so se for aceite -->
         <h3 class="panel-title">
 

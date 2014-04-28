@@ -1,22 +1,20 @@
-<?php /* Smarty version Smarty-3.1.15, created on 2014-04-27 21:05:30
-         compiled from "\wamp\www\proto\templates\users\list_all.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:19759534fcf9f4a7319-04291629%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.15, created on 2014-04-24 15:58:03
+         compiled from "/opt/lbaw/lbaw1346/public_html/proto/templates/users/list_all.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:6560262885359267b661d63-97980770%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    'cda17b92c0fb3e1451fd191deb01a80c253000cb' => 
+    '2d46778f7dd6346170e055b22cbe977ecb850ef0' => 
     array (
-      0 => '\\wamp\\www\\proto\\templates\\users\\list_all.tpl',
-      1 => 1398629128,
+      0 => '/opt/lbaw/lbaw1346/public_html/proto/templates/users/list_all.tpl',
+      1 => 1397741583,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '19759534fcf9f4a7319-04291629',
+  'nocache_hash' => '6560262885359267b661d63-97980770',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.15',
-  'unifunc' => 'content_534fcf9f774f84_79761120',
   'variables' => 
   array (
     'BASE_URL' => 0,
@@ -27,8 +25,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'user' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.15',
+  'unifunc' => 'content_5359267b9295e8_24326332',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_534fcf9f774f84_79761120')) {function content_534fcf9f774f84_79761120($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include 'C:\\wamp\\www\\proto\\lib\\smarty\\plugins\\modifier.date_format.php';
+<?php if ($_valid && !is_callable('content_5359267b9295e8_24326332')) {function content_5359267b9295e8_24326332($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include '/opt/lbaw/lbaw1346/public_html/proto/lib/smarty/plugins/modifier.date_format.php';
 ?><?php echo $_smarty_tpl->getSubTemplate ('common/header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
 
@@ -106,9 +106,7 @@ $_smarty_tpl->tpl_vars['user']->_loop = true;
         	<tr>
 	        	<td><?php echo $_smarty_tpl->tpl_vars['counter']->value++;?>
 </td>
-	            <td><a href="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
-pages/users/show_user.php?username=<?php echo $_smarty_tpl->tpl_vars['user']->value['username'];?>
-"><?php echo $_smarty_tpl->tpl_vars['user']->value['username'];?>
+	            <td><a href="#"><?php echo $_smarty_tpl->tpl_vars['user']->value['username'];?>
 </a></td>
 	            <td><?php echo $_smarty_tpl->tpl_vars['user']->value['reputation'];?>
 </td>

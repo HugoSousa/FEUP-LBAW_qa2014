@@ -1,22 +1,20 @@
-<?php /* Smarty version Smarty-3.1.15, created on 2014-04-27 21:06:57
-         compiled from "\wamp\www\proto\templates\common\header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:243305347dc3f2a0482-45454657%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.15, created on 2014-04-18 21:06:32
+         compiled from "/opt/lbaw/lbaw1346/public_html/proto/templates/common/header.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:340182182535185c8bbd552-65236514%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    'bb913578f4addea22752df13302abd9bb0e93719' => 
+    'd148d0d67534828968ca8c20480335d46513165f' => 
     array (
-      0 => '\\wamp\\www\\proto\\templates\\common\\header.tpl',
-      1 => 1398629215,
+      0 => '/opt/lbaw/lbaw1346/public_html/proto/templates/common/header.tpl',
+      1 => 1397850308,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '243305347dc3f2a0482-45454657',
+  'nocache_hash' => '340182182535185c8bbd552-65236514',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.15',
-  'unifunc' => 'content_5347dc3f2f0510_34177039',
   'variables' => 
   array (
     'BASE_URL' => 0,
@@ -25,8 +23,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'PERMISSION' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.15',
+  'unifunc' => 'content_535185c8c38fb7_26956157',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5347dc3f2f0510_34177039')) {function content_5347dc3f2f0510_34177039($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_535185c8c38fb7_26956157')) {function content_535185c8c38fb7_26956157($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -76,9 +76,7 @@ javascript/bootstrap.min.js"></script>
           <?php }?>
           <ul class="nav navbar-nav navbar-right">
             <?php if ($_smarty_tpl->tpl_vars['USERNAME']->value) {?>
-            <li><a href="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
-pages/users/show_user.php?username=<?php echo $_smarty_tpl->tpl_vars['USERNAME']->value;?>
-"><?php echo $_smarty_tpl->tpl_vars['USERNAME']->value;?>
+            <li><a href="#"><?php echo $_smarty_tpl->tpl_vars['USERNAME']->value;?>
  | <?php echo $_smarty_tpl->tpl_vars['REPUTATION']->value;?>
 </a></li>
             <?php if ($_smarty_tpl->tpl_vars['PERMISSION']->value=='A') {?>

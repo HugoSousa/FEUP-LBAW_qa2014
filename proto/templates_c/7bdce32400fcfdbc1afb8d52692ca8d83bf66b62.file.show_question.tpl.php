@@ -1,22 +1,22 @@
-<?php /* Smarty version Smarty-3.1.15, created on 2014-04-27 21:09:30
-         compiled from "\wamp\www\proto\templates\questions\show_question.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:6020534d1c195a8ea9-56046212%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.15, created on 2014-04-23 19:20:17
+         compiled from "/opt/lbaw/lbaw1346/public_html/proto/templates/questions/show_question.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:1709845750535185f0aaf253-47226038%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '4f52d4065a74167933ff0862cd71dc2563b8a5ce' => 
+    '7bdce32400fcfdbc1afb8d52692ca8d83bf66b62' => 
     array (
-      0 => '\\wamp\\www\\proto\\templates\\questions\\show_question.tpl',
-      1 => 1398629367,
+      0 => '/opt/lbaw/lbaw1346/public_html/proto/templates/questions/show_question.tpl',
+      1 => 1398277176,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '6020534d1c195a8ea9-56046212',
+  'nocache_hash' => '1709845750535185f0aaf253-47226038',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.15',
-  'unifunc' => 'content_534d1c1961d337_93099276',
+  'unifunc' => 'content_535185f0f37af2_59239038',
   'variables' => 
   array (
     'BASE_URL' => 0,
@@ -32,7 +32,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_534d1c1961d337_93099276')) {function content_534d1c1961d337_93099276($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include 'C:\\wamp\\www\\proto\\lib\\smarty\\plugins\\modifier.date_format.php';
+<?php if ($_valid && !is_callable('content_535185f0f37af2_59239038')) {function content_535185f0f37af2_59239038($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include '/opt/lbaw/lbaw1346/public_html/proto/lib/smarty/plugins/modifier.date_format.php';
 ?><?php echo $_smarty_tpl->getSubTemplate ('common/header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
 
@@ -97,7 +97,7 @@ javascript/flag.js"></script>
 
           <br><br><br>
           <span> Asked by <a href="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
-pages/users/show_user.php?username=<?php echo $_smarty_tpl->tpl_vars['question']->value['username'];?>
+pages/users/user.php?username=<?php echo $_smarty_tpl->tpl_vars['question']->value['username'];?>
 "><?php echo $_smarty_tpl->tpl_vars['question']->value['username'];?>
 </a> at <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['question']->value['contentDate'],"M d 'Y");?>
 , <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['question']->value['contentDate'],"H:i");?>
@@ -147,7 +147,7 @@ $_smarty_tpl->tpl_vars['comment']->_loop = true;
 
         <span class="pull-right">
           <a href="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
-pages/users/show_user.php?username=<?php echo $_smarty_tpl->tpl_vars['comment']->value['username'];?>
+pages/users/user.php?username=<?php echo $_smarty_tpl->tpl_vars['comment']->value['username'];?>
 "><?php echo $_smarty_tpl->tpl_vars['comment']->value['username'];?>
 </a> <small><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['comment']->value['contentDate'],"M d 'Y");?>
 , <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['comment']->value['contentDate'],"H:i");?>
@@ -246,7 +246,7 @@ $_smarty_tpl->tpl_vars['answer']->_loop = true;
 
           <br><br><br>
           <span> Answered by <a href="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
-pages/users/show_user.php?username=<?php echo $_smarty_tpl->tpl_vars['answer']->value['username'];?>
+pages/users/user.php?username=<?php echo $_smarty_tpl->tpl_vars['answer']->value['username'];?>
 "><?php echo $_smarty_tpl->tpl_vars['answer']->value['username'];?>
 </a> at <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['answer']->value['contentDate'],"M d 'Y");?>
 , <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['answer']->value['contentDate'],"H:i");?>
@@ -283,7 +283,7 @@ $_smarty_tpl->tpl_vars['comment']->_loop = true;
           <?php }?>
           <span class="pull-right">
             <a href="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
-pages/users/show_user.php?username=<?php echo $_smarty_tpl->tpl_vars['comment']->value['user'];?>
+pages/users/user.php?username=<?php echo $_smarty_tpl->tpl_vars['comment']->value['user'];?>
 "><?php echo $_smarty_tpl->tpl_vars['comment']->value['user'];?>
 </a> <small>at <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['comment']->value['date'],"M d 'Y");?>
 , <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['comment']->value['date'],"H:i");?>

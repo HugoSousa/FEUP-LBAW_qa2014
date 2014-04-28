@@ -45,7 +45,7 @@
           {/if}
           <ul class="nav navbar-nav navbar-right">
             {if $USERNAME}
-            <li><a href="#">{$USERNAME} | {$REPUTATION}</a></li>
+            <li><a href="{$BASE_URL}pages/users/show_user.php?username={$USERNAME}">{$USERNAME} | {$REPUTATION}</a></li>
             {if $PERMISSION == 'A'}
             <li><a href="#">Flags</a></li>
             {/if}

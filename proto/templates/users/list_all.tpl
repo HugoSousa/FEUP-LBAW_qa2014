@@ -61,7 +61,7 @@
         {foreach $users as $user}
         	<tr>
 	        	<td>{$counter++}</td>
-	            <td><a href="#">{$user.username}</a></td>
+	            <td><a href="{$BASE_URL}pages/users/show_user.php?username={$user.username}">{$user.username}</a></td>
 	            <td>{$user.reputation}</td>
 	            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$user.registry|date_format:"d/m/Y"}</td>
 	        </tr>

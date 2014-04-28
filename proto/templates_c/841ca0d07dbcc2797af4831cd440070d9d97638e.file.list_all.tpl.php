@@ -1,22 +1,22 @@
-<?php /* Smarty version Smarty-3.1.15, created on 2014-04-27 21:08:34
-         compiled from "\wamp\www\proto\templates\questions\list_all.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:409753483355473198-10728032%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.15, created on 2014-04-23 19:12:46
+         compiled from "/opt/lbaw/lbaw1346/public_html/proto/templates/questions/list_all.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:1988660416535185c8752ea3-42910662%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '76fa697e1d993feac903f36b186b378cd360bc91' => 
+    '841ca0d07dbcc2797af4831cd440070d9d97638e' => 
     array (
-      0 => '\\wamp\\www\\proto\\templates\\questions\\list_all.tpl',
-      1 => 1398629310,
+      0 => '/opt/lbaw/lbaw1346/public_html/proto/templates/questions/list_all.tpl',
+      1 => 1398276763,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '409753483355473198-10728032',
+  'nocache_hash' => '1988660416535185c8752ea3-42910662',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.15',
-  'unifunc' => 'content_534833555746b9_87606414',
+  'unifunc' => 'content_535185c8bb1ea2_60943003',
   'variables' => 
   array (
     'BASE_URL' => 0,
@@ -30,7 +30,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_534833555746b9_87606414')) {function content_534833555746b9_87606414($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include 'C:\\wamp\\www\\proto\\lib\\smarty\\plugins\\modifier.date_format.php';
+<?php if ($_valid && !is_callable('content_535185c8bb1ea2_60943003')) {function content_535185c8bb1ea2_60943003($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include '/opt/lbaw/lbaw1346/public_html/proto/lib/smarty/plugins/modifier.date_format.php';
 ?><?php echo $_smarty_tpl->getSubTemplate ('common/header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
 
@@ -42,8 +42,7 @@ javascript/questions/list_all.js"></script>
     <li> <a href="#" ><b>Ask a Question</b></a></li>
   </ul>
   <ul class="nav navbar-nav navbar-right">
-    <li> <a href="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
-pages/users/list_all.php">Users</a></li>
+    <li> <a href="#">Users</a></li>
     <li> <a href="#">Tags</a></li>
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Order<b class="caret"></b></a>
@@ -201,7 +200,7 @@ $_smarty_tpl->tpl_vars['question']->_loop = true;
  at <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['question']->value['contentDate'],"H:i");?>
   by 
           <a href="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
-pages/users/show_user.php?username=<?php echo $_smarty_tpl->tpl_vars['question']->value['user'];?>
+pages/users/user.php?username=<?php echo $_smarty_tpl->tpl_vars['question']->value['user'];?>
 "><?php echo $_smarty_tpl->tpl_vars['question']->value['user'];?>
 </a></span> <!--link para o user -->
         <!-- so se for aceite -->

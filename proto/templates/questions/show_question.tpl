@@ -50,7 +50,7 @@
         <div class="well well-lg col-md-8" style="word-wrap: break-word;">
 		      {$question.contentText}
           <br><br><br>
-          <span> Asked by <a href="{$BASE_URL}pages/users/user.php?username={$question.username}">{$question.username}</a> at {$question.contentDate|date_format:"M d 'Y"}, {$question.contentDate|date_format:"H:i"} </span>
+          <span> Asked by <a href="{$BASE_URL}pages/users/show_user.php?username={$question.username}">{$question.username}</a> at {$question.contentDate|date_format:"M d 'Y"}, {$question.contentDate|date_format:"H:i"} </span>
           <br>
           <!-- TAGS -->
           <span> Tags:</span>
@@ -82,7 +82,7 @@
         {/if}
 
         <span class="pull-right">
-          <a href="{$BASE_URL}pages/users/user.php?username={$comment.username}">{$comment.username}</a> <small>{$comment.contentDate|date_format:"M d 'Y"}, {$comment.contentDate|date_format:"H:i"}&nbsp;&nbsp;&nbsp;</small>
+          <a href="{$BASE_URL}pages/users/show_user.php?username={$comment.username}">{$comment.username}</a> <small>{$comment.contentDate|date_format:"M d 'Y"}, {$comment.contentDate|date_format:"H:i"}&nbsp;&nbsp;&nbsp;</small>
         </span>
       </div>
     {/foreach}
@@ -168,7 +168,7 @@
           {$answer.contentText}
 
           <br><br><br>
-          <span> Answered by <a href="{$BASE_URL}pages/users/user.php?username={$answer.username}">{$answer.username}</a> at {$answer.contentDate|date_format:"M d 'Y"}, {$answer.contentDate|date_format:"H:i"} </span>
+          <span> Answered by <a href="{$BASE_URL}pages/users/show_user.php?username={$answer.username}">{$answer.username}</a> at {$answer.contentDate|date_format:"M d 'Y"}, {$answer.contentDate|date_format:"H:i"} </span>
           {if $answer.username == $own}
           <button type="button" class="btn btn-danger pull-right">Delete</button>
           {/if}
@@ -194,7 +194,7 @@
             <a class="pull-right" href="#">edit&nbsp;</a>
           {/if}
           <span class="pull-right">
-            <a href="{$BASE_URL}pages/users/user.php?username={$comment.user}">{$comment.user}</a> <small>at {$comment.date|date_format:"M d 'Y"}, {$comment.date|date_format:"H:i"} &nbsp;&nbsp;&nbsp;</small>
+            <a href="{$BASE_URL}pages/users/show_user.php?username={$comment.user}">{$comment.user}</a> <small>at {$comment.date|date_format:"M d 'Y"}, {$comment.date|date_format:"H:i"} &nbsp;&nbsp;&nbsp;</small>
           </span>
         </div>
 
