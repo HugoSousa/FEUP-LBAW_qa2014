@@ -6,23 +6,28 @@
     <script type="text/javascript" src="{$BASE_URL}javascript/jquery.pagedown-bootstrap.combined.min.js"></script>
     <script type="text/javascript" src="{$BASE_URL}javascript/comment.js"></script>
     <script type="text/javascript" src="{$BASE_URL}javascript/answer.js"></script>
-    <script type="text/javascript" src="{$BASE_URL}javascript/vote.js"></script>
-    <script type="text/javascript" src="{$BASE_URL}javascript/flag.js"></script>
+    <script type="text/javascript" src="{$BASE_URL}javascript/questions/vote.js"></script>
+    <script type="text/javascript" src="{$BASE_URL}javascript/questions/delete.js"></script>
+
+
+    <div id="questionID" style="display:none">{$question.idQuestion}</div>
+    <div id="userID" style="display:none">{$userid}</div>
+
 
     <div class="page-header" style="width:70%; margin-left:auto; margin-right:auto">
       <h3 style="word-wrap: break-word;">{$question.title}</h3>
     </div>
 
-    <div class="container" style="width:70%; margin-left:auto; margin-right:auto">
+    <div class="container question" style="width:70%; margin-left:auto; margin-right:auto" id="{$question.idQuestion}">
       <div class="row">
         <div class="col-md-1">
-          {if isset($own)}
+          {if isset($own) && $own != $question.username}
             {if $question.myvoteup}
-              <button type="button" class="btn btn-default btn-lg btn-warning">
+              <button type="button" class="btn btn-default btn-lg btn-warning questionVote voteUp">
             {else}
-              <button type="button" class="btn btn-default btn-lg">
+              <button type="button" class="btn btn-default btn-lg questionVote voteUp">
             {/if}
-            <span class="glyphicon glyphicon-chevron-up voteUp"></span>
+            <span class="glyphicon glyphicon-chevron-up"></span>
           </button>
           {/if}
           <br><br>
@@ -37,13 +42,13 @@
       		</span>
 
           <br><br>
-          {if isset($own)}
+          {if isset($own) && $own != $question.username }
             {if $question.myvotedown}
-              <button type="button" class="btn btn-default btn-lg btn-warning">
+              <button type="button" class="btn btn-default btn-lg btn-warning questionVote voteDown">
             {else}
-              <button type="button" class="btn btn-default btn-lg">
+              <button type="button" class="btn btn-default btn-lg questionVote voteDown">
             {/if}
-            <span class="glyphicon glyphicon-chevron-down voteDown"></span>
+            <span class="glyphicon glyphicon-chevron-down"></span>
           </button>
           {/if}
         </div>
@@ -59,7 +64,12 @@
           {/foreach}
 
           {if $question.username == $own}
+            <button type="button" class="btn btn-danger pull-right delete" id="{$question.idQuestion}">Delete</button>
+          {/if}
+          {if isset($own)}
           	<button type="button" class="btn btn-default pull-right">Flag</button>
+          {/if}
+          {if $question.username == $own}
           	<button type="button" class="btn btn-default pull-right">Edit</button>
           {/if}
 
@@ -67,9 +77,6 @@
       </div>
 
     </div>
-  
-    <div id="questionID" style="display:none">"{$question.idQuestion}"</div>
-    <div id="userID" style="display:none">{$userid}</div>
 
     <div id="QuestionDiv{$question.idQuestion}">
     {foreach $questionComments as $comment}
@@ -77,7 +84,7 @@
         {$comment.contentText}
 
         {if $own == $comment.username}
-          <a class="close pull-right" style="color:red">&times;</a>
+          <a class="close pull-right delete" id="{$comment.idComment}" style="color:red">&times;</a>
           <a class="pull-right" href="#">edit&nbsp;</a>
         {/if}
 
@@ -114,24 +121,26 @@
         </div>
       </div>  
 
+    <hr>
+
 
      <div id="AllAnswers"> 
     {foreach $answersAndComments as $answer}
 
     <!--Divisoria Horizontal-->
-    <hr>
+    
 
     <!--Resposta-->
-    <div class="container" style="width:70%; margin-left:auto; margin-right:auto">
+    <div class="container" style="width:70%; margin-left:auto; margin-right:auto" id="{$answer.idAnswer}">
       <div class="row">
         <div class="col-md-1">
-          {if isset($own)}
+          {if isset($own) && $own != $answer.username}
             {if $answer.myvoteup}
-                <button type="button" class="btn btn-default btn-lg btn-warning">
+                <button type="button" class="btn btn-default btn-lg btn-warning answerVote voteUp">
             {else}
-                <button type="button" class="btn btn-default btn-lg">
+                <button type="button" class="btn btn-default btn-lg answerVote voteUp">
             {/if}
-              <span class="glyphicon glyphicon-chevron-up voteUp"></span>
+              <span class="glyphicon glyphicon-chevron-up"></span>
             </button>
           {/if}
           <br><br>
@@ -146,13 +155,13 @@
           {$answer.votes}</span>
           <br><br>
 
-          {if isset($own)}
+          {if isset($own) && $own != $answer.username}
             {if $answer.myvotedown}
-                <button type="button" class="btn btn-default btn-lg btn-warning">
+                <button type="button" class="btn btn-default btn-lg btn-warning answerVote voteDown">
             {else}
-                <button type="button" class="btn btn-default btn-lg">
+                <button type="button" class="btn btn-default btn-lg answerVote voteDown">
             {/if}
-              <span class="glyphicon glyphicon-chevron-down voteDown" ></span>
+              <span class="glyphicon glyphicon-chevron-down" ></span>
             </button>
           {/if}
           <br><br>
@@ -170,10 +179,10 @@
           <br><br><br>
           <span> Answered by <a href="{$BASE_URL}pages/users/show_user.php?username={$answer.username}">{$answer.username}</a> at {$answer.contentDate|date_format:"M d 'Y"}, {$answer.contentDate|date_format:"H:i"} </span>
           {if $answer.username == $own}
-          <button type="button" class="btn btn-danger pull-right">Delete</button>
+            <button type="button" class="btn btn-danger pull-right delete" id="{$answer.idAnswer}">Delete</button>
           {/if}
           {if isset($own)}
-          <button type="button" id="flagContent" class="btn btn-default pull-right">Flag</button>
+            <button type="button" id="flagContent" class="btn btn-default pull-right">Flag</button>
           {/if}
           {if $answer.username == $own}
           <button type="button" class="btn btn-default pull-right">Edit</button>
@@ -187,10 +196,10 @@
     <div id="CommentDiv{$answer.idAnswer}">
       {foreach $answer.comments as $comment}
 
-        <div class="well well-sm" style=" margin-left:25%; margin-right:32.5%; text-align:justif; word-wrap: break-word;">
+        <div class="well well-sm" style="margin-bottom:2px; margin-left:25%; margin-right:32.5%; text-align:justif; word-wrap: break-word;">
           {$comment.text}
-          {if $own == $comment.username}
-            <a class="close pull-right" style="color:red">&times;</a>
+          {if $own == $comment.user}
+            <a class="close pull-right delete" id="{$comment.idComment}" style="color:red">&times;</a>
             <a class="pull-right" href="#">edit&nbsp;</a>
           {/if}
           <span class="pull-right">
@@ -237,11 +246,13 @@
         </div>
       </div>  
 
+      <hr>
+
     {/foreach}
 
   </div>
 
-    <hr>
+    
     <br>
 
     {if isset($own)}

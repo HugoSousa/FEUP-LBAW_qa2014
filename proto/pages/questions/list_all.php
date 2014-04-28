@@ -49,11 +49,17 @@
 	if(! isset($_GET['filter_acc']))
 		$filter_acc = 'all';
 
-    $questions = getQuestions($page, $order, $filter_ans, $filter_acc);  
+	if(isset($_GET['search'])){
+		$search = $_GET['search'];
+		$questions = searchQuestions($page, $order, $filter_ans, $filter_acc, $search);
+	}
+	else
+    	$questions = getQuestions($page, $order, $filter_ans, $filter_acc);  
 
     $totalQuestions = getTotalQuestions();
     $pages = ceil($totalQuestions['total']/30);
 
+    $smarty->assign('search', $search);
 	$smarty->assign('filter_acc', $filter_acc);
 	$smarty->assign('filter_ans', $filter_ans);
 	$smarty->assign('order', $order);

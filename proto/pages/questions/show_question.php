@@ -29,6 +29,6 @@
     $smarty->assign('tags', $tags);
 	$smarty->assign('questionComments', $questionComments);
 	$smarty->assign('answersAndComments', $answers);
-	$smarty->display('questions/show_question.tpl');
     $smarty->assign('userid', $_SESSION['userid']);
+	$smarty->display('questions/show_question.tpl');  
 ?>

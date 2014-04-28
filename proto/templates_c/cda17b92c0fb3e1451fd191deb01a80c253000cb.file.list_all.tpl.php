@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.15, created on 2014-04-27 21:05:30
+<?php /* Smarty version Smarty-3.1.15, created on 2014-04-28 10:04:50
          compiled from "\wamp\www\proto\templates\users\list_all.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:19759534fcf9f4a7319-04291629%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'cda17b92c0fb3e1451fd191deb01a80c253000cb' => 
     array (
       0 => '\\wamp\\www\\proto\\templates\\users\\list_all.tpl',
-      1 => 1398629128,
+      1 => 1398675888,
       2 => 'file',
     ),
   ),
@@ -22,6 +22,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'BASE_URL' => 0,
     'order' => 0,
     'page' => 0,
+    'search' => 0,
     'users' => 0,
     'counter' => 0,
     'user' => 0,
@@ -41,7 +42,7 @@ javascript/users/list_all.js"></script>
 <div class="container" style="width:70%; margin-left:auto; margin-right:auto; padding-left:0px">
 	<form class="navbar-form navbar-left" role="search" style="padding-left:0">
 		<div class="form-group">
-        	<input type="text" class="form-control" placeholder="Search User">
+        	<input name="search" type="text" class="form-control" placeholder="Search User">
         </div>
         <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
     </form>
@@ -52,30 +53,36 @@ javascript/users/list_all.js"></script>
                 <li>
                 	<?php if ($_smarty_tpl->tpl_vars['order']->value=='username') {?>
                 		<button class="btn btn-default btn-block active" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
-, 'username')">
+, 'username', '<?php echo $_smarty_tpl->tpl_vars['search']->value;?>
+')">
                 	<?php } else { ?>
                 		<button class="btn btn-default btn-block" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
-, 'username')">
+, 'username', '<?php echo $_smarty_tpl->tpl_vars['search']->value;?>
+')">
                 	<?php }?>
                 		Username</button>
                 </li>
                 <li>
                 	<?php if ($_smarty_tpl->tpl_vars['order']->value=='registry') {?>
                 		<button class="btn btn-default btn-block active" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
-, 'registry')">
+, 'registry', '<?php echo $_smarty_tpl->tpl_vars['search']->value;?>
+')">
                 	<?php } else { ?>
                 		<button class="btn btn-default btn-block" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
-, 'registry')">
+, 'registry', '<?php echo $_smarty_tpl->tpl_vars['search']->value;?>
+')">
                 	<?php }?>
                 		Registry Date</button>
                 </li>
                 <li>
                 	<?php if ($_smarty_tpl->tpl_vars['order']->value=='reputation') {?>
                 		<button class="btn btn-default btn-block active" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
-, 'reputation')">
+, 'reputation', '<?php echo $_smarty_tpl->tpl_vars['search']->value;?>
+')">
                 	<?php } else { ?>
                 		<button class="btn btn-default btn-block" onclick="dropdownClick(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
-, 'reputation')">
+, 'reputation', '<?php echo $_smarty_tpl->tpl_vars['search']->value;?>
+')">
                 	<?php }?>
                 		Reputation</button>
                 </li>
