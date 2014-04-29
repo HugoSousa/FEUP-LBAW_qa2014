@@ -169,7 +169,7 @@
           AND \"VoteQuestion\".\"isUp\" IS FALSE
           AND \"idUser\" = ?
         ) AS myvotedown
-        FROM \"VoteQuestion\" v JOIN \"Question\" q ON v.\"idQuestion\" = q.\"idQuestion\" JOIN \"Content\" c ON q.\"idQuestion\" = c.\"id\"
+        FROM \"VoteQuestion\" v RIGHT JOIN \"Question\" q ON v.\"idQuestion\" = q.\"idQuestion\" JOIN \"Content\" c ON q.\"idQuestion\" = c.\"id\"
         WHERE q.\"idQuestion\" = ?
         GROUP BY q.\"idQuestion\", c.\"contentText\", c.\"contentDate\", username
       ");
@@ -391,5 +391,45 @@
 
   }
 
+
+  function createQuestion($title, $body, $userID, $tags){
+    global $conn;
+
+    try{
+      $conn->beginTransaction();
+
+      $stmt = $conn->prepare("INSERT INTO \"Content\" VALUES(DEFAULT, ?, DEFAULT, ?, ?) RETURNING \"id\"");
+      $stmt->execute(array($body, $userID, QUESTION));
+      $id = $stmt->fetchColumn();
+
+      $stmt = $conn->prepare("INSERT INTO \"Question\" VALUES(?, ?)");
+      $stmt->execute(array($id, $title));
+
+      //inserir as tags
+      for($i=0; $i < count($tags); $i++){
+        //echo $tags[$i];
+        if(!empty($tags[$i])){
+          echo 'a';
+          $stmt = $conn->prepare("INSERT INTO \"TagQuestion\" VALUES(?, (SELECT \"idTag\" FROM \"Tag\" WHERE \"name\" = ?))");
+          echo 'b';
+          //se a tag for invalida, ele pára no execute
+          $inserted = $stmt->execute(array($id, $tags[$i]));
+          
+          //nao entra aqui, nem nos catch
+          if(!inserted)
+           echo 'error execute tag';
+        }
+      }
+
+      $conn->commit();
+
+    }catch(PDOException $e){
+      echo 'erro';
+      echo $e->getMessage();
+      $conn->rollBack();
+    }
+
+    return;
+  }
 
 ?>
