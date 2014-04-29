@@ -8,7 +8,13 @@
     <script type="text/javascript" src="{$BASE_URL}javascript/answer.js"></script>
     <script type="text/javascript" src="{$BASE_URL}javascript/questions/vote.js"></script>
     <script type="text/javascript" src="{$BASE_URL}javascript/questions/delete.js"></script>
+    <script type="text/javascript" src="{$BASE_URL}javascript/questions/flag.js"></script>
 
+    {literal}
+    <style>
+      a.flag-comment:hover {opacity:1.0 !important;}
+    </style>
+    {/literal}
 
     <div id="questionID" style="display:none">{$question.idQuestion}</div>
     <div id="userID" style="display:none">{$userid}</div>
@@ -67,7 +73,25 @@
             <button type="button" class="btn btn-danger pull-right delete" id="{$question.idQuestion}">Delete</button>
           {/if}
           {if isset($own)}
-          	<button type="button" class="btn btn-default pull-right">Flag</button>
+          	<button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#flagQuestion">Flag</button>
+
+            <div class="modal fade" id="flagQuestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Reason of flag</h4>
+                  </div>
+                  <div class="modal-body">
+                    <textarea class="form-control" rows="3" style="resize:none"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" value="{$question.idQuestion}"  class="btn btn-primary flag">Ok</button>
+                  </div>
+                </div>
+              </div>
+            </div> 
           {/if}
           {if $question.username == $own}
           	<button type="button" class="btn btn-default pull-right">Edit</button>
@@ -86,10 +110,31 @@
         {if $own == $comment.username}
           <a class="close pull-right delete" id="{$comment.idComment}" style="color:red">&times;</a>
           <a class="pull-right" href="#">edit&nbsp;</a>
+        {elseif isset($own)}
+            <a class="pull-right flag-comment" href="#flagComment{$comment.idComment}" style="color:red; opacity:0.5" data-toggle="modal"><span class="glyphicon glyphicon-flag"></span></a>
+
+            <div class="modal fade" id="flagComment{$comment.idComment}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Reason of flag</h4>
+                  </div>
+                  <div class="modal-body">
+                    <textarea class="form-control" rows="3" style="resize:none"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" value="{$comment.idComment}"  class="btn btn-primary flag">Ok</button>
+                  </div>
+                </div>
+              </div>
+            </div> 
+
         {/if}
 
         <span class="pull-right">
-          <a href="{$BASE_URL}pages/users/show_user.php?username={$comment.username}">{$comment.username}</a> <small>{$comment.contentDate|date_format:"M d 'Y"}, {$comment.contentDate|date_format:"H:i"}&nbsp;&nbsp;&nbsp;</small>
+          <a href="{$BASE_URL}pages/users/show_user.php?username={$comment.username}">{$comment.username}</a> <small> at {$comment.contentDate|date_format:"M d 'Y"}, {$comment.contentDate|date_format:"H:i"}&nbsp;&nbsp;&nbsp;</small>
         </span>
       </div>
     {/foreach}
@@ -182,7 +227,25 @@
             <button type="button" class="btn btn-danger pull-right delete" id="{$answer.idAnswer}">Delete</button>
           {/if}
           {if isset($own)}
-            <button type="button" id="flagContent" class="btn btn-default pull-right">Flag</button>
+            <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#flagAnswer{$answer.idAnswer}">Flag</button>
+
+             <div class="modal fade" id="flagAnswer{$answer.idAnswer}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Reason of flag</h4>
+                  </div>
+                  <div class="modal-body">
+                    <textarea class="form-control" rows="3" style="resize:none"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" value="{$answer.idAnswer}"  class="btn btn-primary flag">Ok</button>
+                  </div>
+                </div>
+              </div>
+            </div> 
           {/if}
           {if $answer.username == $own}
           <button type="button" class="btn btn-default pull-right">Edit</button>
@@ -201,6 +264,26 @@
           {if $own == $comment.user}
             <a class="close pull-right delete" id="{$comment.idComment}" style="color:red">&times;</a>
             <a class="pull-right" href="#">edit&nbsp;</a>
+          {elseif isset($own)}
+            <a class="pull-right flag-comment" href="#flagComment{$comment.idComment}" style="color:red; opacity:0.5" data-toggle="modal"><span class="glyphicon glyphicon-flag"></span></a>
+
+            <div class="modal fade" id="flagComment{$comment.idComment}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Reason of flag</h4>
+                  </div>
+                  <div class="modal-body">
+                    <textarea class="form-control" rows="3" style="resize:none"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" value="{$comment.idComment}" class="btn btn-primary flag">Ok</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           {/if}
           <span class="pull-right">
             <a href="{$BASE_URL}pages/users/show_user.php?username={$comment.user}">{$comment.user}</a> <small>at {$comment.date|date_format:"M d 'Y"}, {$comment.date|date_format:"H:i"} &nbsp;&nbsp;&nbsp;</small>

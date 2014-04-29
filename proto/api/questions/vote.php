@@ -12,8 +12,6 @@
     $update = $_POST['update'];
 
 
-	global $conn;
-
     try{
         if($type == 'answer'){
 

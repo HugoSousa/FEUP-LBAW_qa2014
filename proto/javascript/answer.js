@@ -18,7 +18,6 @@ $(function() {
           success: function(response) 
           {
             $('#AllAnswers').append(
-            '<hr>'+
             '<div class="container" style="width:70%; margin-left:auto; margin-right:auto">'+
             '<div class="row">'+
             '<div class="col-md-1">'+
@@ -64,11 +63,13 @@ $(function() {
             '</div>'+
             '</div>'+
             '</div>'+
-            '</div>'
-
+            '</div>' +
+            '<hr>'
             );
           },
-          error: function(){
+          error: function(xhr, textStatus, errorThrown){
+            console.log(xhr.responseText);
+
             $('#AllAnswers').append(
                 '<div class="alert alert-warning alert-dismissable">'+
                     '<button type="button" class="close" data-dismiss="alert-danger" aria-hidden="true">&times;</button>'+
