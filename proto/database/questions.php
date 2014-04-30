@@ -395,7 +395,7 @@
   function createQuestion($title, $body, $userID, $tags){
     global $conn;
 
-    try{
+    //try{
       $conn->beginTransaction();
 
       $stmt = $conn->prepare("INSERT INTO \"Content\" VALUES(DEFAULT, ?, DEFAULT, ?, ?) RETURNING \"id\"");
@@ -409,27 +409,19 @@
       for($i=0; $i < count($tags); $i++){
         //echo $tags[$i];
         if(!empty($tags[$i])){
-          echo 'a';
           $stmt = $conn->prepare("INSERT INTO \"TagQuestion\" VALUES(?, (SELECT \"idTag\" FROM \"Tag\" WHERE \"name\" = ?))");
-          echo 'b';
-          //se a tag for invalida, ele pára no execute
-          $inserted = $stmt->execute(array($id, $tags[$i]));
-          
-          //nao entra aqui, nem nos catch
-          if(!inserted)
-           echo 'error execute tag';
+          $stmt->execute(array($id, $tags[$i]));
         }
       }
 
       $conn->commit();
 
-    }catch(PDOException $e){
+    /*}catch(PDOException $e){
       echo 'erro';
       echo $e->getMessage();
       $conn->rollBack();
     }
-
-    return;
+    */
   }
 
 ?>

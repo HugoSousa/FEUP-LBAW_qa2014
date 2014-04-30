@@ -18,9 +18,19 @@
   	createQuestion($title, $body, $userID, $tags);
   }catch(PDOException $e){
   	echo 'erro aqui tambem';
+    $exception = false;
+
+    global $conn;
+    $conn->rollBack();
+
   	echo $e->getMessage();
-  	//$conn->rollBack();
-  	//tags invalidas
+
+     if (strpos($e->getMessage(), '"idTag" violates not-null constraint') !== false) {
+      $_SESSION['error_messages'][] = 'Invalid tag';
+      $_SESSION['field_errors']['tags'] = 'This tag doesn\'t exist.';
+      $exception = true;
+      echo 'Entrei aqui';
+    } 
   }
 
   echo 'fim';

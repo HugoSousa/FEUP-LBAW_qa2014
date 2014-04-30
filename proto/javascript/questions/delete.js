@@ -1,3 +1,5 @@
+var target;
+
 $( document ).ready(function() {
 	//ao clicar num delete, ativar evento
 	$(document).on('click', '.delete', function(e){
@@ -11,57 +13,60 @@ $( document ).ready(function() {
 			var contentID = $(this).attr('id');
 			console.log(contentID);
 
-			var target = $(e.target);
+			target = $(e.target);
 
-			if(target.is('a')){
-				console.log("apagar comentário");
-
-				if(deleteContent(contentID))
-					target.parent().remove();
-			}
-			else if(target.is('button')){
-
-				if(target.closest('div.container').hasClass("question")){
-					//console.log("apagar questão");
-					//apagar e redirecionar para o index
-					if(deleteContent(contentID))
-						window.location = "../..";
-				}
-				else{
-					console.log("apagar resposta");
-
-					if(deleteContent(contentID)){
-						target.closest('div.container').next('div').next('div').remove();
-						target.closest('div.container').next('div').remove();
-						target.closest('div.container').nextAll('hr').remove();
-						target.closest('div.container').remove();
-					}
-				}
-			}
+			deleteContent(contentID, target);
 		}
 	});
 });
 
 
 function deleteContent(contentID){
+
 	$.ajax({
 		url: '../../api/questions/delete.php',
 		type: 'POST',
 		data: $.param({'id': contentID}),
 		dataType : 'json',
 		success: function(data, textStatus, xhr) {	
+			console.log("data:" + data);
 
 			if(data == 'ok'){
-				return true;
+				console.log("retornar true");
+
+				updateHtml();
 			}
 			else{
 				alert(JSON.stringify(data));
-				return false;
 			}
 		},
 		error: function(xhr, textStatus, errorThrown) {
 			console.log(xhr.responseText);
-			return false;
 		}
 	});	
+
+}
+
+function updateHtml(){
+	if(target.is('a')){
+		console.log("apagar comentário");
+
+		target.parent().remove();
+	}
+	else if(target.is('button')){
+
+		if(target.closest('div.container').hasClass("question")){
+			console.log("apagar questão");
+			//apagar e redirecionar para o index
+			window.location = "../..";
+		}
+		else{
+			console.log("apagar resposta");
+
+			target.closest('div.container').next('div').next('div').remove();
+			target.closest('div.container').next('div').remove();
+			target.closest('div.container').nextAll('hr').remove();
+			target.closest('div.container').remove();
+		}
+	}
 }

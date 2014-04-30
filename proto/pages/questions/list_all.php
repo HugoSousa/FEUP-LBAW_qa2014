@@ -59,6 +59,7 @@
     $totalQuestions = getTotalQuestions();
     $pages = ceil($totalQuestions['total']/30);
 
+    $smarty->assign('own', $_SESSION['username']);
     $smarty->assign('search', $search);
 	$smarty->assign('filter_acc', $filter_acc);
 	$smarty->assign('filter_ans', $filter_ans);

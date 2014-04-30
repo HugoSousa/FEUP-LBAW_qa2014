@@ -4,11 +4,12 @@
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
     <link href="{$BASE_URL}css/jquery.pagedown-bootstrap.css" rel="stylesheet">
     <script type="text/javascript" src="{$BASE_URL}javascript/jquery.pagedown-bootstrap.combined.min.js"></script>
-    <script type="text/javascript" src="{$BASE_URL}javascript/comment.js"></script>
-    <script type="text/javascript" src="{$BASE_URL}javascript/answer.js"></script>
+    <script type="text/javascript" src="{$BASE_URL}javascript/questions/comment.js"></script>
+    <script type="text/javascript" src="{$BASE_URL}javascript/questions/answer.js"></script>
     <script type="text/javascript" src="{$BASE_URL}javascript/questions/vote.js"></script>
     <script type="text/javascript" src="{$BASE_URL}javascript/questions/delete.js"></script>
     <script type="text/javascript" src="{$BASE_URL}javascript/questions/flag.js"></script>
+    <script type="text/javascript" src="{$BASE_URL}javascript/questions/accept_answer.js"></script>
 
     {literal}
     <style>
@@ -39,7 +40,7 @@
           <br><br>
           {if $question.votes > 0}
           	<span class="label label-success" style="font-size:170%; display: inline-block; width: 50px;">
-          {else if $question.votes == 0}
+          {elseif $question.votes == 0}
           	<span class="label label-default" style="font-size:170%; display: inline-block; width: 50px;">
           {else}
           	<span class="label label-danger" style="font-size:170%; display: inline-block; width: 50px;">
@@ -192,7 +193,7 @@
 
           {if $answer.votes > 0}
             <span class="label label-success" style="font-size:170%; display: inline-block; width: 50px;">
-          {else if $answer.votes == 0}
+          {elseif $answer.votes == 0}
             <span class="label label-default" style="font-size:170%; display: inline-block; width: 50px;">
           {else}
             <span class="label label-danger" style="font-size:170%; display: inline-block; width: 50px;">
@@ -210,8 +211,16 @@
             </button>
           {/if}
           <br><br>
-          {if $answer.isAccepted}
-            <button type="button" class="btn btn-default btn-lg" style="border:0">
+          {if $answer.isAccepted }
+            {if isset($own) && $own == $question.username}
+            <button type="button" class="btn btn-default btn-lg accepted accept-button" value="{$answer.idAnswer}" style="border:0; opacity:1">
+            {else}
+            <button type="button" class="btn btn-default btn-lg disabled accepted accept-button" value="{$answer.idAnswer}" style="border:0; opacity:1">
+            {/if}
+             <span class="glyphicon glyphicon-ok" style="color:green; font-size:150%"></span>
+            </button>
+          {elseif isset($own) && $own == $question.username }
+            <button type="button" class="btn btn-default btn-lg accept-button" value="{$answer.idAnswer}" style="border:0; opacity:0.2">
               <span class="glyphicon glyphicon-ok" style="color:green; font-size:150%"></span>
             </button>
           {/if}
