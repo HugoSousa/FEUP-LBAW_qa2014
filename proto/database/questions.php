@@ -415,6 +415,7 @@
       }
 
       $conn->commit();
+      return $id;
 
     /*}catch(PDOException $e){
       echo 'erro';

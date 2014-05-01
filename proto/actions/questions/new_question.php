@@ -14,8 +14,16 @@
   $tags = $_POST['tags'];
   $userID = $_SESSION['userid'];
 
+  //echo $body . "<br>";
+  $body = str_replace(array("\r\n", "\r", "\n"), '<br/>', $body, $i);
+  //echo $i ."<br>";
+  //echo $body;
+  
   try{
-  	createQuestion($title, $body, $userID, $tags);
+  	$questionID = createQuestion($title, $body, $userID, $tags);
+
+    //retornar o id da questão criada
+    header("Location: $BASE_URL" . 'pages/questions/show_question.php?id=' . $questionID);
   }catch(PDOException $e){
   	echo 'erro aqui tambem';
     $exception = false;
@@ -29,10 +37,10 @@
       $_SESSION['error_messages'][] = 'Invalid tag';
       $_SESSION['field_errors']['tags'] = 'This tag doesn\'t exist.';
       $exception = true;
-      echo 'Entrei aqui';
+      //echo 'Entrei aqui';
     } 
   }
-
-  echo 'fim';
+  
+  //echo 'fim';
 
 ?>
