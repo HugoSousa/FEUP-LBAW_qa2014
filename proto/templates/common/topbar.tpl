@@ -6,6 +6,6 @@
   {/if}
   <ul class="nav navbar-nav navbar-right">
     <li> <a href="{$BASE_URL}pages/users/list_all.php">Users</a></li>
-    <li> <a href="#">Tags</a></li>
+    <li> <a href="{$BASE_URL}pages/tags/list_all.php">Tags</a></li>
   </ul>
 </div>

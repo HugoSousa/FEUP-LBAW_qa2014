@@ -4,7 +4,6 @@
 	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
     <link href="{$BASE_URL}css/jquery.pagedown-bootstrap.css" rel="stylesheet">
     <script type="text/javascript" src="{$BASE_URL}javascript/jquery.pagedown-bootstrap.combined.min.js"></script>
-    <script type="text/javascript" src="{$BASE_URL}javascript/questions/new_question.js"></script>
 
     <form action="{$BASE_URL}actions/questions/new_question.php" method="post" enctype="multipart/form-data">
 	<div class="container" style="margin-left:15% ;margin-right:31.4%; width:60%">

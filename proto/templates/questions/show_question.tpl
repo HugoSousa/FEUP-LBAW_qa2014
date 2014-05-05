@@ -60,7 +60,14 @@
           {/if}
         </div>
         <div class="well well-lg col-md-8" style="word-wrap: break-word;">
-		      {$question.contentText}
+          
+          <script type="text/javascript">
+            var converter = Markdown.getSanitizingConverter();
+            var htmlText = converter.makeHtml("{$question.contentText}");
+            document.write(htmlText);
+          </script>
+          
+          
           <br><br><br>
           <span> Asked by <a href="{$BASE_URL}pages/users/show_user.php?username={$question.username}">{$question.username}</a> at {$question.contentDate|date_format:"M d 'Y"}, {$question.contentDate|date_format:"H:i"} </span>
           <br>
@@ -73,7 +80,7 @@
           {if $question.username == $own}
             <button type="button" class="btn btn-danger pull-right delete" id="{$question.idQuestion}">Delete</button>
           {/if}
-          {if isset($own)}
+          {if isset($own) && $own != $question.username}
           	<button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#flagQuestion">Flag</button>
 
             <div class="modal fade" id="flagQuestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -235,7 +242,7 @@
           {if $answer.username == $own}
             <button type="button" class="btn btn-danger pull-right delete" id="{$answer.idAnswer}">Delete</button>
           {/if}
-          {if isset($own)}
+          {if isset($own) && $own != $answer.username}
             <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#flagAnswer{$answer.idAnswer}">Flag</button>
 
              <div class="modal fade" id="flagAnswer{$answer.idAnswer}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

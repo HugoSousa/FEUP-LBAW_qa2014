@@ -47,7 +47,7 @@
             {if $USERNAME}
             <li><a href="{$BASE_URL}pages/users/show_user.php?username={$USERNAME}">{$USERNAME} | {$REPUTATION}</a></li>
             {if $PERMISSION == 'A'}
-            <li><a href="#">Flags</a></li>
+            <li><a href="{$BASE_URL}pages/flags/list_all.php">Flags</a></li>
             {/if}
             <li><a href="{$BASE_URL}actions/users/logout.php">Log out</a></li>
             {else}
