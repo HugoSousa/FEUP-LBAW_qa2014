@@ -13,4 +13,18 @@
 
 	}
 
+	function getAnswer($id){
+		global $conn;
+
+		$query = " SELECT * FROM \"Answer\" WHERE \"idAnswer\" = ".$id;
+
+		$stmt = $conn->prepare($query);
+
+	    $stmt->execute();
+
+	    return $stmt->fetch();
+
+
+	}
+
 ?>

@@ -4,14 +4,28 @@
 		global $conn;
 
 		$query = " INSERT INTO \"Content\" (\"contentText\", \"userID\", \"type\") 
-					VALUES ('".$text."',".$userID.", '".$type."')
+					VALUES (?, ?, ?)
 					RETURNING \"Content\".\"id\"  ";
+
+		$stmt = $conn->prepare($query);
+
+	    $stmt->execute(array($text, $userID, $type));
+
+	    return $stmt->fetchAll();
+
+
+	}
+
+	function getContentByID($id){
+		global $conn;
+
+		$query = " SELECT * FROM \"Content\" WHERE \"id\" = ".$id;
 
 		$stmt = $conn->prepare($query);
 
 	    $stmt->execute();
 
-	    return $stmt->fetchAll();
+	    return $stmt->fetch();
 
 
 	}

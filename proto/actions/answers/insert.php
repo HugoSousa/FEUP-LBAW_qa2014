@@ -8,10 +8,11 @@
 	$userID = $_SESSION['userid']; //FIX ME
 	$username = $_SESSION['username']; //FIX ME
 
+	$text = str_replace(array("\r\n", "\r", "\n"), '<br/>', $text, $i);
+
 	$contentID = insertContent($text, $userID, ANSWER);
 
 	$contentID = $contentID[0]['id'];
-
 
 	insertAnswer($contentID, $questionID );
 

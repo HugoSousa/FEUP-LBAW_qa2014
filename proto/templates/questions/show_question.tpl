@@ -102,7 +102,7 @@
             </div> 
           {/if}
           {if $question.username == $own}
-          	<button type="button" class="btn btn-default pull-right">Edit</button>
+          	<a role="button" class="btn btn-default pull-right" href="{$BASE_URL}pages/questions/edit_content.php?id={$question.idQuestion}" >Edit</a>
           {/if}
 
         </div>
@@ -264,7 +264,7 @@
             </div> 
           {/if}
           {if $answer.username == $own}
-          <button type="button" class="btn btn-default pull-right">Edit</button>
+            <a role="button" class="btn btn-default pull-right" href="{$BASE_URL}pages/questions/edit_content.php?id={$answer.idAnswer}" >Edit</a>
           {/if}
 
         </div>
