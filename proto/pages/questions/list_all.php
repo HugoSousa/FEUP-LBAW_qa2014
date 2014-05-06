@@ -1,6 +1,7 @@
 <?php
     include_once('../../config/init.php');
     include_once($BASE_DIR .'database/questions.php');
+    include_once($BASE_DIR .'pages/notifications.php');
 
     $page = $_GET['page'];
 
@@ -59,6 +60,9 @@
     $totalQuestions = getTotalQuestions();
     $pages = ceil($totalQuestions['total']/30);
 
+    //print_r($notifications);
+
+    $smarty->assign('notifications', $notifications);
     $smarty->assign('own', $_SESSION['username']);
     $smarty->assign('search', $search);
 	$smarty->assign('filter_acc', $filter_acc);

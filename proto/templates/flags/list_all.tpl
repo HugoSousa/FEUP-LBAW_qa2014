@@ -12,33 +12,33 @@
 	  <li class="dropdown">
 
 	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Order by <b class="caret"></b></a>
-	        <ul class="dropdown-menu">
+	        <ul class="dropdown-menu" style="padding:0px">
 	          <li>
 	          	{if $order == 'date_new'}
-	          	<button class="btn btn-default btn-block active" onclick="dropdownClick({$page}, 'date_new')">
+	          	<button class="btn btn-default btn-block active" style="border-radius:0px" onclick="dropdownClick({$page}, 'date_new')">
 	          	{else}
-	          	<button class="btn btn-default btn-block" onclick="dropdownClick({$page}, 'date_new')">
+	          	<button class="btn btn-default btn-block" style="border-radius:0px" onclick="dropdownClick({$page}, 'date_new')">
 	          	{/if}
 	          		Newest</button></li>
 	  		  <li>
 	  		  	{if $order == 'date_old'}
-	  		  	<button class="btn btn-default btn-block active" onclick="dropdownClick({$page}, 'date_old')">
+	  		  	<button class="btn btn-default btn-block active" style="border-radius:0px" onclick="dropdownClick({$page}, 'date_old')">
 	  		  	{else}
-	  		  	<button class="btn btn-default btn-block" onclick="dropdownClick({$page}, 'date_old')">
+	  		  	<button class="btn btn-default btn-block" style="border-radius:0px" onclick="dropdownClick({$page}, 'date_old')">
 	  		  	{/if}
 	  		  		Oldest</button></li>
 	          <li>
 	          	{if $order == 'flags_more'}
-	          	<button class="btn btn-default btn-block active" onclick="dropdownClick({$page}, 'flags_more')">
+	          	<button class="btn btn-default btn-block active" style="border-radius:0px" onclick="dropdownClick({$page}, 'flags_more')">
 	          	{else}
-	          	<button class="btn btn-default btn-block" onclick="dropdownClick({$page}, 'flags_more')">
+	          	<button class="btn btn-default btn-block" style="border-radius:0px" onclick="dropdownClick({$page}, 'flags_more')">
 	          	{/if}
 	          		More # of Flags</button></li>
 	  		  <li>
 	  		  	{if $order == 'flags_less'}
-	  		  	<button class="btn btn-default btn-block active" onclick="dropdownClick({$page}, 'flags_less')">
+	  		  	<button class="btn btn-default btn-block active" style="border-radius:0px" onclick="dropdownClick({$page}, 'flags_less')">
 	  		  	{else}
-	  		  	<button class="btn btn-default btn-block" onclick="dropdownClick({$page}, 'flags_less')">
+	  		  	<button class="btn btn-default btn-block" style="border-radius:0px" onclick="dropdownClick({$page}, 'flags_less')">
 	  		  	{/if}
 	  		  		Less # of Flags</button></li>
 	        </ul>

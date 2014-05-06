@@ -1,6 +1,7 @@
 <?php
     include_once('../../config/init.php');
     include_once($BASE_DIR .'database/questions.php');
+    include_once($BASE_DIR .'pages/notifications.php');
 
     $questionid = $_GET['id'];
     $viewer = $_SESSION['userid'];
@@ -23,7 +24,7 @@
     	}
     }
 
-
+    $smarty->assign('notifications', $notifications);
     $smarty->assign('own', $_SESSION['username']);
 	$smarty->assign('question', $question);
     $smarty->assign('tags', $tags);

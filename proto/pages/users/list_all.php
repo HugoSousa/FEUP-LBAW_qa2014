@@ -1,6 +1,7 @@
 <?php
     include_once('../../config/init.php');
     include_once($BASE_DIR .'database/users.php');
+    include_once($BASE_DIR .'pages/notifications.php');
 
     $page = $_GET['page'];
 
@@ -32,6 +33,7 @@
 		$pages = ceil(intval(getTotalUsers())/30);
 	}
 
+	$smarty->assign('notifications', $notifications);
 	$smarty->assign('search', $search);
 	$smarty->assign('users', $users);
 	$smarty->assign('page', $page);

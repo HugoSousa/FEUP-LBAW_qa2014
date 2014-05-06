@@ -30,9 +30,28 @@ function insertFlag(contentID, userID, reason){
 
 			if(data == 'ok'){
 
+				$('body').scrollTop(0);
+
+				$('.page-header').prepend(
+                '<div class="alert alert-success alert-dismissable">'+
+                    '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
+                    'Your flag was successfully submited and will be reviewed by an Admin. Thanks.' +
+                '</div>'
+                );
 			}
-			else
+			else{
 				alert(JSON.stringify(data));
+
+				$('body').scrollTop(0);
+
+				$('.page-header').prepend(
+                '<div class="alert alert-warning alert-dismissable">'+
+                    '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
+                    '<strong>Warning!</strong> '+ data['error'] +
+                '</div>'
+            );
+			}
+				
 		},
 		error: function(xhr, textStatus, errorThrown) {
 			console.log(xhr.responseText);

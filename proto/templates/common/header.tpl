@@ -12,6 +12,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{$BASE_URL}javascript/bootstrap.min.js"></script>
+    
+    <script src="{$BASE_URL}javascript/notifications/notifications.js"></script>
+    {literal}
+    <style>
+      span.username{color:#0000FF;}
+
+      span.username:hover {opacity: 0.3;}
+    </style>
+    {/literal}
 
   </head>
   <body>
@@ -19,25 +28,45 @@
 
       <div class="container">
         <a href="{$BASE_URL}" class="navbar-brand">Q&A2014</a>
-        <form class="navbar-form navbar-right" role="search">
-          <input name="search"type="text" class="form-control" placeholder="Search">
+        <form class="navbar-form navbar-right" role="search" action="{$BASE_URL}pages/questions/list_all.php" method="GET">
+          <input name="search" type="text" class="form-control" placeholder="Search">
           <button id="search_questions" type="submit" class="btn btn-default">
             <span class="glyphicon glyphicon-search"></span>
           </button>
         </form>
           {if $USERNAME}
+
           <ul class="nav navbar-nav navbar-left">
-            <li >
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#"><b>&#9776;</b>
+            <li > 
+
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#"><b>&#9776;</b><span id="notification-counter"class="badge alert-success nav nabar-nav" style="margin-left:10px">{count($notifications)}</span>
                   <button class="btn dropdown-toggle sr-only" type="button" id="dropdownMenu1" data-toggle="dropdown">
                     Dropdown
                     <span class="caret"></span>
                   </button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">First Notification</a></li>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another notification</a></li>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another one</a></li>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Last Notification</a></li>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="height:auto; max-height:300px; overflow-x:hidden;">
+                  {foreach $notifications as $notification}
+                    <li role="presentation">
+                      <a id="{$notification.idNotification}"role="menuitem" tabindex="-1" href="{$BASE_URL}pages/questions/show_question.php?id={$notification.link}" target="_blank" class="notification">
+                        {if $notification.type == 'COMMENT'}
+                          <small>{$notification.notificationDate|date_format:"M d 'Y H:i"}</small><br>
+                          <span onclick="document.location.href = '{$BASE_URL}pages/users/show_user.php?username={$notification.username}'; return false" class="username">{$notification.username}</span> commented your content<br>
+                          <medium>"{substr($notification.content, 0, 100)}"</medium>
+                        {elseif $notification.type == 'VOTE'}
+                          <small>{$notification.notificationDate|date_format:"M d 'Y H:i"}</small><br>
+                          Your content was voted<br>
+                          {substr($notification.content, 0, 100)}
+                        {elseif $notification.type == 'ANSWER'}
+                          <small>{$notification.notificationDate|date_format:"M d 'Y H:i"}</small><br>
+                          <span onclick="document.location.href = '{$BASE_URL}pages/users/show_user.php?username={$notification.username}'; return false" class="username">{$notification.username}</span> answered your question<br>
+                          {substr($notification.content, 0, 100)}
+                        {elseif $notification.type == 'ACCEPT'}
+                          <small>{$notification.notificationDate|date_format:"M d 'Y H:i"}</small><br>
+                          Your answer was accepted<br>
+                          {substr($notification.content, 0, 100)}
+                        {/if}
+                      </a></li>
+                  {/foreach}
                 </ul>
               </a>
             </li>

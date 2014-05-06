@@ -1,6 +1,7 @@
 <?php
     include_once('../../config/init.php');
     include_once($BASE_DIR .'database/flags/flags.php');
+    include_once($BASE_DIR .'pages/notifications.php');
 
     if($_SESSION['permission'] == 'A'){
 
@@ -17,6 +18,7 @@
 	    $totalReports = getTotalReports($id);
 	    $pages = ceil(floatval($totalReports['total']/10));
 
+	    $smarty->assign('notifications', $notifications);
 	    $smarty->assign('content', $content);
 		$smarty->assign('pages', $pages);
 		$smarty->assign('reports', $reports);
@@ -24,7 +26,7 @@
 		$smarty->display('flags/show_flag.tpl');
 	}
 	else{
-		header('Location: ' . $_SERVER['HTTP_REFERER']);
+		header('Location: ' . $BASE_URL);
 	}
 
 ?>

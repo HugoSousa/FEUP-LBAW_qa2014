@@ -14,7 +14,15 @@
         $return = array("ok");        
     }
     catch(PDOException $e){
-        $return = array("error" => "Failed to insert the flag.");
+        if (strpos($e->getMessage(), 'Flag_pkey') !== false) {
+          $_SESSION['error_messages'][] = 'Already flagged this content';
+          //$_SESSION['field_errors']['name'] = 'Username already exists';
+          $return = array("error" => "Already flagged this content.");
+        }
+        else{
+          $return = array("error" => "Unexpected error inserting flag in database.");  
+        } 
+        
     }
 
     echo json_encode($return);

@@ -425,4 +425,77 @@
     */
   }
 
+    function getQuestionOfAnswer($idAnswer){
+    global $conn;
+
+      $query ="
+        SELECT \"idQuestion\"
+      FROM \"Answer\" 
+      WHERE \"idAnswer\" = ?
+      ";
+
+      $stmt = $conn->prepare($query);
+
+      $stmt->execute(array($idAnswer));
+
+      return $stmt->fetch();
+  }
+
+
+  function getQuestionOfCommentQuestion($idComment){
+    global $conn;
+
+      $query ="
+      SELECT \"idQuestion\"         
+      FROM \"CommentQuestion\"     
+      WHERE \"idComment\" = ?
+      ";
+
+      $stmt = $conn->prepare($query);
+
+      $stmt->execute(array($idComment));
+
+      return $stmt->fetch();
+
+  }
+
+
+  function getQuestionOfCommentAnswer($idComment){
+    global $conn;
+
+      $query ="
+      SELECT \"idQuestion\"
+      FROM \"Answer\"
+      WHERE \"idAnswer\" =
+      (
+        SELECT \"idAnswer\"
+        FROM \"CommentAnswer\" 
+        WHERE \"idComment\" = ?
+      )
+      ";
+
+      $stmt = $conn->prepare($query);
+
+      $stmt->execute(array($idComment));
+
+      return $stmt->fetch();
+  }
+
+
+  function getContent($id){
+    global $conn;
+
+    $query = "
+      SELECT \"id\", \"contentText\", \"type\"
+      FROM \"Content\" 
+      WHERE \"id\" = ?
+    ";
+
+    $stmt = $conn->prepare($query);
+
+      $stmt->execute(array($id));
+
+      return $stmt->fetch();
+  }
+
 ?>

@@ -32,12 +32,19 @@ function deleteContent(contentID){
 			console.log("data:" + data);
 
 			if(data == 'ok'){
-				console.log("retornar true");
+				//console.log("retornar true");
 
 				updateHtml();
 			}
 			else{
-				alert(JSON.stringify(data));
+				//alert(JSON.stringify(data));
+
+				$('.page-header').prepend(
+		            '<div class="alert alert-warning alert-dismissable">'+
+		                '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
+		                '<strong>Warning!</strong> '+ data['error'] +
+		            '</div>'
+		        );
 			}
 		},
 		error: function(xhr, textStatus, errorThrown) {
@@ -56,12 +63,22 @@ function updateHtml(){
 	else if(target.is('button')){
 
 		if(target.closest('div.container').hasClass("question")){
-			console.log("apagar questão");
-			//apagar e redirecionar para o index
+			//console.log("apagar questão");
+
 			window.location = "../..";
+
 		}
 		else{
 			console.log("apagar resposta");
+
+			$('body').scrollTop(0);
+
+			$('.page-header').prepend(
+            '<div class="alert alert-success alert-dismissable">'+
+                '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
+                'Your answer was successfully deleted.' +
+            '</div>'
+            );
 
 			target.closest('div.container').next('div').next('div').remove();
 			target.closest('div.container').next('div').remove();
