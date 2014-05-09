@@ -51,44 +51,28 @@ function getTags($order, $page){
     $offset = ($page-1) * 30;
 
    if($order == 'name')
-      $query = "SELECT COUNT(*) AS total, \"TagQuestion\".\"idTag\",
-              (
-                SELECT \"name\" 
-                FROM \"Tag\"
-                WHERE \"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\"
-              ) AS name
-              FROM \"TagQuestion\"
-       		WHERE (
-                SELECT \"name\" 
-                FROM \"Tag\"
-                WHERE \"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\"
-              )LIKE ?
-              GROUP BY \"idTag\"
-              ORDER BY name
-              LIMIT 30 OFFSET ?";
+      $query = "SELECT COUNT(\"TagQuestion\".\"idQuestion\") AS total,
+                \"Tag\".\"idTag\", name 
+                FROM \"Tag\", \"TagQuestion\" 
+                WHERE \"name\" LIKE ?
+                AND \"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\"
+                GROUP BY \"Tag\".\"idTag\"
+                ORDER BY name
+                LIMIT 30 OFFSET ?";
    else if($order == 'number_tags')
-      $query =  "SELECT COUNT(*) AS total, \"TagQuestion\".\"idTag\",
-              (
-                SELECT \"name\" 
-                FROM \"Tag\"
-                WHERE \"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\"
-              ) AS name
-              FROM \"TagQuestion\"
-       		WHERE (
-                SELECT \"name\" 
-                FROM \"Tag\"
-                WHERE \"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\"
-              )LIKE ?
-		GROUP BY \"TagQuestion\".\"idTag\"
- 
-              LIMIT 30 OFFSET ?";
+      $query =  "SELECT COUNT(\"TagQuestion\".\"idQuestion\") AS total,
+                \"Tag\".\"idTag\", name 
+                FROM \"Tag\", \"TagQuestion\" 
+                WHERE \"name\" LIKE ?
+                AND \"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\"
+                GROUP BY \"Tag\".\"idTag\"
+                ORDER BY total
+                LIMIT 30 OFFSET ?";
 
 
     $stmt = $conn->prepare($query);
 
     $stmt->execute(array('%'.$search.'%', $offset));
-	
-	
 
     return $stmt->fetchAll();
   }
