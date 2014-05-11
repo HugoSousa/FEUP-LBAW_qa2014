@@ -57,8 +57,8 @@
 	else
     	$questions = getQuestions($page, $order, $filter_ans, $filter_acc);  
 
-    $totalQuestions = getTotalQuestions();
-    $pages = ceil($totalQuestions['total']/30);
+    $totalResults = getNumberOfQuestions($filter_ans, $filter_acc);
+    $pages = ceil($totalResults/30);
 
     //print_r($notifications);
 
@@ -69,6 +69,7 @@
 	$smarty->assign('filter_ans', $filter_ans);
 	$smarty->assign('order', $order);
 	$smarty->assign('pages', $pages);
+	$smarty->assign('destination', 'pages/questions/list_all.php');
 	$smarty->assign('questions', $questions);
 	$smarty->assign('page', $page);
 	$smarty->display('questions/list_all.tpl');

@@ -30,7 +30,7 @@
 	}
 	else{
 		$users = getUsers($order, $page);
-		$pages = ceil(intval(getTotalUsers())/30);
+		$pages = ceil(getTotalUsers()/30);
 	}
 
 	$smarty->assign('notifications', $notifications);
@@ -38,6 +38,7 @@
 	$smarty->assign('users', $users);
 	$smarty->assign('page', $page);
 	$smarty->assign('pages', $pages);
+	$smarty->assign('destination', 'pages/users/list_all.php');
 	$smarty->assign('order', $order);
 	$smarty->display('users/list_all.tpl');
 ?>

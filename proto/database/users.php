@@ -152,11 +152,15 @@
   function getTotalUsers(){
     global $conn;
 
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM \"User\"");
+    $stmt = $conn->prepare("SELECT * FROM \"User\"");
 
     $stmt->execute(array());
 
-    return $stmt->fetch();
+    $stmt->fetch();
+
+    $count = $stmt->rowCount();
+
+    return $count;
   }
 
 

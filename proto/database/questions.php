@@ -122,6 +122,76 @@
 
   }
 
+  function getNumberOfQuestions($filter_ans, $filter_acc){
+    global $conn;
+
+    $query = "SELECT q.id,
+              CASE WHEN answers.numAnswers IS NULL THEN 0 ELSE answers.numAnswers END AS answers, 
+              CASE WHEN answers.accepted IS NULL THEN 0 ELSE answers.accepted END AS accepted
+
+              FROM
+              (
+                SELECT c.\"id\"
+                FROM \"Content\" c, \"Question\" q
+                WHERE q.\"idQuestion\" = c.\"id\"
+              ) AS q
+
+              LEFT JOIN
+
+              (
+                SELECT answers.id, answers.numAnswers, accepted.accepted FROM
+                (
+                  SELECT COUNT(*) as numAnswers, \"Content\".\"id\" AS id
+                  FROM \"Answer\", \"Content\", \"Question\"
+                  WHERE \"Content\".\"id\" = \"Question\".\"idQuestion\" AND \"Answer\".\"idQuestion\" = \"Content\".\"id\"
+                  GROUP BY id
+                  ORDER BY id
+                ) AS answers LEFT JOIN 
+                (
+                  SELECT \"Question\".\"idQuestion\" AS id, 
+                    COALESCE(sum(CASE WHEN a.\"isAccepted\" THEN 1 ELSE 0 END),0) AS accepted
+                  FROM \"Question\", \"Answer\" a
+                  WHERE \"Question\".\"idQuestion\" = a.\"idQuestion\"
+                  GROUP BY \"Question\".\"idQuestion\"
+                  ORDER BY \"Question\".\"idQuestion\" DESC
+                ) AS accepted ON answers.id = accepted.id 
+              ) AS answers
+
+              ON q.id = answers.id";
+
+  
+  if($filter_ans == 'y'){
+      $query .= " GROUP BY result.\"id\", result.\"answers\", result.\"accepted\"
+                HAVING answers > 0";
+      
+      if($filter_acc == 'y')
+        $query .= " AND accepted = 1";
+      else if($filter_acc == 'n')
+        $query .= " AND accepted = 0";
+    }
+    else if($filter_ans == 'n'){
+      $query .= " GROUP BY result.\"id\", result.\"answers\", result.\"accepted\"
+                HAVING answers = 0";
+    }
+    else{
+      if($filter_acc == 'y')
+        $query .= " GROUP BY result.\"id\", result.\"answers\", result.\"accepted\"
+                HAVING accepted = 1";
+      else if($filter_acc == 'n')
+        $query .= " GROUP BY result.\"id\", result.\"answers\", result.\"accepted\"
+                HAVING accepted = 0";
+    }
+
+    $stmt = $conn->prepare($query);
+
+    $stmt->execute();
+
+    $count = $stmt->rowCount();
+
+    return $count;
+
+  }
+
 
   function getQuestion($userid, $questionid){
 
