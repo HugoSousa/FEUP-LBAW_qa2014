@@ -3,10 +3,12 @@
 	include_once($BASE_DIR .'database/content.php');
 	include_once($BASE_DIR .'database/answer.php');
 
-	$questionID = $_GET['questionID'];
-	$text = $_GET['text'];
+	$questionID = $_POST['questionID'];
+	$text = $_POST['text'];
 	$userID = $_SESSION['userid']; //FIX ME
 	$username = $_SESSION['username']; //FIX ME
+
+	$text = str_replace(array("\r\n\r\n", "\n\n"), '<br>', $text, $i);
 
 	$contentID = insertContent($text, $userID, ANSWER);
 

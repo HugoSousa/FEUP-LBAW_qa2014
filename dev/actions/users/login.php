@@ -1,6 +1,6 @@
 <?php
   include_once('../../config/init.php');
-  include_once($BASE_DIR .'database/users.php');  
+  include_once($BASE_DIR .'database/users/users.php');  
 
   if (!$_POST['login'] || !$_POST['password']) {
     $_SESSION['error_messages'][] = 'Invalid login';

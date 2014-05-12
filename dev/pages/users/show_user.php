@@ -1,6 +1,6 @@
 <?php
   include_once('../../config/init.php');
-  include_once($BASE_DIR .'database/users.php');
+  include_once($BASE_DIR .'database/users/users.php');
   include_once($BASE_DIR .'pages/notifications.php');
 
   $username = $_GET['username'];

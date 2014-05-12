@@ -1,6 +1,6 @@
 <?php
     include_once('../../config/init.php');
-    include_once($BASE_DIR .'database/users.php');
+    include_once($BASE_DIR .'database/users/users.php');
     include_once($BASE_DIR .'pages/notifications.php');
 
     $page = $_GET['page'];
@@ -26,7 +26,7 @@
 	if(isset($_GET['search'])){
 		$search = $_GET['search'];
 		$users = getUsersBySearch($order, $page, $search);
-		$pages = ceil(intval(getTotalUsersBySearch($search))/30);
+		$pages = ceil(getTotalUsersBySearch($search)/30);
 	}
 	else{
 		$users = getUsers($order, $page);

@@ -10,10 +10,9 @@ $(function() {
         var questionID = $(this).val();
         if(text.val().trim()){
 
-          jQuery.ajax({ type: "GET", 
+          jQuery.ajax({ type: "POST", 
           url: "../../api/questions/insert_answer.php", 
-          data: 'questionID='+questionID+'&text='+text.val(),
-          cache: false, 
+          data: $.param({'questionID': questionID, 'text': text.val()}),
           dataType: "json",
           success: function(response) 
           {

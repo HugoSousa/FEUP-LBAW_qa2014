@@ -1,5 +1,6 @@
 {include file='common/header.tpl'}
 
+<script type="text/javascript" src="{$BASE_URL}javascript/jquery.pagedown-bootstrap.combined.min.js"></script>
 <script src="{$BASE_URL}javascript/questions/list_all.js"></script>
 
 <div class="container" style="width:70%; margin-left:auto; margin-right:auto; padding-left:0px; margin-bottom:20px">
@@ -127,7 +128,11 @@
         <h3 class="panel-title" id={$question.id} style="word-wrap: break-word;"><a href="{$BASE_URL}pages/questions/show_question.php?id={$question.id}"><b>{$question.title}</b></a></h3>
       </div>
       <div class="panel-body" style="word-wrap: break-word;">
-        {substr($question.contentText, 0, 400)}
+            <script type="text/javascript">
+              var converter = Markdown.getSanitizingConverter();
+              var htmlText = converter.makeHtml("{substr($question.contentText, 0, 100)}");
+              document.write(htmlText);
+          </script>
       </div>
     </div>
 {/foreach}

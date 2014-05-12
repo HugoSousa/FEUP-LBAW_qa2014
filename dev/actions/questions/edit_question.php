@@ -15,7 +15,7 @@
   $tags = $_POST['tags'];
   $userID = $_SESSION['userid'];
 
-  $body = str_replace(array("\r\n", "\r", "\n"), '<br/>', $body, $i);
+  $body = str_replace(array("\r\n\r\n", "\n\n"), '<br>', $body, $i);
   
   try{
   	editQuestion($id, $body, $title, $tags);

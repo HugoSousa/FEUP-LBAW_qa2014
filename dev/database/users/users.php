@@ -138,7 +138,7 @@
       $query = "SELECT \"username\", \"registry\", \"reputation\" FROM \"User\" ORDER BY \"username\" LIMIT 30 OFFSET ?";
     else if($order == 'reputation')
       $query = "SELECT \"username\", \"registry\", \"reputation\" FROM \"User\" ORDER BY \"reputation\" DESC LIMIT 30 OFFSET ?";
-    if($order == 'registry')
+    else if($order == 'registry')
       $query = "SELECT \"username\", \"registry\", \"reputation\" FROM \"User\" ORDER BY \"registry\" LIMIT 30 OFFSET ?";
 
     $stmt = $conn->prepare($query);
@@ -187,10 +187,16 @@
 
     global $conn;
 
-      $query = "SELECT COUNT(*) FROM \"User\" WHERE \"username\" LIKE ?";
+    $query = "SELECT * FROM \"User\" WHERE \"username\" LIKE ?";
 
     $stmt = $conn->prepare($query);
 
     $stmt->execute(array('%'.$search.'%'));
+
+    $stmt->fetch();
+
+    $count = $stmt->rowCount();
+
+    return $count;
   }
 ?>

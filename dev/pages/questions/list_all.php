@@ -53,12 +53,15 @@
 	if(isset($_GET['search'])){
 		$search = $_GET['search'];
 		$questions = searchQuestions($page, $order, $filter_ans, $filter_acc, $search);
+		$totalResults = getTotalResultsBySearch($filter_ans, $filter_acc, $search);
+    	$pages = ceil($totalResults/30);
 	}
-	else
+	else{
     	$questions = getQuestions($page, $order, $filter_ans, $filter_acc);  
-
-    $totalResults = getNumberOfQuestions($filter_ans, $filter_acc);
-    $pages = ceil($totalResults/30);
+    	$totalResults = getNumberOfQuestions($filter_ans, $filter_acc);
+    	$pages = ceil($totalResults/30);
+	}
+    
 
     //print_r($notifications);
 

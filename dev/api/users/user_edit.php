@@ -1,6 +1,6 @@
 <?php
   include_once('../../config/init.php');
-  include_once($BASE_DIR .'database/users.php');
+  include_once($BASE_DIR .'database/users/users.php');
 
   $username = $_GET['username'];
   $field = $_GET['field'];

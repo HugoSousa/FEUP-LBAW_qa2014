@@ -15,7 +15,7 @@
   $userID = $_SESSION['userid'];
 
   //echo $body . "<br>";
-  $body = str_replace(array("\r\n", "\r", "\n"), '<br/>', $body, $i);
+  $body = str_replace(array("\r\n\r\n", "\n\n"), '<br>', $body, $i);
   //echo $i ."<br>";
   //echo $body;
   
