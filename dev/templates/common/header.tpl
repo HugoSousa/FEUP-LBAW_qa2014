@@ -93,7 +93,23 @@
             </li>
             {/if}
           </ul>
+
+
             
         </div>
       </div>
+
+      {foreach $ERROR_MESSAGES as $error}
+        <div class="alert alert-danger alert-dismissable" style="width:70%; margin-left:auto; margin-right:auto">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          {$error}
+        </div>
+      {/foreach}
+
+      {foreach $SUCCESS_MESSAGES as $success}
+        <div class="alert alert-success" style="width:70%; margin-left:auto; margin-right:auto">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          {$success}
+        </div>
+      {/foreach}
     </div>
