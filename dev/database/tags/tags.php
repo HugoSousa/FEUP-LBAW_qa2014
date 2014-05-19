@@ -88,4 +88,16 @@ function getTags($order, $page){
     $stmt->execute(array('%'.$search.'%'));
   }
 
+  function getNotAcceptedTags(){
+
+    global $conn;
+
+    $stmt = $conn->prepare("SELECT * FROM \"Tag\" WHERE \"isAccepted\" = False");
+
+    $stmt->execute(array());
+
+    return $stmt->fetchAll();
+
+  }
+
 ?>

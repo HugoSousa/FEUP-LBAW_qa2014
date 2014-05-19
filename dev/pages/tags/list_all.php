@@ -29,11 +29,16 @@
 		$tags = getTags($order, $page);
 		$pages = ceil(intval(getTotalTags())/30);
 	}
+
+	if($_SESSION['permission'] == 'A'){
+		$notAcceptedTags = getNotAcceptedTags();
+	}
 	
 	$smarty->assign('tags', $tags);
 	$smarty->assign('page', $page);
 	$smarty->assign('pages', $pages);
 	$smarty->assign('search', $search);
 	$smarty->assign('order', $order);
+	$smarty->assign('notAcceptedTags', $notAcceptedTags);
 	$smarty->display('tags/list_all.tpl');
 ?>
