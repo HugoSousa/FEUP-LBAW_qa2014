@@ -7,9 +7,7 @@
   $value = $_GET['value'];
   
   if (!$username || !$field || !$value) {
-    $_SESSION['error_messages'][] = 'Parameters missing';
     $_SESSION['form_values'] = $_GET;
-    header('Location: ' . $_SERVER['HTTP_REFERER']);
 
     $result = array(error => "parameters missing");
 

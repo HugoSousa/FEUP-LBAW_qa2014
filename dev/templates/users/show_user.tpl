@@ -5,7 +5,11 @@
 	<script src="{$BASE_URL}javascript/users/user.js"></script>
 
     <div class="page-header" style="width:70%; margin-left:auto; margin-right:auto" >
-      <h1 id="username">{$user.username}</h1>
+      <h1><span id="username">{$user.username}</span>
+      {if $PERMISSION == 'A' && $USERNAME != $user.username}
+        <button type="button" id="ban-user" class="btn btn-danger btn-lg pull-right"><span class="glyphicon glyphicon-remove"></span> Ban</button>
+      {/if}
+      </h1>
     </div>
 
     <div style="text-align:center">
@@ -140,5 +144,6 @@
 
     </div>
 
+    <br><br><br>
 
 {include file='common/footer.tpl'}

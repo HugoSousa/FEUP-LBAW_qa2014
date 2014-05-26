@@ -2,7 +2,7 @@
   
   function createUser($email, $login, $password, $username) {
     global $conn;
-    $stmt = $conn->prepare("INSERT INTO \"User\" VALUES (DEFAULT, NULL, ?, NULL, ?, ?, NULL, DEFAULT, ?, DEFAULT, DEFAULT)");
+    $stmt = $conn->prepare("INSERT INTO \"User\" VALUES (DEFAULT, NULL, ?, NULL, ?, ?, NULL, DEFAULT, ?, DEFAULT, DEFAULT, DEFAULT)");
     $stmt->execute(array($email, $login, hash("sha256", $password), $username));
   }
 
@@ -198,5 +198,15 @@
     $count = $stmt->rowCount();
 
     return $count;
+  }
+
+  function banUser($username){
+    global $conn;
+
+    $query = "UPDATE \"User\" SET \"banned\" = TRUE WHERE \"username\" = ?";
+
+    $stmt = $conn->prepare($query);
+
+    return $stmt->execute(array($username));
   }
 ?>

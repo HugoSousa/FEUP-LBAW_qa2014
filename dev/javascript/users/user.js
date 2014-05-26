@@ -101,9 +101,28 @@ $(document).ready(function() {
 				//alert(data);
 
 			  }
-			})
+			});
 
 			$(event.target).parent().replaceWith("<div class='well' style='width:70%; margin-left:auto; margin-right:auto;'>"+biography+"</div>");
 		}
 	});
+
+  $(document).on('click', '#ban-user', function(event){
+
+    //console.log("Click ban");
+    var username = $("#username").text();
+    //console.log(username);
+    
+    $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: "../../api/users/user_ban.php",
+      data: { username: username },
+      success: function(data){
+        //alert(data);
+        console.log(data);
+      }
+    });
+    
+  });  
 });
