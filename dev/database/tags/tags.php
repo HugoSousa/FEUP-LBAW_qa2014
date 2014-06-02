@@ -8,15 +8,10 @@ function getTags($order, $page){
     if($order == 'name')
       $query = "SELECT COUNT(*) AS total, \"TagQuestion\".\"idTag\",
               (
-                SELECT \"name\"
+                SELECT \"name\" 
                 FROM \"Tag\"
                 WHERE \"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\"
-              ) AS name,
-              (
-                SELECT \"description\" 
-                FROM \"Tag\"
-                WHERE \"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\"
-              ) AS description
+              ) AS name
               FROM \"TagQuestion\"
               GROUP BY \"idTag\"
               ORDER BY name
@@ -28,12 +23,7 @@ function getTags($order, $page){
                 SELECT \"name\" 
                 FROM \"Tag\"
                 WHERE \"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\"
-              ) AS name,
-              (
-                SELECT \"description\" 
-                FROM \"Tag\"
-                WHERE \"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\"
-              ) AS description
+              ) AS name
               FROM \"TagQuestion\"
               GROUP BY \"idTag\"
               ORDER BY total DESC
@@ -48,15 +38,11 @@ function getTags($order, $page){
  function getTotalTags(){
     global $conn;
 
-    $stmt = $conn->prepare("SELECT * FROM \"Tag\" ");
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM \"Tag\" ");
 
     $stmt->execute(array());
 
-    $stmt->fetch();
-
-    $count = $stmt->rowCount();
-
-    return $count;
+    return $stmt->fetch();
   }
 
   function getTagsBySearch($order, $page, $search){
@@ -66,7 +52,7 @@ function getTags($order, $page){
 
    if($order == 'name')
       $query = "SELECT COUNT(\"TagQuestion\".\"idQuestion\") AS total,
-                \"Tag\".\"idTag\", name, \"Tag\".description
+                \"Tag\".\"idTag\", name 
                 FROM \"Tag\", \"TagQuestion\" 
                 WHERE \"name\" LIKE ?
                 AND \"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\"
@@ -75,7 +61,7 @@ function getTags($order, $page){
                 LIMIT 30 OFFSET ?";
    else if($order == 'number_tags')
       $query =  "SELECT COUNT(\"TagQuestion\".\"idQuestion\") AS total,
-                \"Tag\".\"idTag\", name, \"Tag\".description 
+                \"Tag\".\"idTag\", name 
                 FROM \"Tag\", \"TagQuestion\" 
                 WHERE \"name\" LIKE ?
                 AND \"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\"
@@ -91,21 +77,35 @@ function getTags($order, $page){
     return $stmt->fetchAll();
   }
 
-  function getTotalTagsBySearch($search){
-
+  function getTagsOnlyBySearch($search){
     global $conn;
 
-      $query = "SELECT * FROM \"Tag\" WHERE \"name\" LIKE ?";
+    $offset = ($page-1) * 30;
+
+    $query = "SELECT COUNT(\"TagQuestion\".\"idQuestion\") AS total,
+              \"Tag\".\"idTag\", name 
+              FROM \"Tag\", \"TagQuestion\" 
+              WHERE \"name\" LIKE ?
+              AND \"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\"
+              GROUP BY \"Tag\".\"idTag\"";
 
     $stmt = $conn->prepare($query);
 
     $stmt->execute(array('%'.$search.'%'));
 
-    $stmt->fetch();
+    return $stmt->fetchAll();
+  }
 
-    $count = $stmt->rowCount();
 
-    return $count;
+  function getTotalTagsBySearch($search){
+
+    global $conn;
+
+      $query = "SELECT COUNT(*) FROM \"Tag\" WHERE \"name\" LIKE ?";
+
+    $stmt = $conn->prepare($query);
+
+    $stmt->execute(array('%'.$search.'%'));
   }
 
   function getNotAcceptedTags(){

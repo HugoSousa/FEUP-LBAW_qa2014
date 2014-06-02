@@ -1,4 +1,4 @@
-    <div class="navbar navbar-default navbar-fixed-bottom" style="margin-bottom:0">
+    <div class="navbar navbar-default" style="margin-bottom:0">
 
       <div class="container">
           <ul class="nav navbar-nav">

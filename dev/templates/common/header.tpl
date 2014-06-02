@@ -30,7 +30,7 @@
         <a href="{$BASE_URL}" class="navbar-brand">Q&A2014</a>
         <form class="navbar-form navbar-right" role="search" action="{$BASE_URL}pages/questions/list_all.php" method="GET">
           <input name="search" type="text" class="form-control" placeholder="Search">
-          <button id="search_questions" type="submit" class="btn btn-default">
+          <button id="search_questions" type="submit" class="btn btn-default form-control">
             <span class="glyphicon glyphicon-search"></span>
           </button>
         </form>

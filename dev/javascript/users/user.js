@@ -109,9 +109,9 @@ $(document).ready(function() {
 
   $(document).on('click', '#ban-user', function(event){
 
-    //console.log("Click ban");
+    console.log("Click ban");
     var username = $("#username").text();
-    //console.log(username);
+    console.log(username);
     
     $.ajax({
       type: "POST",

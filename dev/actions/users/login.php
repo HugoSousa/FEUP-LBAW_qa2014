@@ -16,11 +16,16 @@
 
     $user = getUserInfoByLogin($login);
 
-    $_SESSION['username'] = $user['username']; 
-    $_SESSION['reputation'] = $user['reputation'];
-    $_SESSION['permission'] = $user['permission'];
-    $_SESSION['userid'] = $user['id'];
-    $_SESSION['success_messages'][] = 'Login successful';
+    if(!$user['banned']){
+      $_SESSION['username'] = $user['username']; 
+      $_SESSION['reputation'] = $user['reputation'];
+      $_SESSION['permission'] = $user['permission'];
+      $_SESSION['userid'] = $user['id'];
+      $_SESSION['success_messages'][] = 'Login successful';
+    }
+    else{
+      $_SESSION['error_messages'][] = 'This account has been banned!'; 
+    }
   } else {
     $_SESSION['error_messages'][] = 'Login failed';  
   }
