@@ -9,3 +9,7 @@ function dropdownClick(page, order, search){
 
 		window.location.href = redirect;
 }
+
+jQuery(function ($) {
+        $("a").tooltip();
+    });

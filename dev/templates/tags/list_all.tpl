@@ -108,7 +108,8 @@
         {foreach $tags as $tag}
         	<tr>
 	            <td>{$counter++}</td>
-	            <td><a href="#">{$tag.name}</a></td>
+	            <td><a href="{$BASE_URL}pages/questions/list_by_tag.php?idTag={$tag.idTag}" data-toggle="tooltip" data-placement="top" title="{$tag.description}" >{$tag.name}</a></td>
+
 	            <td>{$tag.total}</td>
 	        </tr>
         {/foreach}

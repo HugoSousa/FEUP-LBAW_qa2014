@@ -40,5 +40,6 @@
 	$smarty->assign('search', $search);
 	$smarty->assign('order', $order);
 	$smarty->assign('notAcceptedTags', $notAcceptedTags);
+	$smarty->assign('destination', 'pages/tags/list_all.php');
 	$smarty->display('tags/list_all.tpl');
 ?>

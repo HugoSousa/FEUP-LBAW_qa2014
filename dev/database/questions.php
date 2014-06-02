@@ -725,9 +725,172 @@
 
     $stmt = $conn->prepare($query);
 
-      $stmt->execute(array($id));
+    $stmt->execute(array($id));
 
-      return $stmt->fetch();
+    return $stmt->fetch();
+  }
+
+  function getQuestionsByTag($idTag, $page){
+
+    global $conn;
+
+    $query = "SELECT * FROM
+      (SELECT info.id, info.\"contentText\", info.\"contentDate\", info.title, info.user, info.upvotes, info.downvotes, answers.answers, answers.accepted  FROM 
+      (
+        SELECT \"Content\".\"id\", \"Content\".\"contentText\", \"Content\".\"contentDate\", \"title\",
+        (
+          SELECT \"User\".\"username\"
+          FROM \"User\"
+          WHERE \"User\".\"id\" = \"Content\".\"userID\"
+        )AS USER,  
+        (
+          SELECT COUNT(*) 
+          FROM \"VoteQuestion\"
+          WHERE \"idQuestion\" = \"Content\".\"id\" AND \"VoteQuestion\".\"isUp\" IS TRUE
+        ) AS upvotes,
+        (
+          SELECT COUNT(*) 
+          FROM \"VoteQuestion\"
+          WHERE \"idQuestion\" = \"Content\".\"id\" AND \"VoteQuestion\".\"isUp\" IS FALSE
+        ) AS downvotes
+        FROM \"Question\", \"Content\"
+        WHERE\"Content\".\"id\" = \"Question\".\"idQuestion\"
+      ) as info
+
+      LEFT JOIN
+
+      (
+        SELECT q.id,
+        CASE WHEN answers.numAnswers IS NULL THEN 0 ELSE answers.numAnswers END AS answers, 
+        CASE WHEN answers.accepted IS NULL THEN 0 ELSE answers.accepted END AS accepted
+
+        FROM
+        (
+          SELECT c.\"id\"
+          FROM \"Content\" c, \"Question\" q
+          WHERE q.\"idQuestion\" = c.\"id\"
+        ) AS q
+
+        LEFT JOIN
+
+        (
+          SELECT answers.id, answers.numAnswers, accepted.accepted FROM
+          (
+            SELECT COUNT(*) as numAnswers, \"Content\".\"id\" AS id
+            FROM \"Answer\", \"Content\", \"Question\"
+            WHERE \"Content\".\"id\" = \"Question\".\"idQuestion\" AND \"Answer\".\"idQuestion\" = \"Content\".\"id\"
+            GROUP BY id
+            ORDER BY id
+          ) AS answers LEFT JOIN 
+          (
+            SELECT \"Question\".\"idQuestion\" AS id, 
+              COALESCE(sum(CASE WHEN a.\"isAccepted\" THEN 1 ELSE 0 END),0) AS accepted
+            FROM \"Question\", \"Answer\" a
+            WHERE \"Question\".\"idQuestion\" = a.\"idQuestion\"
+            GROUP BY \"Question\".\"idQuestion\"
+            ORDER BY \"Question\".\"idQuestion\" DESC
+          ) AS accepted ON answers.id = accepted.id 
+        ) AS answers
+
+        ON q.id = answers.id
+      ) as answers
+
+      ON info.id = answers.id, \"TagQuestion\"
+      WHERE \"TagQuestion\".\"idTag\" = ? AND \"TagQuestion\".\"idQuestion\" = info.id
+      ORDER BY \"contentDate\"";
+
+    $query .=  " OFFSET ?) AS result";
+
+    $query .= ' LIMIT 30';
+    
+    $stmt = $conn->prepare($query);
+
+    $stmt->execute(array($idTag, 30*($page-1)));
+
+    return $stmt->fetchAll();
+
+  }
+
+  function getTotalQuestionsByTag($idTag){
+
+    global $conn;
+
+    $query = "SELECT * FROM
+      (SELECT info.id, info.\"contentText\", info.\"contentDate\", info.title, info.user, info.upvotes, info.downvotes, answers.answers, answers.accepted  FROM 
+      (
+        SELECT \"Content\".\"id\", \"Content\".\"contentText\", \"Content\".\"contentDate\", \"title\",
+        (
+          SELECT \"User\".\"username\"
+          FROM \"User\"
+          WHERE \"User\".\"id\" = \"Content\".\"userID\"
+        )AS USER,  
+        (
+          SELECT COUNT(*) 
+          FROM \"VoteQuestion\"
+          WHERE \"idQuestion\" = \"Content\".\"id\" AND \"VoteQuestion\".\"isUp\" IS TRUE
+        ) AS upvotes,
+        (
+          SELECT COUNT(*) 
+          FROM \"VoteQuestion\"
+          WHERE \"idQuestion\" = \"Content\".\"id\" AND \"VoteQuestion\".\"isUp\" IS FALSE
+        ) AS downvotes
+        FROM \"Question\", \"Content\"
+        WHERE\"Content\".\"id\" = \"Question\".\"idQuestion\"
+      ) as info
+
+      LEFT JOIN
+
+      (
+        SELECT q.id,
+        CASE WHEN answers.numAnswers IS NULL THEN 0 ELSE answers.numAnswers END AS answers, 
+        CASE WHEN answers.accepted IS NULL THEN 0 ELSE answers.accepted END AS accepted
+
+        FROM
+        (
+          SELECT c.\"id\"
+          FROM \"Content\" c, \"Question\" q
+          WHERE q.\"idQuestion\" = c.\"id\"
+        ) AS q
+
+        LEFT JOIN
+
+        (
+          SELECT answers.id, answers.numAnswers, accepted.accepted FROM
+          (
+            SELECT COUNT(*) as numAnswers, \"Content\".\"id\" AS id
+            FROM \"Answer\", \"Content\", \"Question\"
+            WHERE \"Content\".\"id\" = \"Question\".\"idQuestion\" AND \"Answer\".\"idQuestion\" = \"Content\".\"id\"
+            GROUP BY id
+            ORDER BY id
+          ) AS answers LEFT JOIN 
+          (
+            SELECT \"Question\".\"idQuestion\" AS id, 
+              COALESCE(sum(CASE WHEN a.\"isAccepted\" THEN 1 ELSE 0 END),0) AS accepted
+            FROM \"Question\", \"Answer\" a
+            WHERE \"Question\".\"idQuestion\" = a.\"idQuestion\"
+            GROUP BY \"Question\".\"idQuestion\"
+            ORDER BY \"Question\".\"idQuestion\" DESC
+          ) AS accepted ON answers.id = accepted.id 
+        ) AS answers
+
+        ON q.id = answers.id
+      ) as answers
+
+      ON info.id = answers.id, \"TagQuestion\"
+      WHERE \"TagQuestion\".\"idTag\" = ? AND \"TagQuestion\".\"idQuestion\" = info.id
+      ORDER BY \"contentDate\" DESC";
+
+    $query .=  ") AS result";
+    
+    $stmt = $conn->prepare($query);
+
+    $stmt->execute(array($idTag));
+
+    $count = $stmt->rowCount();
+
+    return $count;
+
+
   }
 
 ?>

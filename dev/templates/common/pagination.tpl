@@ -21,8 +21,16 @@
         {if (isset($order) && $order != 'reputation' && $order != 'new')}
           {assign var="fields" value=$fields|cat:'&order='|cat:$order}
         {/if}
-        <a href="{$BASE_URL}{$destination}?page={$page - 1}{$fields}">&laquo;</a></li>
 
+        {if (isset($idTag))}
+          {assign var="fields" value=$fields|cat:'&idTag='|cat:$idTag}
+        {/if}
+
+        {if $page == 1}
+        <a>&laquo;</a></li>
+        {else}
+        <a href="{$BASE_URL}{$destination}?page={$page - 1}{$fields}">&laquo;</a></li>
+        {/if}
         {if $page >= 3}
           {if $page-2 > 1}
             <li><a href="{$BASE_URL}{$destination}?page=1{$fields}">1</a></li>
@@ -54,9 +62,12 @@
 
         {if $page == $pages}
         <li class="disabled">
+          <a>&raquo;</a>
+        </li>
         {else}
         <li>
+        <a href="{$BASE_URL}{$destination}?page={$page + 1}{$fields}">&raquo;</a>
+        </li>
         {/if}
-        <a href="{$BASE_URL}{$destination}?page={$page + 1}{$fields}">&raquo;</a></li>
       </ul>
     </div>
