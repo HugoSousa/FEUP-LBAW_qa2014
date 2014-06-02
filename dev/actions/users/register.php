@@ -22,6 +22,14 @@
     exit;
   }
 
+  $pattern = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/';
+  if(preg_match($pattern, $password1) == 0){
+    $_SESSION['error_messages'][] = 'Wrong password format';
+    $_SESSION['form_values'] = $_POST;
+    header("Location: $BASE_URL" . 'pages/users/register.php');
+    exit;
+  }
+
   try {
     createUser($email, $login, $password1, $name);
   } catch (PDOException $e) {
