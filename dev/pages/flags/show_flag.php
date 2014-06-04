@@ -12,11 +12,18 @@
 
 	    $id = $_GET['id'];
 
-	    $content = getContent($id);
-	    $content['type'] = strtolower($content['type']);
-		$reports = getReports($id, $page);
-	    $totalReports = getTotalReports($id);
-	    $pages = ceil(floatval($totalReports['total']/10));
+	    try{
+		    $content = getContent($id);
+		    $content['type'] = strtolower($content['type']);
+			$reports = getReports($id, $page);
+		    $totalReports = getTotalReports($id);
+		    $pages = ceil(floatval($totalReports['total']/10));
+		}catch(PDOException $e){
+			$smarty->display("common/error.tpl");
+			$date = date("r");
+			file_put_contents($BASE_DIR.'log.txt', $date." - ".$e."\r\n", FILE_APPEND | LOCK_EX);
+			exit;
+		}
 
 	    $smarty->assign('notifications', $notifications);
 	    $smarty->assign('content', $content);

@@ -58,8 +58,8 @@
       <br><br>
 	{/if}
 
-    <div class="container" style="width:70%; margin-left:auto; margin-right:auto; padding-left:0px">
-	<form class="navbar-form navbar-left" role="search" style="padding-left:0">
+  <div class="container" style="width:70%; margin-left:auto; margin-right:auto; padding-left:0px">
+	 <form class="navbar-form navbar-left" role="search" style="padding-left:0">
 		<div class="form-group">
         		<input name="search" type="text" class="form-control" placeholder="Search Tag">
        		</div>
@@ -90,7 +90,7 @@
             </ul>
         </li>
     </ul>
-</div>
+  </div>
 
 
 <br>
@@ -116,9 +116,9 @@
 
     </table>
 </div>
-
+</div>
 {include file='common/pagination.tpl'}
 
-<br><br>
+<br>
 
 {include file='common/footer.tpl'}

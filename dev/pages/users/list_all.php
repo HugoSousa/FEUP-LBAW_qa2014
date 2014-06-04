@@ -20,17 +20,24 @@
 	        break;
 	}
 
-	if(! isset($_GET['order']))
-		$order = 'reputation';
+	try{
+		if(! isset($_GET['order']))
+			$order = 'reputation';
 
-	if(isset($_GET['search'])){
-		$search = $_GET['search'];
-		$users = getUsersBySearch($order, $page, $search);
-		$pages = ceil(getTotalUsersBySearch($search)/30);
-	}
-	else{
-		$users = getUsers($order, $page);
-		$pages = ceil(getTotalUsers()/30);
+		if(isset($_GET['search'])){
+			$search = $_GET['search'];
+			$users = getUsersBySearch($order, $page, $search);
+			$pages = ceil(getTotalUsersBySearch($search)/30);
+		}
+		else{
+			$users = getUsers($order, $page);
+			$pages = ceil(getTotalUsers()/30);
+		}
+	}catch(PDOException $e){
+		$smarty->display("common/error.tpl");
+		$date = date("r");
+		file_put_contents($BASE_DIR.'log.txt', $date." - ".$e."\r\n", FILE_APPEND | LOCK_EX);
+		exit;
 	}
 
 	$smarty->assign('notifications', $notifications);

@@ -89,6 +89,10 @@
                   <input name="password" id="password" type="password" placeholder="Password" size="30" style="margin-bottom: 15px;" class="form-control"><br>
                   <input class="btn btn-primary" style="clear: left; width: 100%; height: 32px; font-size: 13px" type="submit" name="commit" value="Sign In" />
                 </form>
+                <br>
+                <div style="text-align:center">
+                  <a href="{$BASE_URL}pages/users/recover_password.php">Recover Password</a>
+                </div>
               </div>
             </li>
             {/if}

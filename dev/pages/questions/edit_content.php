@@ -4,59 +4,65 @@
     include_once($BASE_DIR .'database/questions.php');
     include_once($BASE_DIR .'database/answer.php');
 
+    try{
+        $id = $_GET['id'];
+        $viewer = $_SESSION['userid'];
+        $content = getContentByID($id);
 
-    $id = $_GET['id'];
-    $viewer = $_SESSION['userid'];
-    $content = getContentByID($id);
+        if($viewer == $content['userID'])
+        {
+            
 
-    if($viewer == $content['userID'])
-    {
-        
+            switch ($content['type']) {
+                case 'ANSWER':
+                    $answer = getAnswer($id);
 
-        switch ($content['type']) {
-            case 'ANSWER':
-                $answer = getAnswer($id);
-
-                $question = getQuestion($viewer, $answer['idQuestion']);
-                $tags = getTagsQuestion($answer['idQuestion']);
+                    $question = getQuestion($viewer, $answer['idQuestion']);
+                    $tags = getTagsQuestion($answer['idQuestion']);
 
 
-                $smarty->assign('own', $_SESSION['username']);
-                $smarty->assign('type', 'ANSWER');
-                $smarty->assign('content', $content);
-                $smarty->assign('question', $question);
-                $smarty->assign('tags', $tags);
-                $smarty->assign('userid', $_SESSION['userid']);
-                $smarty->display('questions/edit_content.tpl'); 
+                    $smarty->assign('own', $_SESSION['username']);
+                    $smarty->assign('type', 'ANSWER');
+                    $smarty->assign('content', $content);
+                    $smarty->assign('question', $question);
+                    $smarty->assign('tags', $tags);
+                    $smarty->assign('userid', $_SESSION['userid']);
+                    $smarty->display('questions/edit_content.tpl'); 
 
-                break;
+                    break;
 
-            case 'QUESTION':
-                
-                $question = getQuestion($viewer, $id);
-                $tags = getTagsQuestion($id);
+                case 'QUESTION':
+                    
+                    $question = getQuestion($viewer, $id);
+                    $tags = getTagsQuestion($id);
 
-                $smarty->assign('own', $_SESSION['username']);
-                $smarty->assign('type', 'QUESTION');
-                $smarty->assign('question', $question);
-                $smarty->assign('tags', $tags);
-                $smarty->assign('userid', $_SESSION['userid']);
-                $smarty->display('questions/edit_content.tpl'); 
-                
-                break;
+                    $smarty->assign('own', $_SESSION['username']);
+                    $smarty->assign('type', 'QUESTION');
+                    $smarty->assign('question', $question);
+                    $smarty->assign('tags', $tags);
+                    $smarty->assign('userid', $_SESSION['userid']);
+                    $smarty->display('questions/edit_content.tpl'); 
+                    
+                    break;
 
-            default:
-                
-                header("Location: $BASE_URL" . 'pages/questions/list_all.php');  //Redirect browser 
-                exit();
-                
-                break;
+                default:
+                    
+                    header("Location: $BASE_URL" . 'pages/questions/list_all.php');  //Redirect browser 
+                    exit();
+                    
+                    break;
+            }
         }
-    }
-    else
-    {
-        header("Location: $BASE_URL" . 'pages/questions/list_all.php');  //Redirect browser 
-        exit();
+        else
+        {
+            header("Location: $BASE_URL" . 'pages/questions/list_all.php');  //Redirect browser 
+            exit();
+        }
+    }catch(PDOException $e){
+        $smarty->display("common/error.tpl");
+        $date = date("r");
+        file_put_contents($BASE_DIR.'log.txt', $date." - ".$e."\r\n", FILE_APPEND | LOCK_EX);
+        exit;
     }
     
 ?>

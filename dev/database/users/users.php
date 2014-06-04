@@ -20,7 +20,7 @@
 
   function getUserInfoByLogin($login){
     global $conn;
-    $stmt = $conn->prepare("SELECT id, username, reputation, permission, banned
+    $stmt = $conn->prepare("SELECT *
                             FROM \"User\"
                             WHERE login = ?");
 

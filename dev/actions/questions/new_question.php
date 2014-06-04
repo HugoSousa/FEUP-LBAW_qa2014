@@ -37,10 +37,8 @@
       $_SESSION['error_messages'][] = 'Invalid tag';
       $_SESSION['field_errors']['tags'] = 'This tag doesn\'t exist.';
       $exception = true;
-      //echo 'Entrei aqui';
     } 
   }
   
-  //echo 'fim';
 
 ?>

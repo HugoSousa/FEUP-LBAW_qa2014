@@ -50,16 +50,24 @@
 	if(! isset($_GET['filter_acc']))
 		$filter_acc = 'all';
 
-	if(isset($_GET['search'])){
-		$search = $_GET['search'];
-		$questions = searchQuestions($page, $order, $filter_ans, $filter_acc, $search);
-		$totalResults = getTotalResultsBySearch($filter_ans, $filter_acc, $search);
-    	$pages = ceil($totalResults/30);
-	}
-	else{
-    	$questions = getQuestions($page, $order, $filter_ans, $filter_acc);  
-    	$totalResults = getNumberOfQuestions($filter_ans, $filter_acc);
-    	$pages = ceil($totalResults/30);
+
+	try{
+		if(isset($_GET['search'])){
+			$search = $_GET['search'];
+			$questions = searchQuestions($page, $order, $filter_ans, $filter_acc, $search);
+			$totalResults = getTotalResultsBySearch($filter_ans, $filter_acc, $search);
+	    	$pages = ceil($totalResults/30);
+		}
+		else{
+	    	$questions = getQuestions($page, $order, $filter_ans, $filter_acc);  
+	    	$totalResults = getNumberOfQuestions($filter_ans, $filter_acc);
+	    	$pages = ceil($totalResults/30);
+		}
+	}catch(Exception $e){
+		$smarty->display("common/error.tpl");
+		$date = date("r");
+		file_put_contents($BASE_DIR.'log.txt', $date." - ".$e."\r\n", FILE_APPEND | LOCK_EX);
+		exit;
 	}
     
 

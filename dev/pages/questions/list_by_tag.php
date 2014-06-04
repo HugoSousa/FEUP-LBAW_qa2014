@@ -12,10 +12,17 @@
 
 	$idTag = $_GET['idTag'];
 
-	$questions = getQuestionsByTag($idTag, $page);
+	try{
+		$questions = getQuestionsByTag($idTag, $page);
 
-	$totalResults = getTotalQuestionsByTag($idTag);
-   	$pages = ceil($totalResults/30);
+		$totalResults = getTotalQuestionsByTag($idTag);
+	   	$pages = ceil($totalResults/30);
+	}catch(PDOException $e){
+		$smarty->display("common/error.tpl");
+		$date = date("r");
+		file_put_contents($BASE_DIR.'log.txt', $date." - ".$e."\r\n", FILE_APPEND | LOCK_EX);
+		exit;
+	}
 
 
     $smarty->assign('own', $_SESSION['username']);

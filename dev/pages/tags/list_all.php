@@ -17,21 +17,28 @@
 	        break;
 	}
 
-	if(! isset($_GET['order']))
-		$order = 'number_tags';
-	
-	if(isset($_GET['search'])){
-		$search = $_GET['search'];
-		$tags = getTagsBySearch($order, $page, $search);
-		$pages = ceil(intval(getTotalTagsBySearch($search))/30);
-	}
-	else {
-		$tags = getTags($order, $page);
-		$pages = ceil(intval(getTotalTags())/30);
-	}
+	try{
+		if(! isset($_GET['order']))
+			$order = 'number_tags';
+		
+		if(isset($_GET['search'])){
+			$search = $_GET['search'];
+			$tags = getTagsBySearch($order, $page, $search);
+			$pages = ceil(intval(getTotalTagsBySearch($search))/30);
+		}
+		else {
+			$tags = getTags($order, $page);
+			$pages = ceil(intval(getTotalTags())/30);
+		}
 
-	if($_SESSION['permission'] == 'A'){
-		$notAcceptedTags = getNotAcceptedTags();
+		if($_SESSION['permission'] == 'A'){
+			$notAcceptedTags = getNotAcceptedTags();
+		}
+	}catch(PDOException $e){
+		$smarty->display("common/error.tpl");
+		$date = date("r");
+		file_put_contents($BASE_DIR.'log.txt', $date." - ".$e."\r\n", FILE_APPEND | LOCK_EX);
+		exit;
 	}
 	
 	$smarty->assign('tags', $tags);

@@ -5,9 +5,16 @@
 
   $username = $_GET['username'];
 
-  $user = getUserInfoByUsername($username);
-  $topQuestions = getTopQuestionsUser($user['id']);
-  $topAnswers = getTopAnswersUser($user['id']);
+  try{
+    $user = getUserInfoByUsername($username);
+    $topQuestions = getTopQuestionsUser($user['id']);
+    $topAnswers = getTopAnswersUser($user['id']);
+  }catch(PDOException $e){
+    $smarty->display("common/error.tpl");
+    $date = date("r");
+    file_put_contents($BASE_DIR.'log.txt', $date." - ".$e."\r\n", FILE_APPEND | LOCK_EX);
+    exit;
+  }
   
   $smarty->assign('notifications', $notifications);
   $smarty->assign('own', $_SESSION['username']);

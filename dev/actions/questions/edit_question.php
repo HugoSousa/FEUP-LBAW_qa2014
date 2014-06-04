@@ -29,15 +29,6 @@
     $conn->rollBack();
 
   	echo $e->getMessage();
-
-     /*if (strpos($e->getMessage(), '"idTag" violates not-null constraint') !== false) {
-      $_SESSION['error_messages'][] = 'Invalid tag';
-      $_SESSION['field_errors']['tags'] = 'This tag doesn\'t exist.';
-      $exception = true;
-      //echo 'Entrei aqui';
-    } */
   }
-  
-  //echo 'fim';
 
 ?>
