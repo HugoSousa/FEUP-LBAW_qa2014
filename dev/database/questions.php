@@ -93,6 +93,12 @@
         $query .= " GROUP BY result.\"id\", result.\"contentText\", result.\"contentDate\", result.\"title\", result.\"user\", result.\"upvotes\", result.\"downvotes\", result.\"answers\", result.\"accepted\"
                 HAVING accepted = 0";
     }
+ 
+    if($order == "best"){
+      $query .= " ORDER BY (result.\"upvotes\" - result.\"downvotes\") DESC";
+    }else if($order == "least"){
+      $query .= " ORDER BY (result.\"upvotes\" - result.\"downvotes\")";
+    }
 
     $query .= ' LIMIT 30';
 
@@ -511,6 +517,12 @@
       else if($filter_acc == 'n')
         $query .= " GROUP BY result.\"id\", result.\"contentText\", result.\"contentDate\", result.\"title\", result.\"user\", result.\"upvotes\", result.\"downvotes\", result.\"answers\", result.\"accepted\"
                 HAVING accepted = 0";
+    }
+
+    if($order == "best"){
+      $query .= " ORDER BY (result.\"upvotes\" - result.\"downvotes\") DESC";
+    }else if($order == "least"){
+      $query .= " ORDER BY (result.\"upvotes\" - result.\"downvotes\")";
     }
 
     $query .= ' LIMIT 30';

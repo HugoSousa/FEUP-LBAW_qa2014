@@ -15,6 +15,12 @@
 	    case 'new' :
 	        $order = 'new';
 	        break;
+	    case 'least' :
+	        $order = 'least';
+	        break;
+	    case 'best' :
+	        $order = 'best';
+	        break;
 	}
 
 	if(! isset($_GET['order']))

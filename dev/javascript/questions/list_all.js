@@ -4,6 +4,10 @@ function dropdownClick(page, order, filter_ans, filter_acc, search){
 
 		if(order == 'old')
 			redirect += '&order=old';
+		else if (order == 'best') 
+			redirect += '&order=best';
+		else if (order == 'least') 
+			redirect += '&order=least';
 
 		if(filter_ans != 'all')
 			redirect += '&filter_ans=' + filter_ans;

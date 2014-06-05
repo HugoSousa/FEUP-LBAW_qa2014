@@ -17,10 +17,24 @@
       <ul class="dropdown-menu" style="padding:0px" id="order_dropdown">
         {if $order == 'new'}
           <li><button class="btn btn-default btn-block active" style="border-radius: 0;" onclick="dropdownClick({$page}, 'new', '{$filter_ans}', '{$filter_acc}', '{$search}')">Newest First</button></li>
-          <li><button class="btn btn-default btn-block " style="border-radius: 0;" onclick="dropdownClick({$page}, 'old', '{$filter_ans}', '{$filter_acc}', '{$search}')">Oldest First</button></li>
+          <li><button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick({$page}, 'old', '{$filter_ans}', '{$filter_acc}', '{$search}')">Oldest First</button></li>
+          <li><button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick({$page}, 'best', '{$filter_ans}', '{$filter_acc}', '{$search}')">Best Rated</button></li>
+          <li><button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick({$page}, 'least', '{$filter_ans}', '{$filter_acc}', '{$search}')">Least Rated</button></li>
+        {elseif $order == 'best'}
+          <li><button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick({$page}, 'new', '{$filter_ans}', '{$filter_acc}', '{$search}')">Newest First</button></li>
+          <li><button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick({$page}, 'old', '{$filter_ans}', '{$filter_acc}', '{$search}')">Oldest First</button></li>
+          <li><button class="btn btn-default btn-block active" style="border-radius: 0;" onclick="dropdownClick({$page}, 'best', '{$filter_ans}', '{$filter_acc}', '{$search}')">Best Rated</button></li>
+          <li><button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick({$page}, 'least', '{$filter_ans}', '{$filter_acc}', '{$search}')">Least Rated</button></li>
+        {elseif $order == 'least'}
+          <li><button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick({$page}, 'new', '{$filter_ans}', '{$filter_acc}', '{$search}')">Newest First</button></li>
+          <li><button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick({$page}, 'old', '{$filter_ans}', '{$filter_acc}', '{$search}')">Oldest First</button></li>
+          <li><button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick({$page}, 'best', '{$filter_ans}', '{$filter_acc}', '{$search}')">Best Rated</button></li>
+          <li><button class="btn btn-default btn-block active" style="border-radius: 0;" onclick="dropdownClick({$page}, 'least', '{$filter_ans}', '{$filter_acc}', '{$search}')">Least Rated</button></li>
         {else}
           <li><button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick({$page}, 'new', '{$filter_ans}', '{$filter_acc}', '{$search}')">Newest First</button></li>
           <li><button class="btn btn-default btn-block active" style="border-radius: 0;" onclick="dropdownClick({$page}, 'old', '{$filter_ans}', '{$filter_acc}', '{$search}')">Oldest First</button></li>
+          <li><button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick({$page}, 'best', '{$filter_ans}', '{$filter_acc}', '{$search}')">Best Rated</button></li>
+          <li><button class="btn btn-default btn-block" style="border-radius: 0;" onclick="dropdownClick({$page}, 'least', '{$filter_ans}', '{$filter_acc}', '{$search}')">Least Rated</button></li>
         {/if}
       </ul>
     </li>
