@@ -85,11 +85,11 @@
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">Log in <b class="caret"></b></a>  
               <div class="dropdown-menu" style="padding: 15px; width:200px">
                 <form class="form" action="{$BASE_URL}actions/users/login.php" method="post">
-                  <input name="login" id="login" type="text" placeholder="Username" size="30" style="margin-bottom: 15px;" class="form-control"> 
-                  <input name="password" id="password" type="password" placeholder="Password" size="30" style="margin-bottom: 15px;" class="form-control"><br>
+                  <input name="login" id="login" type="text" placeholder="Username" size="30" style="margin-bottom: 10px;" class="form-control"> 
+                  <input name="password" id="password" type="password" placeholder="Password" size="30"  class="form-control"><br>
                   <input class="btn btn-primary" style="clear: left; width: 100%; height: 32px; font-size: 13px" type="submit" name="commit" value="Sign In" />
                 </form>
-                <br>
+                <div style="margin-top:15px;" class="divider"></div>
                 <div style="text-align:center">
                   <a href="{$BASE_URL}pages/users/recover_password.php">Recover Password</a>
                 </div>

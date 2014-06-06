@@ -14,8 +14,13 @@
       {if $PERMISSION == 'A' && $USERNAME != $user.username && !$user.banned}
         <button type="button" id="ban-user" class="btn btn-danger btn-lg pull-right"><span class="glyphicon glyphicon-remove"></span> Ban</button>
       {/if}
+      {if $PERMISSION == 'R' && $USERNAME == $user.username && !$user.banned}
+        <a class="btn btn-primary pull-right" href="{$BASE_URL}pages/users/change_password.php?id={$user.id}">Change Password</a>
+      {/if}
       </h1>
+
     </div>
+
 
     <div style="text-align:center">
       <small>Reputation</small>
@@ -71,6 +76,8 @@
         <a class="pull-right" id="edit_biography" href="#">Edit</a>
       {/if}
     </div>
+
+
     <div class="well" style="width:70%; margin-left:auto; margin-right:auto;">
     	{$user.biography}
     </div>

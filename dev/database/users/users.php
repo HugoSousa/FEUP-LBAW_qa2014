@@ -45,6 +45,19 @@
     return $result;
   }
 
+  function getUserInfoById($id){
+    global $conn;
+    $stmt = $conn->prepare("SELECT *
+                            FROM \"User\"
+                            WHERE id = ?");
+
+    $stmt->execute(array($id));
+    
+    $result = $stmt->fetch();
+
+    return $result;
+  }
+
 
   function getTopQuestionsUser($userid){
     global $conn;
@@ -119,6 +132,8 @@
       $query = "UPDATE \"User\" SET \"realName\" = ? WHERE \"username\" = ?";
     else if($field == 'biography')
       $query = "UPDATE \"User\" SET \"biography\" = ? WHERE \"username\" = ?";
+    else if($field == 'password')
+      $query = "UPDATE \"User\" SET \"password\" = ? WHERE \"username\" = ?";
 
 
     $stmt = $conn->prepare($query);
