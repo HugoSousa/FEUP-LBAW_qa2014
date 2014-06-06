@@ -47,3 +47,5 @@
         file_put_contents($BASE_DIR.'log.txt', $date." - ".$e."\r\n", FILE_APPEND | LOCK_EX);
         exit;
     }
+
+?>

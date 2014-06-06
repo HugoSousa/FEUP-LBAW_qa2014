@@ -18,12 +18,10 @@
     //mandar email para o utilizador com uma pagina
     //gerar password aleatoria
     //modificar na BD
-    echo "CORRETO";
 
     $username = $info['username'];
     $new_password = generateRandomString();
 
-    echo "PASS:".$new_password;
     try{
       editUser($username, 'password', hash("sha256", $new_password));
     }catch(PDOException $e){
@@ -37,7 +35,9 @@
 
     ini_set('SMTP', "smtp.fe.up.pt");
     $headers = 'From: qa2014_noreply@fe.up.pt' . "\r\n" . 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-    mail('77hugosousa@gmail.com', 'Q&A2014 - Password Recovery', $message, $headers);
+
+    //cuidado a testar isto para nao enviar mails aleatorios
+    mail($email, 'Q&A2014 - Password Recovery', $message, $headers);
     $_SESSION['success_messages'][] = 'An email has been sent with a new password. Please check it!';
     header("Location: $BASE_URL" . 'pages/questions/list_all.php');
   }

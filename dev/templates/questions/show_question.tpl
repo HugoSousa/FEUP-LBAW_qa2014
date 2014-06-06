@@ -74,7 +74,7 @@
           <!-- TAGS -->
           <span> Tags:</span>
           {foreach $tags as $tag}
-            <span class="label label-default" style="font-size:100%"><a href="#" style="color:white">{$tag.name}</a></span>
+            <span class="label label-default" style="font-size:100%"><a href="{$BASE_URL}/pages/questions/list_by_tag.php?idTag={$tag.idTag}" style="color:white">{$tag.name}</a></span>
           {/foreach}
 
           {if $question.username == $own}

@@ -5,8 +5,8 @@
             <li><p class="navbar-text navbar-right">LBAW 2013/14 </p></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Rules</a></li>  <!-- link para pagina estatica de rules -->
-            <li><a href="#">About</a></li>	<!-- link para pagina estatica de about -->
+            <li><a href="{$BASE_URL}pages/rules.php">Rules</a></li>  <!-- link para pagina estatica de rules -->
+            <li><a href="{$BASE_URL}pages/about.php">About</a></li>	<!-- link para pagina estatica de about -->
           </ul>
             
         </div>
