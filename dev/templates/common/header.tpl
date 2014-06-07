@@ -7,7 +7,7 @@
     <title>Q&A2014</title>
 
     <!-- Bootstrap -->
-    <link href="{$BASE_URL}css/bootstrap.min.css" rel="stylesheet">
+    <link href="{$BASE_URL}css/bootstrap.min.css" rel="stylesheet">    
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -24,21 +24,31 @@
 
   </head>
   <body>
-    <div class="navbar navbar-static-top navbar-inverse">
+    <div class="navbar navbar-static-top navbar-inverse" role="navigation">
 
       <div class="container">
-        <a href="{$BASE_URL}" class="navbar-brand">Q&A2014</a>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="{$BASE_URL}" class="navbar-brand">Q&A2014</a>
+        </div>
+
+        <div class="navbar-collapse collapse" id="navbar-collapse-1">
+
         <form class="navbar-form navbar-right" role="search" action="{$BASE_URL}pages/questions/list_all.php" method="GET">
           <input name="search" type="text" class="form-control" placeholder="Search">
           <button id="search_questions" type="submit" class="btn btn-default form-control">
             <span class="glyphicon glyphicon-search"></span>
           </button>
         </form>
+
           {if $USERNAME}
-
-          <ul class="nav navbar-nav navbar-left">
-            <li > 
-
+          <ul class="nav navbar-nav">
+            <li> 
               <a class="dropdown-toggle" data-toggle="dropdown" href="#"><b>&#9776;</b><span id="notification-counter"class="badge alert-success nav nabar-nav" style="margin-left:10px">{count($notifications)}</span>
                   <button class="btn dropdown-toggle sr-only" type="button" id="dropdownMenu1" data-toggle="dropdown">
                     Dropdown
@@ -65,7 +75,8 @@
                           Your answer was accepted<br>
                           {substr($notification.content, 0, 100)}
                         {/if}
-                      </a></li>
+                      </a>
+                    </li>
                   {/foreach}
                 </ul>
               </a>
@@ -97,6 +108,7 @@
             </li>
             {/if}
           </ul>
+        </div>
 
 
             
