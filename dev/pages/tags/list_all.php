@@ -24,11 +24,11 @@
 		if(isset($_GET['search'])){
 			$search = $_GET['search'];
 			$tags = getTagsBySearch($order, $page, $search);
-			$pages = ceil(intval(getTotalTagsBySearch($search))/30);
+			$pages = ceil(getTotalTagsBySearch($search)/30);
 		}
 		else {
 			$tags = getTags($order, $page);
-			$pages = ceil(intval(getTotalTags())/30);
+			$pages = ceil(getTotalTags()/30);
 		}
 
 		if($_SESSION['permission'] == 'A'){
