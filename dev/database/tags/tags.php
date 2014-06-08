@@ -10,6 +10,7 @@ function getTags($order, $page){
                 FROM \"Tag\" 
                 LEFT JOIN \"TagQuestion\" 
                 ON (\"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\")
+                WHERE \"Tag\".\"isAccepted\" = TRUE
                 GROUP BY \"Tag\".\"name\", \"Tag\".\"idTag\"
                 ORDER BY name
                 LIMIT 30 OFFSET ?";
@@ -19,6 +20,7 @@ function getTags($order, $page){
                 FROM \"Tag\" 
                 LEFT JOIN \"TagQuestion\" 
                 ON (\"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\")
+                WHERE \"Tag\".\"isAccepted\" = TRUE
                 GROUP BY \"Tag\".\"name\", \"Tag\".\"idTag\"
                 ORDER BY total DESC
                 LIMIT 30 OFFSET ?";
@@ -32,7 +34,7 @@ function getTags($order, $page){
  function getTotalTags(){
     global $conn;
 
-    $stmt = $conn->prepare("SELECT * FROM \"Tag\" ");
+    $stmt = $conn->prepare("SELECT * FROM \"Tag\" WHERE \"Tag\".\"isAccepted\" = TRUE ");
 
     $stmt->execute(array());
 
@@ -51,7 +53,7 @@ function getTags($order, $page){
                 FROM \"Tag\" 
                 LEFT JOIN \"TagQuestion\" 
                 ON (\"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\")
-                WHERE \"name\" LIKE ?
+                WHERE \"name\" LIKE ? AND \"Tag\".\"isAccepted\" = TRUE
                 GROUP BY \"Tag\".\"name\", \"Tag\".\"idTag\"
                 ORDER BY name
                 LIMIT 30 OFFSET ?";
@@ -60,7 +62,7 @@ function getTags($order, $page){
                 FROM \"Tag\" 
                 LEFT JOIN \"TagQuestion\" 
                 ON (\"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\")
-                WHERE \"name\" LIKE ?
+                WHERE \"name\" LIKE ? AND \"Tag\".\"isAccepted\" = TRUE
                 GROUP BY \"Tag\".\"name\", \"Tag\".\"idTag\"
                 ORDER BY total
                 LIMIT 30 OFFSET ?";
@@ -82,7 +84,7 @@ function getTags($order, $page){
                 FROM \"Tag\" 
                 LEFT JOIN \"TagQuestion\" 
                 ON (\"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\")
-                WHERE \"name\" LIKE ?
+                WHERE \"name\" LIKE ? AND \"Tag\".\"isAccepted\" = TRUE
                 GROUP BY \"Tag\".\"name\", \"Tag\".\"idTag\"";
 
     $stmt = $conn->prepare($query);
@@ -97,7 +99,7 @@ function getTags($order, $page){
 
     global $conn;
 
-      $query = "SELECT * FROM \"Tag\" WHERE \"name\" LIKE ?";
+      $query = "SELECT * FROM \"Tag\" WHERE \"name\" LIKE ? AND \"Tag\".\"isAccepted\" = TRUE";
 
     $stmt = $conn->prepare($query);
 
