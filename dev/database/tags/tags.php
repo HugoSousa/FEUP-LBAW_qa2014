@@ -38,11 +38,13 @@ function getTags($order, $page){
  function getTotalTags(){
     global $conn;
 
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM \"Tag\" ");
+    $stmt = $conn->prepare("SELECT * FROM \"Tag\" ");
 
     $stmt->execute(array());
 
-    return $stmt->fetch();
+    $count = $stmt->rowCount();
+
+    return $count;
   }
 
   function getTagsBySearch($order, $page, $search){
@@ -101,11 +103,15 @@ function getTags($order, $page){
 
     global $conn;
 
-      $query = "SELECT COUNT(*) FROM \"Tag\" WHERE \"name\" LIKE ?";
+      $query = "SELECT * FROM \"Tag\" WHERE \"name\" LIKE ?";
 
     $stmt = $conn->prepare($query);
 
     $stmt->execute(array('%'.$search.'%'));
+
+    $count = $stmt->rowCount();
+
+    return $count;
   }
 
   function getNotAcceptedTags(){
