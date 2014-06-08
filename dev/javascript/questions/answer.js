@@ -16,6 +16,9 @@ $(function() {
           dataType: "json",
           success: function(response) 
           {
+            var converter = Markdown.getSanitizingConverter();
+            var htmlText = converter.makeHtml(response["text"]);
+            console.log(htmlText);
             $('#AllAnswers').append(
             '<div class="container" style="width:70%; margin-left:auto; margin-right:auto">'+
             '<div class="row">'+
@@ -25,7 +28,7 @@ $(function() {
             '<br><br>'+
             '</div>'+
             '<div class="well well-lg col-md-8">'+
-            response["text"]+
+            htmlText+
             '<br><br><br>'+
             '<span> Answered by <a href="../../pages/users/user.php?username='+response["username"]+'">'+response["username"]+'</a> Now</span>'+
             '<button type="button" class="btn btn-danger pull-right">Delete</button>'+
