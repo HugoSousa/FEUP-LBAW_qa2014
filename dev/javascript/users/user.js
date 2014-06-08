@@ -5,13 +5,9 @@ $(document).ready(function() {
 	var lastBiography;
 
   $(document).on('click', 'a.edit', function(event){
-  	console.log('Cliquei num a.edit');
 
   	var actualContent = $(event.target).prev().text();
   	var parentId = $(event.target).parent().attr('id');
-  	console.log(parentId);
-
-  	//console.log(actualContent);
 
   	if(parentId == 'realname')
   		lastRealName = actualContent;
@@ -30,9 +26,6 @@ $(document).ready(function() {
 
   		var parentId = $(event.target).parent().attr('id');
 
-  		console.log("Cliquei no cancel");
-  		console.log(parentId);
-
   		if(parentId == 'realname')
   			$(event.target).parent().replaceWith("<div class='col-md-8' id='realname'><span>"+lastRealName+"</span><a class='pull-right edit' href='javascript:undefined'>Edit</a>");
   		else if(parentId == 'location')
@@ -45,12 +38,6 @@ $(document).ready(function() {
   		var field = parentId;
   		var actualContent = $(event.target).siblings('div').children('input').val();
   		var username = $("#username").text();
-
-
-  		console.log(username);
-  		console.log("Cliquei no Ok");
-  		console.log(field);
-  		console.log(actualContent);
   		
   		$.ajax({
 		  type: "GET",
@@ -75,8 +62,6 @@ $(document).ready(function() {
 	$(document).on('click', '#edit_biography', function(event){
 
 		lastBiography = $(this).parent().siblings('div.well').text().trim();
-
-		console.log(lastBiography);
 
 		$(this).parent().siblings('div.well').replaceWith("<div class='container' style='width:70%; margin-left:auto; margin-right:auto;'><textarea class='form-control' rows='5' style='margin-bottom:5px'>"+lastBiography+"</textarea><button type='button' class='btn btn-default btn-sm pull-right edit_biography' style='margin-left:5px'>Cancel</button><button type='button' class='btn btn-info btn-sm pull-right edit_biography' >Ok</button></div><br>");
 
@@ -109,18 +94,21 @@ $(document).ready(function() {
 
   $(document).on('click', '#ban-user', function(event){
 
-    console.log("Click ban");
     var username = $("#username").text();
-    console.log(username);
-    
     $.ajax({
       type: "POST",
       dataType: "json",
       url: "../../api/users/user_ban.php",
       data: { username: username },
       success: function(data){
-        //alert(data);
-        console.log(data);
+        $('body').scrollTop(0);
+
+        $('.page-header').prepend(
+                '<div class="alert alert-warning alert-dismissable">'+
+                    '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
+                    '<strong>Warning!</strong> '+ "User succesfully banned." +
+                '</div>'
+              );
       }
     });
     

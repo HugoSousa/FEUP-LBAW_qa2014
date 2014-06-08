@@ -29,12 +29,12 @@ function suggestTag(name, description){
 		        $("#tag-name").val('');
 		        $("#tag-description").val('');
 			}else{
+				$('body').scrollTop(0);
 				showWarning(data['error']);
 
 			}
 		},
 		error: function(xhr, textStatus, errorThrown) {
-			console.log(xhr.responseText);
 		}
 	});	
 }

@@ -5,17 +5,21 @@
     include_once('../../database/notifications/notifications.php');
 
     $id = $_POST['id'];
+    if(!isset($id))
+        $return = array("error" => "Missing parameters.");
+    else{
 
-    global $conn;
+        global $conn;
 
-    try{
+        try{
 
-    	seeNotification($id);
+        	seeNotification($id);
 
-        $return = array("ok");
-    }
-    catch(PDOException $e){
-        $return = array("error" => "Failed to update notification.");
+            $return = array("ok");
+        }
+        catch(PDOException $e){
+            $return = array("error" => "Failed to update notification.");
+        }
     }
 
     echo json_encode($return);

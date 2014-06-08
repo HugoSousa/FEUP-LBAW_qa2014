@@ -13,19 +13,31 @@ $(document).ready(function() {
 				data: $.param({'id': contentID}),
 				dataType : 'json',
 				success: function(data, textStatus, xhr) {	
-					console.log("data:" + data);
 
 					if(data == 'ok'){
-						console.log("retornar true");
 
 						window.location = "../../pages/flags/list_all.php";
 					}
 					else{
-						alert(JSON.stringify(data));
+						$('body').scrollTop(0);
+
+						$('.page-header').prepend(
+		                '<div class="alert alert-warning alert-dismissable">'+
+		                    '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
+		                    '<strong>Warning!</strong> '+ data['error'] +
+		                '</div>'
+		            	);
 					}
 				},
 				error: function(xhr, textStatus, errorThrown) {
-					console.log(xhr.responseText);
+					$('body').scrollTop(0);
+
+					$('.page-header').prepend(
+	                '<div class="alert alert-warning alert-dismissable">'+
+	                    '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
+	                    '<strong>Warning!</strong> '+ "Error solving flag." +
+	                '</div>'
+	            	);
 				}
 			});	
 

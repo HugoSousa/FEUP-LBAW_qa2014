@@ -8,10 +8,7 @@ $( document ).ready(function() {
 		var r = confirm("Are you sure?");
 		if (r==true)
 		{
-
-
 			var contentID = $(this).attr('id');
-			console.log(contentID);
 
 			target = $(e.target);
 
@@ -29,16 +26,11 @@ function deleteContent(contentID){
 		data: $.param({'id': contentID}),
 		dataType : 'json',
 		success: function(data, textStatus, xhr) {	
-			console.log("data:" + data);
 
 			if(data == 'ok'){
-				//console.log("retornar true");
-
 				updateHtml();
 			}
 			else{
-				//alert(JSON.stringify(data));
-
 				$('.page-header').prepend(
 		            '<div class="alert alert-warning alert-dismissable">'+
 		                '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
@@ -48,7 +40,14 @@ function deleteContent(contentID){
 			}
 		},
 		error: function(xhr, textStatus, errorThrown) {
-			console.log(xhr.responseText);
+			$('body').scrollTop(0);
+
+				$('.page-header').prepend(
+                '<div class="alert alert-warning alert-dismissable">'+
+                    '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
+                    '<strong>Warning!</strong> '+ "Error deleting content." +
+                '</div>'
+            	);
 		}
 	});	
 
@@ -56,21 +55,15 @@ function deleteContent(contentID){
 
 function updateHtml(){
 	if(target.is('a')){
-		console.log("apagar comentário");
-
 		target.parent().remove();
 	}
 	else if(target.is('button')){
 
 		if(target.closest('div.container').hasClass("question")){
-			//console.log("apagar questão");
-
 			window.location = "../..";
 
 		}
 		else{
-			console.log("apagar resposta");
-
 			$('body').scrollTop(0);
 
 			$('.page-header').prepend(

@@ -60,7 +60,6 @@ $(function() {
             );
           },
           error: function(xhr, textStatus, errorThrown){
-            console.log(xhr.responseText);
 
             $('#AllAnswers').append(
                 '<div class="alert alert-warning alert-dismissable">'+

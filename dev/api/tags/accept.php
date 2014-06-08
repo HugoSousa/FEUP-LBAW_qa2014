@@ -6,15 +6,20 @@
 
 	$id = $_POST['id'];
 
-	try{
-        acceptTag($id);
-        $return = array("ok");        
-    }
-    catch(PDOException $e){
-      
-        $return = array("error" => "Unexpected error updating tag in database.");  
-        
-        
+    if(!isset($id))
+        $return = array("error" => "Missing parameters.");
+    else{
+
+    	try{
+            acceptTag($id);
+            $return = array("ok");        
+        }
+        catch(PDOException $e){
+          
+            $return = array("error" => "Unexpected error updating tag in database.");  
+            
+            
+        }
     }
 
     echo json_encode($return);

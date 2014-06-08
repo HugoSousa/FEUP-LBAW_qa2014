@@ -8,21 +8,26 @@
 	$questionID = $_GET['questionID'];
 	$text = $_GET['text'];
 	$type = $_GET['type'];
-	$userID = $_SESSION['userid']; //FIX ME
-	$username = $_SESSION['username']; //FIX ME
+	$userID = $_SESSION['userid']; 
+	$username = $_SESSION['username'];
 
-	$contentID = insertContent($text, $userID, COMMENT);
+	if(!isset($answerID) || !isset($questionID) || !isset($text) || !isset($type) || !isset($userID) || !isset($username))
+        $return = array("error" => "Missing parameters.");
+    else{
 
-	$contentID = $contentID[0]['id'];
+		$contentID = insertContent($text, $userID, COMMENT);
 
-	if($type == 'Answer'){
-		insertCommentAnswer($contentID, $answerID);
+		$contentID = $contentID[0]['id'];
 
-	}else if($type == 'Question'){
-		insertCommentQuestion($contentID, $questionID);
+		if($type == 'Answer'){
+			insertCommentAnswer($contentID, $answerID);
+
+		}else if($type == 'Question'){
+			insertCommentQuestion($contentID, $questionID);
+		}
+
+		$res = array('text' => $text , 'username' => $username , 'answerID' => $answerID, 'questionID' => $questionID);
 	}
-
-	$res = array('text' => $text , 'username' => $username , 'answerID' => $answerID, 'questionID' => $questionID);
 
 	echo json_encode($res);
 

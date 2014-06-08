@@ -11,5 +11,5 @@ function dropdownClick(page, order, search){
 }
 
 jQuery(function ($) {
-        $("a").tooltip();
-    });
+    $("a").tooltip();
+});

@@ -10,6 +10,7 @@
     <script type="text/javascript" src="{$BASE_URL}javascript/questions/delete.js"></script>
     <script type="text/javascript" src="{$BASE_URL}javascript/questions/flag.js"></script>
     <script type="text/javascript" src="{$BASE_URL}javascript/questions/accept_answer.js"></script>
+    <script type="text/javascript" src="{$BASE_URL}javascript/questions/edit_comment.js"></script>
 
     {literal}
     <style>
@@ -112,12 +113,30 @@
 
     <div id="QuestionDiv{$question.idQuestion}">
     {foreach $questionComments as $comment}
-      <div class="well well-sm" style="margin-bottom:2px; margin-left:25%; margin-right:32.5%; text-align:justify; word-wrap: break-word;">
-        {$comment.contentText}
+      <div class="well well-lg" style="margin-bottom:2px; margin-left:25%; margin-right:32.5%; text-align:justify; word-wrap: break-word;">
+        <span>{$comment.contentText}</span><br>
 
         {if $own == $comment.username}
           <a class="close pull-right delete" id="{$comment.idComment}" style="color:red">&times;</a>
-          <a class="pull-right" href="#">edit&nbsp;</a>
+          <a class="pull-right edit-comment" href="#editComment{$comment.idComment}" data-toggle="modal">edit&nbsp;</a>
+
+          <div class="modal fade" id="editComment{$comment.idComment}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Edit Comment</h4>
+                  </div>
+                  <div class="modal-body">
+                    <textarea id="textarea-{$comment.idComment}"class="form-control" rows="3" style="resize:none"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" value="{$comment.idComment}"  class="btn btn-primary edit">Ok</button>
+                  </div>
+                </div>
+              </div>
+            </div> 
         {elseif isset($own)}
             <a class="pull-right flag-comment" href="#flagComment{$comment.idComment}" style="color:red; opacity:0.5" data-toggle="modal"><span class="glyphicon glyphicon-flag"></span></a>
 
@@ -141,9 +160,9 @@
 
         {/if}
 
-        <span class="pull-right">
-          <a href="{$BASE_URL}pages/users/show_user.php?username={$comment.username}">{$comment.username}</a> <small> at {$comment.contentDate|date_format:"M d 'Y"}, {$comment.contentDate|date_format:"H:i"}&nbsp;&nbsp;&nbsp;</small>
-        </span>
+          <span class="pull-right">
+            <a href="{$BASE_URL}pages/users/show_user.php?username={$comment.username}">{$comment.username}</a> <small> at {$comment.contentDate|date_format:"M d 'Y"}, {$comment.contentDate|date_format:"H:i"}&nbsp;&nbsp;&nbsp;</small>
+          </span>
       </div>
     {/foreach}
   </div>
@@ -235,7 +254,11 @@
         </div>
         <div class="well well-lg col-md-8" style="word-wrap: break-word;">
 
-          {$answer.contentText}
+          <script type="text/javascript">
+            var converter = Markdown.getSanitizingConverter();
+            var htmlText = converter.makeHtml("{$answer.contentText}");
+            document.write(htmlText);
+          </script>
 
           <br><br><br>
           <span> Answered by <a href="{$BASE_URL}pages/users/show_user.php?username={$answer.username}">{$answer.username}</a> at {$answer.contentDate|date_format:"M d 'Y"}, {$answer.contentDate|date_format:"H:i"} </span>
@@ -275,11 +298,29 @@
     <div id="CommentDiv{$answer.idAnswer}">
       {foreach $answer.comments as $comment}
 
-        <div class="well well-sm" style="margin-bottom:2px; margin-left:25%; margin-right:32.5%; text-align:justif; word-wrap: break-word;">
-          {$comment.text}
+        <div class="well well-lg" style="margin-bottom:2px; margin-left:25%; margin-right:32.5%; text-align:justif; word-wrap: break-word;">
+          <span>{$comment.text}</span><br>
           {if $own == $comment.user}
             <a class="close pull-right delete" id="{$comment.idComment}" style="color:red">&times;</a>
-            <a class="pull-right" href="#">edit&nbsp;</a>
+            <a class="pull-right edit-comment" href="#editComment{$comment.idComment}" data-toggle="modal">edit&nbsp;</a>
+
+            <div class="modal fade" id="editComment{$comment.idComment}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Edit Comment</h4>
+                  </div>
+                  <div class="modal-body">
+                    <textarea id="textarea-{$comment.idComment}"class="form-control" rows="3" style="resize:none"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" value="{$comment.idComment}"  class="btn btn-primary edit">Ok</button>
+                  </div>
+                </div>
+              </div>
+            </div> 
           {elseif isset($own)}
             <a class="pull-right flag-comment" href="#flagComment{$comment.idComment}" style="color:red; opacity:0.5" data-toggle="modal"><span class="glyphicon glyphicon-flag"></span></a>
 

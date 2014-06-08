@@ -18,6 +18,25 @@
 			$reports = getReports($id, $page);
 		    $totalReports = getTotalReports($id);
 		    $pages = ceil(floatval($totalReports['total']/10));
+
+
+			if($content['type'] == 'answer'){
+				$question = getQuestionOfAnswer($content['id']);
+				$content['link'] = $question['idQuestion'];
+			}
+
+			else if($content['type'] == 'comment'){
+				$question = getQuestionOfCommentQuestion($content['id']);
+				if(empty($question['idQuestion'])){
+					$question = getQuestionOfCommentAnswer($content['id']);
+				}
+				$content['link'] = $question['idQuestion'];
+			}
+
+			else if($content['type'] == 'question'){
+				$content['link'] = $content['id'];
+			}
+
 		}catch(PDOException $e){
 			$smarty->display("common/error.tpl");
 			$date = date("r");

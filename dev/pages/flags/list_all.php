@@ -49,10 +49,9 @@
 				}
 
 				else if($flags[$i]['type'] == 'QUESTION'){
-					$flags[$i]['link'] = $question['idContent'];
+					$flags[$i]['link'] = $flags[$i]['idContent'];
 				}
 			}
-
 
 		    $totalFlags = getTotalFlags();
 		    $pages = ceil(floatval($totalFlags['total']/30));

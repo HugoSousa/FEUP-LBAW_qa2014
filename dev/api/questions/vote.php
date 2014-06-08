@@ -11,33 +11,37 @@
     $type = $_POST['type'];
     $update = $_POST['update'];
 
+    if(!isset($id) || !isset($user) || !isset($isup) || !isset($type) || !isset($update))
+        $return = array("error" => "Missing parameters.");
+    else{
 
-    try{
-        if($type == 'answer'){
+        try{
+            if($type == 'answer'){
 
-            if($update == 'false'){
-                insertVoteAnswer($user, $id, $isup);
-            }   
+                if($update == 'false'){
+                    insertVoteAnswer($user, $id, $isup);
+                }   
 
-            else{
-                updateVoteAnswer($isup, $user, $id);
+                else{
+                    updateVoteAnswer($isup, $user, $id);
+                }
             }
-        }
-        else if($type == 'question'){
+            else if($type == 'question'){
 
-            if($update == 'false'){
-                insertVoteQuestion($user, $id, $isup);
-            }   
+                if($update == 'false'){
+                    insertVoteQuestion($user, $id, $isup);
+                }   
 
-            else{
-                updateVoteQuestion($isup, $user, $id);
+                else{
+                    updateVoteQuestion($isup, $user, $id);
+                }
             }
-        }
 
-        $return = array("ok");
-    }
-    catch(PDOException $e){
-        $return = array("error" => "Failed to insert the vote.");
+            $return = array("ok");
+        }
+        catch(PDOException $e){
+            $return = array("error" => "Failed to insert the vote.");
+        }
     }
 
     echo json_encode($return);

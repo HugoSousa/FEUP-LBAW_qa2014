@@ -28,6 +28,8 @@ function acceptTag(tagID){
 				clicked.siblings('.hidden').filter(":first").removeClass("hidden");
 				clicked.remove();
 			}else{
+				$('body').scrollTop(0);
+
 				$('#page-header').prepend(
 		            '<div class="alert alert-warning alert-dismissable">'+
 		                '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
@@ -38,14 +40,19 @@ function acceptTag(tagID){
 			}
 		},
 		error: function(xhr, textStatus, errorThrown) {
-			console.log(xhr.responseText);
+			$('body').scrollTop(0);
+
+				$('.page-header').prepend(
+                '<div class="alert alert-warning alert-dismissable">'+
+                    '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
+                    '<strong>Warning!</strong> '+ "Error accepting tag." +
+                '</div>'
+            	);
 		}
 	});	
 }
 
 function rejectTag(tagID){
-	console.log("AQUI");
-
 	$.ajax({
 		url: '../../api/tags/reject.php',
 		type: 'POST',
@@ -56,6 +63,8 @@ function rejectTag(tagID){
 				clicked.siblings('.hidden').filter(":first").removeClass("hidden");
 				clicked.remove();
 			}else{
+				$('body').scrollTop(0);
+
 				$('#page-header').prepend(
 		            '<div class="alert alert-warning alert-dismissable">'+
 		                '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
@@ -65,7 +74,12 @@ function rejectTag(tagID){
 			}
 		},
 		error: function(xhr, textStatus, errorThrown) {
-			console.log(xhr.responseText);
+			$('.page-header').prepend(
+                '<div class="alert alert-warning alert-dismissable">'+
+                    '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
+                    '<strong>Warning!</strong> '+ "Error rejecting tag." +
+                '</div>'
+            	);
 		}
 	});	
 }

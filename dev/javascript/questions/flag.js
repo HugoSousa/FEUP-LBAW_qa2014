@@ -5,11 +5,6 @@ $( document ).ready(function() {
 		var userID = $('#userID').text();
 		var reason = $(this).parent().parent().find(".modal-body > textarea").val();
 
-		console.log("CLICK");
-		console.log(contentID);
-		console.log(userID);
-		console.log(reason);
-
 		insertFlag(contentID, userID, reason);
 
 		$(this).parent().parent().find(".modal-body > textarea").val('');
@@ -40,7 +35,6 @@ function insertFlag(contentID, userID, reason){
                 );
 			}
 			else{
-				alert(JSON.stringify(data));
 
 				$('body').scrollTop(0);
 
@@ -49,12 +43,19 @@ function insertFlag(contentID, userID, reason){
                     '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
                     '<strong>Warning!</strong> '+ data['error'] +
                 '</div>'
-            );
+            	);
 			}
 				
 		},
 		error: function(xhr, textStatus, errorThrown) {
-			console.log(xhr.responseText);
+			$('body').scrollTop(0);
+
+				$('.page-header').prepend(
+                '<div class="alert alert-warning alert-dismissable">'+
+                    '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
+                    '<strong>Warning!</strong> There was an error submiting your flag.' +
+                '</div>'
+                );
 		}
 	});
 }

@@ -5,8 +5,6 @@
 
 		editQuestionTitle($id, $title);
 
-		//edittQuestionTags($id, $tags);
-
   }
 
 	function editQuestionBody($id, $body){
@@ -27,17 +25,16 @@
 	    $stmt->execute(array($title, $id));
   }
 
-  	function edittQuestionTags($id, $tags){
-	    /*global $conn;
+	function editAnswer($id, $body){
+	    global $conn;
 
 	    $query = "UPDATE \"Content\" SET \"contentText\" = ? WHERE \"id\" = ?";
 
 	    $stmt = $conn->prepare($query);
-	    $stmt->execute(array($body, $id));*/
+	    $stmt->execute(array($body, $id));
   }
 
-
-	function editAnswer($id, $body){
+  function editComment($id, $body){
 	    global $conn;
 
 	    $query = "UPDATE \"Content\" SET \"contentText\" = ? WHERE \"id\" = ?";

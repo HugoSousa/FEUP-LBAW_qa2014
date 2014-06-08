@@ -7,7 +7,7 @@
 <div class="page-header" style="width:70%; margin-left:auto; margin-right:auto">
 	
 	<span><small>{$content.type}</small></span>
-    <h2 style="margin-top:0" class="idContent" id="{$content.id}"><a href="#">{substr({$content.contentText},0, 140)}</a> 
+    <h2 style="margin-top:0" class="idContent" id="{$content.id}"><a href="{$BASE_URL}pages/questions/show_question.php?id={$content.link}">{substr({$content.contentText},0, 140)}</a> 
     <br><br>
 </div>
 

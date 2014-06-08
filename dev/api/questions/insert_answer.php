@@ -8,17 +8,21 @@
 	$userID = $_SESSION['userid']; //FIX ME
 	$username = $_SESSION['username']; //FIX ME
 
-	$text = str_replace(array("\r\n\r\n", "\n\n"), '<br>', $text, $i);
+	if(!isset($questionID) || !isset($text) || !isset($userID) || !isset($username))
+        $return = array("error" => "Missing parameters.");
+    else{
 
-	$contentID = insertContent($text, $userID, ANSWER);
+		$text = str_replace(array("\r\n\r\n", "\n\n"), '<br>', $text, $i);
 
-	$contentID = $contentID[0]['id'];
+		$contentID = insertContent($text, $userID, ANSWER);
+
+		$contentID = $contentID[0]['id'];
 
 
-	insertAnswer($contentID, $questionID );
+		insertAnswer($contentID, $questionID );
 
-	$res = array('text' => $text , 'username' => $username , 'answerID' => $contentID);
-
+		$res = array('text' => $text , 'username' => $username , 'answerID' => $contentID);
+	}
 
 	echo json_encode($res);
 

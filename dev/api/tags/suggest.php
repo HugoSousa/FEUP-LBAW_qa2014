@@ -7,15 +7,17 @@
 	$name = $_POST['name'];
     $description = $_POST['description'];
 
-	try{
-        suggestTag($name, $description);
-        $return = array("ok");        
-    }
-    catch(PDOException $e){
-      
-        $return = array("error" => "Unexpected error suggesting tag in database.");  
-        
-        
+    if(!isset($name) || !isset($description))
+        $return = array("error" => "Missing parameters.");
+    else{
+
+    	try{
+            suggestTag($name, $description);
+            $return = array("ok");        
+        }
+        catch(PDOException $e){
+            $return = array("error" => "Unexpected error suggesting tag in database.");  
+        }
     }
 
     echo json_encode($return);

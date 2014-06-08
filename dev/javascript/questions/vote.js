@@ -1,7 +1,6 @@
 $( document ).ready(function() {
 
 	$(document).on('click', 'button.answerVote, button.questionVote', function(){
-		console.log("click");
 
 		var clicked = $(this);
 		var userID = $('#userID').text();
@@ -16,7 +15,6 @@ $( document ).ready(function() {
 			isUp = false;
 
 		if($(this).siblings('button').hasClass('btn-warning')){
-			console.log("fazer update ao vote");
 			updateVoteCall(answerID, userID, type, isUp, clicked);
 			return;
 		}
@@ -71,11 +69,26 @@ function removeVoteCall(contentID, userID, type, isup, clicked){
 				else
 					clicked.siblings('span').text(actualVotes+1);
 			}
-			else
-				alert(JSON.stringify(data));
+			else{
+				$('body').scrollTop(0);
+
+				$('.page-header').prepend(
+                '<div class="alert alert-warning alert-dismissable">'+
+                    '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
+                    '<strong>Warning!</strong> '+ data['error'] +
+                '</div>'
+            	);
+			}
 		},
 		error: function(xhr, textStatus, errorThrown) {
-			console.log(textStatus.reponseText);
+			$('body').scrollTop(0);
+
+				$('.page-header').prepend(
+                '<div class="alert alert-warning alert-dismissable">'+
+                    '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
+                    '<strong>Warning!</strong> '+ "Error removing vote." +
+                '</div>'
+            	);
 		
 		}
 	});
@@ -83,7 +96,6 @@ function removeVoteCall(contentID, userID, type, isup, clicked){
 
 function insertVoteCall(contentID, userID, type, isup, clicked){
 
-	console.log("a");
 	$.ajax({
 		url: '../../api/questions/vote.php',
 		type: 'POST',
@@ -123,11 +135,28 @@ function insertVoteCall(contentID, userID, type, isup, clicked){
 				else
 					clicked.siblings('span').text(actualVotes-1);
 			}
-			else
-				alert(JSON.stringify(data));
+			else{
+
+				$('body').scrollTop(0);
+
+				$('.page-header').prepend(
+                '<div class="alert alert-warning alert-dismissable">'+
+                    '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
+                    '<strong>Warning!</strong> '+ data['error'] +
+                '</div>'
+            	);
+			}
+				
 		},
 		error: function(xhr, textStatus, errorThrown) {
-			console.log(xhr.responseText);
+			$('body').scrollTop(0);
+
+				$('.page-header').prepend(
+                '<div class="alert alert-warning alert-dismissable">'+
+                    '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
+                    '<strong>Warning!</strong> '+ "Error inserting vote." +
+                '</div>'
+            	);
 		}
 	});
 }
@@ -184,11 +213,26 @@ function updateVoteCall(contentID, userID, type, isup, clicked){
 				else
 					clicked.siblings('span').text(actualVotes-2);
 			}
-			else
-				alert(JSON.stringify(data));
+			else{
+				$('body').scrollTop(0);
+
+				$('.page-header').prepend(
+                '<div class="alert alert-warning alert-dismissable">'+
+                    '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
+                    '<strong>Warning!</strong> '+ data['error'] +
+                '</div>'
+            	);
+			}
 		},
 		error: function(xhr, textStatus, errorThrown) {
-			console.log(textStatus.reponseText);
+			$('body').scrollTop(0);
+
+				$('.page-header').prepend(
+                '<div class="alert alert-warning alert-dismissable">'+
+                    '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
+                    '<strong>Warning!</strong> '+ "Error updating vote." +
+                '</div>'
+            	);
 		
 		}
 	});	

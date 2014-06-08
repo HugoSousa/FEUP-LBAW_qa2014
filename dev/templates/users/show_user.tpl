@@ -48,7 +48,7 @@
       <div class="col-md-8" id="location">
         <span>{if empty($user.location)}---------------{else}{$user.location}{/if}</span>
         {if $own == $user.username}
-        <a class="pull-right edit" href="#" >Edit</a>
+        <a class="pull-right edit" href="javascript:undefined" >Edit</a>
         {/if}
       </div>
     </div>    

@@ -17,15 +17,9 @@ $(document).ready(function() {
 				data: $.param({'id': click.attr('id')}),
 				dataType : 'json',
 				success: function(data, textStatus, xhr) {	
-					console.log("data:" + data);
-
 					if(data == 'ok'){
-						//console.log("retornar true");
-
-						console.log('update da notificação');
 					}
 					else{
-						//alert(JSON.stringify(data));
 
 						$('.page-header').prepend(
 				            '<div class="alert alert-warning alert-dismissable">'+
@@ -36,7 +30,14 @@ $(document).ready(function() {
 					}
 				},
 				error: function(xhr, textStatus, errorThrown) {
-					console.log(xhr.responseText);
+					$('body').scrollTop(0);
+
+					$('.page-header').prepend(
+	                '<div class="alert alert-warning alert-dismissable">'+
+	                    '<span class="close" data-dismiss="alert" aria-hidden="true">&times;</span>'+
+	                    '<strong>Warning!</strong> '+ "Error loading notification." +
+	                '</div>'
+	            	);
 				}
 			});	
 	});

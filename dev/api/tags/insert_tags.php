@@ -3,13 +3,17 @@
 	include_once($BASE_DIR .'database/content.php');
 	include_once($BASE_DIR .'database/tags/tags.php');
 
-	$nmae = $_POST['name'];
+	$name = $_POST['name'];
 	$description = $_POST['description'];
 
-	insertTag($name, $description);
+	if(!isset($name) || !isset($description))
+        $return = array("error" => "Missing parameters.");
+    else{
 
-	$res = array('name' => $name , 'description' => $description);
+		insertTag($name, $description);
 
+		$res = array('name' => $name , 'description' => $description);
+	}
 
 	echo json_encode($res);
 

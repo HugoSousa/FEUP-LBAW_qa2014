@@ -3,10 +3,10 @@
   include_once($BASE_DIR .'database/users/users.php');
   include_once($BASE_DIR .'pages/notifications.php');
 
-  $username = $_GET['username'];
+  $user_name = $_GET['username'];
 
   try{
-    $user = getUserInfoByUsername($username);
+    $user = getUserInfoByUsername($user_name);
     $topQuestions = getTopQuestionsUser($user['id']);
     $topAnswers = getTopAnswersUser($user['id']);
   }catch(PDOException $e){

@@ -39,7 +39,7 @@
               <th style="width:10%"></th>
             </tr>
           </thead>
-          {for $index = 0 to $notAcceptedTags|@count}
+          {for $index = 0 to $notAcceptedTags|@count-1}
               {if $index < 10}
                 <tr>
               {else}

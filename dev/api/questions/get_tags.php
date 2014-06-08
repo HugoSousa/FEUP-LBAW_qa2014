@@ -6,14 +6,17 @@
 
 
     $value = $_POST['value'];
+    if(!isset($value))
+        $return = array("error" => "Missing parameters.");
+    else{
+        try{
+            $tags = getTagsOnlyBySearch($value);
 
-    try{
-        $tags = getTagsOnlyBySearch($value);
-
-        $return = $tags;
-    }
-    catch(PDOException $e){
-        $return = array("error" => "Failed to insert the vote.");
+            $return = $tags;
+        }
+        catch(PDOException $e){
+            $return = array("error" => "Failed to insert the vote.");
+        }
     }
 
     echo json_encode($return);

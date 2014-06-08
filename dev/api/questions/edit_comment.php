@@ -2,22 +2,23 @@
     header('Content-type: application/json');
 
     include_once('../../config/init.php');
-    include_once('../../database/questions/delete.php');
+    include_once('../../database/questions/edit_content.php');
 
     $id = $_POST['id'];
-    if(!isset($id))
+    $text = $_POST['text'];
+    if(!isset($id) || !isset($text))
         $return = array("error" => "Missing parameters.");
     else{
         global $conn;
 
         try{
 
-        	deleteContent($id);
+        	editComment($id, $text);
 
             $return = array("ok");
         }
         catch(PDOException $e){
-            $return = array("error" => "Failed to delete the content.");
+            $return = array("error" => "Failed to edit content.");
         }
     }
 
