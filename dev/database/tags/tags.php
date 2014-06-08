@@ -6,28 +6,22 @@ function getTags($order, $page){
     $offset = ($page-1) * 30;
 
     if($order == 'name')
-      $query = "SELECT COUNT(*) AS total, \"TagQuestion\".\"idTag\",
-              (
-                SELECT \"name\" 
-                FROM \"Tag\"
-                WHERE \"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\"
-              ) AS name
-              FROM \"TagQuestion\"
-              GROUP BY \"idTag\"
-              ORDER BY name
-              LIMIT 30 OFFSET ?";
+      $query = "SELECT COUNT(\"TagQuestion\".\"idTag\") AS total , \"Tag\".\"name\", \"Tag\".\"idTag\", \"Tag\".\"description\"
+                FROM \"Tag\" 
+                LEFT JOIN \"TagQuestion\" 
+                ON (\"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\")
+                GROUP BY \"Tag\".\"name\", \"Tag\".\"idTag\"
+                ORDER BY name
+                LIMIT 30 OFFSET ?";
 
    else if($order == 'number_tags')
-       $query = "SELECT COUNT(*) AS total, \"TagQuestion\".\"idTag\",
-              (
-                SELECT \"name\" 
-                FROM \"Tag\"
-                WHERE \"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\"
-              ) AS name
-              FROM \"TagQuestion\"
-              GROUP BY \"idTag\"
-              ORDER BY total DESC
-              LIMIT 30 OFFSET ?";
+       $query = "SELECT COUNT(\"TagQuestion\".\"idTag\") AS total , \"Tag\".\"name\", \"Tag\".\"idTag\", \"Tag\".\"description\"
+                FROM \"Tag\" 
+                LEFT JOIN \"TagQuestion\" 
+                ON (\"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\")
+                GROUP BY \"Tag\".\"name\", \"Tag\".\"idTag\"
+                ORDER BY total DESC
+                LIMIT 30 OFFSET ?";
      $stmt = $conn->prepare($query);
 
     $stmt->execute(array($offset));
@@ -53,21 +47,21 @@ function getTags($order, $page){
     $offset = ($page-1) * 30;
 
    if($order == 'name')
-      $query = "SELECT COUNT(\"TagQuestion\".\"idQuestion\") AS total,
-                \"Tag\".\"idTag\", name 
-                FROM \"Tag\", \"TagQuestion\" 
+      $query = "SELECT COUNT(\"TagQuestion\".\"idTag\") AS total , \"Tag\".\"name\", \"Tag\".\"idTag\", \"Tag\".\"description\"
+                FROM \"Tag\" 
+                LEFT JOIN \"TagQuestion\" 
+                ON (\"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\")
                 WHERE \"name\" LIKE ?
-                AND \"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\"
-                GROUP BY \"Tag\".\"idTag\"
+                GROUP BY \"Tag\".\"name\", \"Tag\".\"idTag\"
                 ORDER BY name
                 LIMIT 30 OFFSET ?";
    else if($order == 'number_tags')
-      $query =  "SELECT COUNT(\"TagQuestion\".\"idQuestion\") AS total,
-                \"Tag\".\"idTag\", name 
-                FROM \"Tag\", \"TagQuestion\" 
+      $query =  "SELECT COUNT(\"TagQuestion\".\"idTag\") AS total , \"Tag\".\"name\", \"Tag\".\"idTag\", \"Tag\".\"description\"
+                FROM \"Tag\" 
+                LEFT JOIN \"TagQuestion\" 
+                ON (\"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\")
                 WHERE \"name\" LIKE ?
-                AND \"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\"
-                GROUP BY \"Tag\".\"idTag\"
+                GROUP BY \"Tag\".\"name\", \"Tag\".\"idTag\"
                 ORDER BY total
                 LIMIT 30 OFFSET ?";
 
@@ -84,12 +78,12 @@ function getTags($order, $page){
 
     $offset = ($page-1) * 30;
 
-    $query = "SELECT COUNT(\"TagQuestion\".\"idQuestion\") AS total,
-              \"Tag\".\"idTag\", name 
-              FROM \"Tag\", \"TagQuestion\" 
-              WHERE \"name\" LIKE ?
-              AND \"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\"
-              GROUP BY \"Tag\".\"idTag\"";
+    $query = "SELECT COUNT(\"TagQuestion\".\"idTag\") AS total , \"Tag\".\"name\", \"Tag\".\"idTag\", \"Tag\".\"description\"
+                FROM \"Tag\" 
+                LEFT JOIN \"TagQuestion\" 
+                ON (\"Tag\".\"idTag\" = \"TagQuestion\".\"idTag\")
+                WHERE \"name\" LIKE ?
+                GROUP BY \"Tag\".\"name\", \"Tag\".\"idTag\"";
 
     $stmt = $conn->prepare($query);
 
