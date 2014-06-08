@@ -5,7 +5,7 @@
 	<script src="{$BASE_URL}javascript/users/user.js"></script>
 
     <div class="page-header" style="width:70%; margin-left:auto; margin-right:auto" >
-      <h1><span id="username">{$user.username}
+      <h1><span class="user-name" id="{$user.username}">{$user.username}
             {if $user.banned}
               <span style="color:red"> [banned] 
               </span>

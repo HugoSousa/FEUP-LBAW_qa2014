@@ -37,15 +37,19 @@ $(document).ready(function() {
   		var parentId = $(event.target).parent().attr('id');
   		var field = parentId;
   		var actualContent = $(event.target).siblings('div').children('input').val();
-  		var username = $("#username").text();
+  		var user_name = $(".user-name").attr('id');
   		
+      console.log(user_name);
+      console.log(field);
+      console.log(actualContent);
+
   		$.ajax({
 		  type: "GET",
 		  dataType: "json",
 		  url: "../../api/users/user_edit.php",
-		  data: { username: username, field: field, value: actualContent },
+		  data: { username: user_name, field: field, value: actualContent },
 		  success: function(data){
-			//alert(data);
+			 console.log("success:" + data);
 
 		  }
 		})
@@ -75,13 +79,13 @@ $(document).ready(function() {
 		}
 		else if($(event.target).text() == 'Ok'){
 			var biography = $(event.target).siblings('textarea').val();
-			var username = $("#username").text();
+			var user_name = $(".user-name").attr('id');
 
 			$.ajax({
 			  type: "GET",
 			  dataType: "json",
 			  url: "../../api/users/user_edit.php",
-			  data: { username: username, field: 'biography', value: biography },
+			  data: { username: user_name, field: 'biography', value: biography },
 			  success: function(data){
 				//alert(data);
 
@@ -94,12 +98,13 @@ $(document).ready(function() {
 
   $(document).on('click', '#ban-user', function(event){
 
-    var username = $("#username").text();
+    var user_name = $(".user-name").attr('id');
+
     $.ajax({
       type: "POST",
       dataType: "json",
       url: "../../api/users/user_ban.php",
-      data: { username: username },
+      data: { username: user_name },
       success: function(data){
         $('body').scrollTop(0);
 
