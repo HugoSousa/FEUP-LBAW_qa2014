@@ -11,7 +11,7 @@
 	$userID = $_SESSION['userid']; 
 	$username = $_SESSION['username'];
 
-	if(!isset($answerID) || !isset($questionID) || !isset($text) || !isset($type) || !isset($userID) || !isset($username))
+	if((!isset($answerID) && !isset($questionID)) || !isset($text) || !isset($type) || !isset($userID) || !isset($username))
         $return = array("error" => "Missing parameters.");
     else{
 
@@ -26,9 +26,9 @@
 			insertCommentQuestion($contentID, $questionID);
 		}
 
-		$res = array('text' => $text , 'username' => $username , 'answerID' => $answerID, 'questionID' => $questionID);
+		$return = array('text' => $text , 'username' => $username , 'answerID' => $answerID, 'questionID' => $questionID);
 	}
 
-	echo json_encode($res);
+	echo json_encode($return);
 
 ?>
