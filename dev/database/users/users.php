@@ -129,7 +129,7 @@
     if($field == 'realname')
       $query = "UPDATE \"User\" SET \"realName\" = ? WHERE \"username\" = ?";
     else if($field == 'location')
-      $query = "UPDATE \"User\" SET \"realName\" = ? WHERE \"username\" = ?";
+      $query = "UPDATE \"User\" SET \"location\" = ? WHERE \"username\" = ?";
     else if($field == 'biography')
       $query = "UPDATE \"User\" SET \"biography\" = ? WHERE \"username\" = ?";
     else if($field == 'password')
