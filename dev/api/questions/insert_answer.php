@@ -14,6 +14,8 @@
 
 		$text = str_replace(array("\r\n\r\n", "\n\n"), '<br>', $text, $i);
 
+		$text = str_replace(array("\r\n", "\n"), ' ', $text, $i);
+
 		$contentID = insertContent($text, $userID, ANSWER);
 
 		$contentID = $contentID[0]['id'];

@@ -16,6 +16,7 @@
 
   //echo $body . "<br>";
   $body = str_replace(array("\r\n\r\n", "\n\n"), '<br>', $body, $i);
+  $body = str_replace(array("\r\n", "\n"), ' ', $body, $i);
   //echo $i ."<br>";
   //echo $body;
   
